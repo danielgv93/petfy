@@ -22,8 +22,8 @@
             Perfil
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="perfil.php" title="perfil"><i class="fas fa-user mr-2"></i>Perfil</a>
-            <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+            <a class="dropdown-item" href="" title="perfil"><i class="fas fa-user mr-2"></i>Perfil</a>
+            <a class="dropdown-item" href=""><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
         </div>
     </div>
 </nav>

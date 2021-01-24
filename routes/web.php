@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
+use App\Models\Refugio;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::get("/mascotas/crear", [MascotasController::class, "create"])->name("masc
 Route::get("/mascota/{id}", [MascotasController::class, "show"])->name("mascotas.show");
 
 Route::get("/mascota/{id}/editar", [MascotasController::class, "edit"])->name("mascotas.editar");
+
+Route::get("/perfil", [Refugio::class, "index"])->name("refugios.index");
