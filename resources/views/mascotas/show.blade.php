@@ -15,7 +15,7 @@
                 <h5 class="card-title">Sexo: {{$mascota->sexo}}</h5>
                 <h5 class="card-title">
                     @if ($mascota instanceof \App\Models\Mascota)
-                        Tamaño: {{$mascota->perro->tamano}}
+                        Tamaño: {{$mascota->gato->pelo}}
                     @else
                         Pelo: {{$mascota->gato->pelo}}
                     @endif

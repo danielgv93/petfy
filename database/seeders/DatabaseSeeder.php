@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Mascota;
-use App\Models\Refugio;
-use App\Models\Gato;
-use App\Models\Perro;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Refugio::factory(3)->create();
-        $this->call(MascotaSeeder::class);
-
+        User::factory(3)->create();
+        $this->call(EspecieSeeder::class);
+        Mascota::factory(20)->create();
     }
 }

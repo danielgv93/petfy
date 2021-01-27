@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Especie;
 use App\Models\Mascota;
-use App\Models\Refugio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,11 +25,12 @@ class MascotaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->lastName,
-            'imagen' => $this->faker->imageUrl(300, 200, "animals", true),
+            'imagen' => $this->faker->imageUrl(300, 200, "animals"),
             "fechaNacimiento" => $this->faker->date(),
             "peso" => $this->faker->numberBetween(1, 99),
             "sexo" => $this->faker->randomElement(["M", "F"]),
-            "refugio_id" => Refugio::all()->random()->id,
+            "users_id" => User::all()->random()->id,
+            "especies_id" => Especie::all()->random()->id,
         ];
     }
 }

@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gato extends Model
+class Especie extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    public function gato() {
-        return $this->belongsTo(Mascota::class);
+    public function mascota() {
+        return $this->hasMany("mascotas");
     }
 }

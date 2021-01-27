@@ -11,11 +11,11 @@ class Mascota extends Model
 
     public $timestamps = false;
 
-    public function perro(){
-        return $this->hasOne(Perro::class);
+    public function especie(){
+        return $this->hasOne(Especie::class);
     }
 
-    public function gato(){
-        return $this->hasOne(Gato::class);
+    public function usuario() {
+        return $this->hasOne(User::class);
     }
 }

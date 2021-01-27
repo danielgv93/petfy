@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Refugio;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class RefugioFactory extends Factory
+class UserFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Refugio::class;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.

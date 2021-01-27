@@ -20,9 +20,11 @@ class CreateMascotasTable extends Migration
             $table->date("fechaNacimiento");
             $table->integer("peso")->unsigned();
             $table->string("sexo", 5);
-            $table->foreignId("refugio_id");
+            $table->foreignId("users_id");
+            $table->foreignId("especies_id");
             $table->timestamps();
-            $table->foreign("refugio_id")->references("id")->on("refugios");
+            $table->foreign("users_id")->references("id")->on("users");
+            $table->foreign("especies_id")->references("id")->on("especies");
         });
     }
 
