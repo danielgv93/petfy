@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +16,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [InicioController::class, "index"])->name("welcome");
+Route::get('/', [InicioController::class, "index"])
+    ->name("welcome");
 
-Route::get("/mascotas", [MascotasController::class, "index"])->name("mascotas");
+Route::get("/mascotas", [MascotasController::class, "index"])
+    ->name("mascotas");
 
-Route::get("/mascotas/crear", [MascotasController::class, "create"])->name("mascotas.crear");
+Route::get("/mascotas/perros", [MascotasController::class, "perros"])
+    ->name("mascotas.perros");
 
-Route::get("/mascota/{id}", [MascotasController::class, "show"])->name("mascotas.show");
+Route::get("/mascotas/gatos", [MascotasController::class, "gatos"])
+    ->name("mascotas.gatos");
 
-Route::get("/mascota/{id}/editar", [MascotasController::class, "edit"])->name("mascotas.editar");
+Route::get("/mascotas/crear", [MascotasController::class, "create"])
+    ->name("mascotas.crear");
+
+Route::get("/mascota/{id}", [MascotasController::class, "show"])
+    ->name("mascotas.show");
+
+Route::get("/administrar-mascotas", [UserController::class, "index"])
+    ->name("administrar-mascotas.index")
+    ->middleware("auth");
+
+Route::get("/administrar-mascotas/{id}/editar", [UserController::class, "edit"])
+    ->name("administrar-mascotas.edit")
+    ->middleware("auth");
+
+
+// USUARIOS JETSTREAM
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

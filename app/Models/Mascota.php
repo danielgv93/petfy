@@ -12,10 +12,10 @@ class Mascota extends Model
     public $timestamps = false;
 
     public function especie(){
-        return $this->hasOne(Especie::class);
+        return $this->belongsTo(Especie::class);
     }
 
     public function usuario() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

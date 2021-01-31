@@ -1,7 +1,7 @@
 @extends("layouts.master.master")
 
 @section('title')
-    Homepage
+    Dashboardpage
 @endsection
 
 @section('main')

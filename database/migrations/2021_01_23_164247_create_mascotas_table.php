@@ -19,10 +19,19 @@ class CreateMascotasTable extends Migration
             $table->string("imagen");
             $table->date("fechaNacimiento");
             $table->integer("peso")->unsigned();
-            $table->string("sexo", 5);
+            $table->string("sexo", 1);
+            $table->string("raza")->nullable();
+            $table->string("color")->nullable();
+            $table->string("pelaje")->nullable();
+            $table->text("descripcion")->nullable();
             $table->foreignId("users_id");
             $table->foreignId("especies_id");
             $table->timestamps();
+            //Campos Perro
+            $table->string("tamano")->nullable();
+            //Campos Gato
+
+            //Foreign Keys
             $table->foreign("users_id")->references("id")->on("users");
             $table->foreign("especies_id")->references("id")->on("especies");
         });

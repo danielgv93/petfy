@@ -45,7 +45,7 @@ class MascotasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $mascota = Mascota::query()->find($id);
         return view("mascotas.show", compact("mascota"));
@@ -84,5 +84,17 @@ class MascotasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function perros()
+    {
+        $perros = Mascota::all()->where("especies_id", "=", 1);
+        return view("mascotas.perros", compact("perros"));
+    }
+
+    public function gatos()
+    {
+        $gatos = Mascota::all()->where("especies_id", "=", 2);
+        return view("mascotas.gatos", compact("gatos"));
     }
 }
