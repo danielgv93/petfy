@@ -26,8 +26,8 @@ class MascotaFactory extends Factory
         $id = $this->faker->numberBetween(1, 100);
         return [
             'nombre' => $this->faker->lastName,
-            'imagen' => "https://loremflickr.com/300/200/dog?random=$id",
-                //$this->faker->imageUrl(300, 200, "animals"),
+            'imagen' => //"https://loremflickr.com/300/200/dog?random=$id",
+                $this->faker->imageUrl(300, 200, "animal"),
             "fechaNacimiento" => $this->faker->date(),
             "peso" => $this->faker->numberBetween(1, 99),
             "sexo" => $this->faker->randomElement(["M", "F"]),

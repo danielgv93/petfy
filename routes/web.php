@@ -38,6 +38,10 @@ Route::get("/administrar-mascotas", [UserController::class, "index"])
     ->name("administrar-mascotas.index")
     ->middleware("auth");
 
+Route::put("/administrar-mascotas/{id}", [MascotasController::class, "update"])
+    ->name("administrar-mascotas.update")
+    ->middleware("auth");
+
 Route::get("/administrar-mascotas/{id}/editar", [UserController::class, "edit"])
     ->name("administrar-mascotas.edit")
     ->middleware("auth");
