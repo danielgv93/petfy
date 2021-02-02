@@ -22,7 +22,7 @@
                     </a></td>
             </tr>
             <tr>
-                <td><a href="">
+                <td><a href="{{route("mascotas.create")}}">
                         <button class="btn btn-primary" type="button">Añadir nueva mascota</button>
                     </a>
                 </td>

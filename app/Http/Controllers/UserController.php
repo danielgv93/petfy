@@ -20,9 +20,4 @@ class UserController extends Controller
         $mascotas = Mascota::where("users_id", "=", $users_id)->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
-
-    public function edit(Mascota $mascota)
-    {
-        return view("refugios.mascotas-edit", compact("mascota"));
-    }
 }

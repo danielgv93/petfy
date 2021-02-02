@@ -28,8 +28,6 @@ Route::get("/mascotas/perros", [MascotasController::class, "perros"])
 Route::get("/mascotas/gatos", [MascotasController::class, "gatos"])
     ->name("mascotas.gatos");
 
-Route::get("/mascotas/crear", [MascotasController::class, "create"])
-    ->name("mascotas.crear");
 
 Route::get("/mascota/{mascota}", [MascotasController::class, "show"])
     ->name("mascotas.show");
@@ -42,10 +40,17 @@ Route::put("/administrar-mascotas/{mascota}", [MascotasController::class, "updat
     ->name("administrar-mascotas.update")
     ->middleware("auth");
 
-Route::get("/administrar-mascotas/{mascota}/editar", [UserController::class, "edit"])
+Route::get("/administrar-mascotas/{mascota}/editar", [MascotasController::class, "edit"])
     ->name("administrar-mascotas.edit")
     ->middleware("auth");
 
+Route::get("/administrar-mascotas/crear", [MascotasController::class, "create"])
+    ->name("mascotas.create")
+    ->middleware("auth");
+
+Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
+    ->name("mascotas.store")
+    ->middleware("auth");
 
 // USUARIOS JETSTREAM
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
