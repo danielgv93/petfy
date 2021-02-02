@@ -31,18 +31,18 @@ Route::get("/mascotas/gatos", [MascotasController::class, "gatos"])
 Route::get("/mascotas/crear", [MascotasController::class, "create"])
     ->name("mascotas.crear");
 
-Route::get("/mascota/{id}", [MascotasController::class, "show"])
+Route::get("/mascota/{mascota}", [MascotasController::class, "show"])
     ->name("mascotas.show");
 
 Route::get("/administrar-mascotas", [UserController::class, "index"])
     ->name("administrar-mascotas.index")
     ->middleware("auth");
 
-Route::put("/administrar-mascotas/{id}", [MascotasController::class, "update"])
+Route::put("/administrar-mascotas/{mascota}", [MascotasController::class, "update"])
     ->name("administrar-mascotas.update")
     ->middleware("auth");
 
-Route::get("/administrar-mascotas/{id}/editar", [UserController::class, "edit"])
+Route::get("/administrar-mascotas/{mascota}/editar", [UserController::class, "edit"])
     ->name("administrar-mascotas.edit")
     ->middleware("auth");
 

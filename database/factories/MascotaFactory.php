@@ -6,6 +6,7 @@ use App\Models\Especie;
 use App\Models\Mascota;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class MascotaFactory extends Factory
 {
@@ -15,7 +16,6 @@ class MascotaFactory extends Factory
      * @var string
      */
     protected $model = Mascota::class;
-
     /**
      * Define the model's default state.
      *
@@ -23,21 +23,24 @@ class MascotaFactory extends Factory
      */
     public function definition()
     {
-        $id = $this->faker->numberBetween(1, 100);
+        static $ai = 1;
+        $nombre = $this->faker->lastName;
         return [
-            'nombre' => $this->faker->lastName,
-            'imagen' => //"https://loremflickr.com/300/200/dog?random=$id",
-                $this->faker->imageUrl(300, 200, "animal"),
+            'nombre' => $nombre,
+            'slug' => Str::slug($nombre),
+            'imagen' => $ai++.".jpg",
+                //"https://loremflickr.com/300/200/dog?random=$ai++",
+                //$this->faker->imageUrl(300, 200, "animal"),
             "fechaNacimiento" => $this->faker->date(),
             "peso" => $this->faker->numberBetween(1, 99),
-            "sexo" => $this->faker->randomElement(["M", "F"]),
+            "sexo" => $this->faker->randomElement(["Macho", "Hembra"]),
             "raza" => $this->faker->randomElement(["Teckle", "Siames", "Border Collie", "Mestizo", "Pastor Aleman"]),
             "color" => $this->faker->safeColorName,
             "pelaje" => $this->faker->randomElement(["Corto", "Largo"]),
+            "tamano" => $this->faker->randomElement(["Pequeño", "Mediano", "Grande"]),
             "descripcion" => $this->faker->text(400),
             "users_id" => User::all()->random()->id,
             "especies_id" => Especie::all()->random()->id,
-            "tamano" => $this->faker->randomElement(["Pequeño", "Mediano", "Grande"]),
         ];
     }
 }

@@ -17,15 +17,12 @@ class UserController extends Controller
     public function index()
     {
         $users_id = Auth::user()->id;
-        $mascotas = Mascota::all()->where("users_id", "=", $users_id);
+        $mascotas = Mascota::where("users_id", "=", $users_id)->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
 
-    public function edit($id)
+    public function edit(Mascota $mascota)
     {
-        $mascota = Mascota::query()->find($id);
         return view("refugios.mascotas-edit", compact("mascota"));
     }
-
-
 }

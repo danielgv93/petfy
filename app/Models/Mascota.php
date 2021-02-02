@@ -18,4 +18,9 @@ class Mascota extends Model
     public function usuario() {
         return $this->belongsTo(User::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
 }

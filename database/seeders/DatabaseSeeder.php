@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
         $this->call(UserSeeder::class);
         $this->call(EspecieSeeder::class);
-        Mascota::factory(20)->create();
+        Mascota::factory(28)->create();
     }
 }

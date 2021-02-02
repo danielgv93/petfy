@@ -5,7 +5,11 @@
 @endsection
 @section('main')
     <div class="row">
-        <form class="col" action="{{route("administrar-mascotas.update", $mascota)}}" method="POST">
+        <div class="col-4">
+            <h3>{{$mascota->nombre}}</h3>
+            <img style="object-fit: contain" src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}">
+        </div>
+        <form class="col-8" action="{{route("administrar-mascotas.update", $mascota)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("put")
             <div class="row form-group">
@@ -30,8 +34,8 @@
                 <div class="col form-group">
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
-                        <option value="M">Macho</option>
-                        <option value="F">Hembra</option>
+                        <option value="Macho">Macho</option>
+                        <option value="Hembra">Hembra</option>
                     </select>
                     <small id="helpId" class="form-text text-muted text-danger">Campo obligatorio</small>
                 </div>
