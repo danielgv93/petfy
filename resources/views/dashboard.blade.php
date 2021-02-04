@@ -15,15 +15,15 @@
             <tbody>
             <tr>
                 <td><a href="{{route("administrar-mascotas.index")}}">
-                        <button class="btn btn-primary" type="button">Administra tus mascotas</button>
+                        <button class="btn btn-dark" type="button">Administra tus mascotas</button>
                     </a></td>
                 <td><a href="{{route("profile.show")}}">
-                        <button class="btn btn-primary" type="button">Edita tu perfil</button>
+                        <button class="btn btn-dark" type="button">Edita tu perfil</button>
                     </a></td>
             </tr>
             <tr>
                 <td><a href="{{route("mascotas.create")}}">
-                        <button class="btn btn-primary" type="button">Añadir nueva mascota</button>
+                        <button class="btn btn-dark" type="button">Añadir nueva mascota</button>
                     </a>
                 </td>
             </tr>

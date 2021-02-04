@@ -1,7 +1,11 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,300&display=swap');
 * {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 400;
+}
+
+body{
+    background-color: #f3f4f6;
 }
 
 .navbar {
@@ -14,5 +18,9 @@ h1{
 
 .centrar {
     flex-grow: 1;
+}
+.btn-dark {
+    background-color: #1f2937;
+    border: 1px solid #dee2e6;
 }
 
