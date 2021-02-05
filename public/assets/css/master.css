@@ -24,3 +24,7 @@ h1{
     border: 1px solid #dee2e6;
 }
 
+a:hover {
+    color: black;
+    text-decoration: none;
+}

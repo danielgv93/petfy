@@ -13,8 +13,24 @@
 </head>
 <body>
 @include('layouts.partials.navbar')
-<div>
-    <img style="pointer-events: none" class="img-fluid" src="https://wikifaunia.com/wp-content/uploads/2014/10/mascotas-1.png">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h1>Bienvenido a Petfy</h1>
+    </div>
+    <div class="row justify-content-center">
+        <h2>Elige que tipo de mascota vas a querer adoptar</h2>
+    </div>
+    <div class="row mt-5">
+        <div class="col-4">
+            <a href="{{route("mascotas.perros")}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
+                            src="{{url(asset("storage/web/perro.png"))}}"></a>
+        </div>
+        <div class="col-4 offset-4">
+            <a href="{{route("mascotas.gatos")}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
+                 src="{{url(asset("storage/web/gato.png"))}}"></a>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
