@@ -9,7 +9,7 @@
 
 ## Instalación
 
-1. Crear host virtual con la direccion www.petfy.es
+1. Crear host virtual con la direccion http://petfy.es. Si no es asi, es probable que alguna imagen no se muestre correctamente
 1. Instalar composer desde [aquí](https://getcomposer.org/download/)
 2. Ejecutar `composer install`.
 3. Clonar el archivo .env.example y cambiarlo de nombre por .env. Cambiar la linea 5 `APP_URL=http://petfy.es` y la linea
