@@ -30,12 +30,12 @@ class CreateMascotasTable extends Migration
             //Campos Gato
 
             //Foreign Keys
-            $table->foreignId("users_id");
-            $table->foreignId("especies_id");
+            $table->foreignId("user_id");
+            $table->foreignId("especie_id");
             $table->timestamps();
 
-            $table->foreign("users_id")->references("id")->on("users");
-            $table->foreign("especies_id")->references("id")->on("especies");
+            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("especie_id")->references("id")->on("especies");
         });
     }
 

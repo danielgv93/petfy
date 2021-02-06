@@ -28,7 +28,7 @@ class MascotaFactory extends Factory
         return [
             'nombre' => $nombre,
             'slug' => Str::slug($nombre),
-            'imagen' => $ai++.".jpg",
+            'imagen' => "mascotas/". $ai++ .".jpg",
                 //"https://loremflickr.com/300/200/dog?random=$ai++",
                 //$this->faker->imageUrl(300, 200, "animal"),
             "fechaNacimiento" => $this->faker->date(),
@@ -39,8 +39,8 @@ class MascotaFactory extends Factory
             "pelaje" => $this->faker->randomElement(["Corto", "Largo"]),
             "tamano" => $this->faker->randomElement(["Pequeño", "Mediano", "Grande"]),
             "descripcion" => $this->faker->text(400),
-            "users_id" => User::all()->random()->id,
-            "especies_id" => Especie::all()->random()->id,
+            "user_id" => User::all()->random()->id,
+            "especie_id" => Especie::all()->random()->id,
         ];
     }
 }

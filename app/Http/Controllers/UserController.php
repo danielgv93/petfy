@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users_id = Auth::user()->id;
-        $mascotas = Mascota::where("users_id", "=", $users_id)->paginate(9);
+        $user_id = Auth::user()->id;
+        $mascotas = Mascota::where("user_id", "=", $user_id)->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
 }

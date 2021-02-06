@@ -11,12 +11,14 @@ class Mascota extends Model
 
     public $timestamps = false;
 
+    protected $table = "mascotas";
+
     public function especie(){
         return $this->belongsTo(Especie::class);
     }
 
-    public function usuario() {
-        return $this->belongsTo(User::class);
+    public function refugio() {
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public function getRouteKeyName()

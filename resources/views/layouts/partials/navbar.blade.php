@@ -18,10 +18,11 @@
 
     </div>
     @if (\Illuminate\Support\Facades\Auth::check())
-        <div class="dropdown">
+        <div class="dropdown" style="margin-right: 7px">
+            <img class="dropdown-toggle rounded" id="dropdownMenuButton" data-toggle="dropdown" style="display: inline; height: 37px; cursor: pointer" src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}" alt="">
             <button class="btn bg-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                Hola, {{\Illuminate\Support\Facades\Auth::user()->name}}
+                 {{\Illuminate\Support\Facades\Auth::user()->name}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fas fa-user mr-2"></i>Menú</a>
@@ -34,6 +35,9 @@
             </div>
         </div>
     @else
+        <a href="{{route("register")}}"><button class="btn bg-light mr-4" type="button">
+                Registro
+            </button></a>
         <a href="{{route("login")}}"><button class="btn bg-light" type="button">
             Login
         </button></a>

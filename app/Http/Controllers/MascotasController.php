@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Especie;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,8 @@ class MascotasController extends Controller
         $mascota->fechaNacimiento = $request->fechaNacimiento;
         $mascota->peso = $request->peso;
         $mascota->sexo = $request->sexo;
-        $mascota->users_id = Auth::user()->id;
-        $mascota->especies_id = $request->especie;
+        $mascota->user_id = Auth::user()->id;
+        $mascota->especie_id = $request->especie;
         if ($request->raza === "") {
             $mascota->raza = null;
         } else {
@@ -75,12 +76,12 @@ class MascotasController extends Controller
         if ($request->imagen !== null) {
             // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
             Storage::delete($mascota->imagen);
-            $mascota->imagen = $request->file("imagen")->storeAs("", Str::slug($request->nombre).".".$request->file("imagen")->extension());
+            $mascota->imagen = $request->file("imagen")->storeAs("mascotas", Str::slug($request->nombre).".".$request->file("imagen")->extension());
         } else {
             // Establece el nombre de la imagen por el nombre que se edite
             $cadena = explode(".", $mascota->imagen);
             $nuevoFichero = Str::slug($request->nombre).".$cadena[1]";
-            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción
+            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción. Esta con copy para evitar borrar las imagenes de prueba
             $mascota->imagen = $nuevoFichero;
         }
 
@@ -152,12 +153,12 @@ class MascotasController extends Controller
         if ($request->imagen !== null) {
             // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
             Storage::delete($mascota->imagen);
-            $mascota->imagen = $request->file("imagen")->storeAs("", Str::slug($request->nombre).".".$request->file("imagen")->extension());
+            $mascota->imagen = $request->file("imagen")->storeAs("mascotas", Str::slug($request->nombre).".".$request->file("imagen")->extension());
         } else {
             // Establece el nombre de la imagen por el nombre que se edite
             $cadena = explode(".", $mascota->imagen);
-            $nuevoFichero = Str::slug($request->nombre).".$cadena[1]";
-            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción
+            $nuevoFichero = "mascotas/" . Str::slug($request->nombre).".$cadena[1]";
+            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción. Esta con copy para evitar borrar las imagenes de prueba
             $mascota->imagen = $nuevoFichero;
         }
         $mascota->save();
@@ -167,23 +168,25 @@ class MascotasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Mascota $mascota
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Mascota $mascota)
     {
-        //
+        $mascota->delete();
+        return redirect()->route("administrar-mascotas.index");
     }
 
     public function perros()
     {
-        $perros = Mascota::where("especies_id", "=", 1)->paginate(9);
+        $perros = Mascota::where("especie_id", "=", 1)->paginate(9);
         return view("mascotas.perros", compact("perros"));
     }
 
     public function gatos()
     {
-        $gatos = Mascota::where("especies_id", "=", 2)->paginate(9);
+        $gatos = Mascota::where("especie_id", "=", 2)->paginate(9);
         return view("mascotas.gatos", compact("gatos"));
     }
 }

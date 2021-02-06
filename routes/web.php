@@ -52,6 +52,10 @@ Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
     ->name("mascotas.store")
     ->middleware("auth");
 
+Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::class, "destroy"])
+    ->name("mascotas.destroy")
+    ->middleware("auth");
+
 // USUARIOS JETSTREAM
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

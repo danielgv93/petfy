@@ -14,7 +14,7 @@
                     <img class="card-img-top" src="{{asset("storage")}}/{{$mascota->imagen}}"
                          alt="Imagen de {{$mascota->nombre}}">
                     <div class="card-body text-center text-dark">
-                        <h5 class="card-title">{{$mascota->nombre}}</h5>
+                        <h5 class="tdn card-title">{{$mascota->nombre}}</h5>
                     </div>
                 </div>
             </a>

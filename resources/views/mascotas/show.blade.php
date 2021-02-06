@@ -16,6 +16,7 @@
                         <div class="card-body">
                             <h3 class="card-title text-center">{{$mascota->nombre}}</h3>
                             <h5 class="card-title text-center">Fecha Nacimiento: {{$mascota->fechaNacimiento}}</h5>
+                            <h5 class="card-title text-center">Refugio: {{$mascota->refugio->name}}</h5>
                             <h5 class="card-title text-center">Peso: {{$mascota->peso}} Kg</h5>
                             <h5 class="card-title text-center">Sexo: {{$mascota->sexo}}</h5>
                             @if ($mascota->raza !== null)

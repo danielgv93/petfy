@@ -11,7 +11,9 @@ class Especie extends Model
 
     public $timestamps = false;
 
+    protected $table = "especies";
+
     public function mascota() {
-        return $this->hasMany("mascotas");
+        return $this->hasMany(Mascota::class);
     }
 }
