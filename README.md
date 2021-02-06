@@ -26,3 +26,6 @@ php artisan migrate
 
 8. Ejecutar `php artisan db:seed`.
 9. Ejecutar `php artisan storage:link` para poder acceder desde el cliente a las imagenes.
+10. Usuario de prueba:
+1. Email: dani@gmail.com
+2. Password: 123
