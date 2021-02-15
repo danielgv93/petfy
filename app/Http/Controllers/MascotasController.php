@@ -4,28 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Models\Especie;
 use App\Models\Mascota;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class MascotasController extends Controller
 {
+    const PAGINATION = 9;
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param int|null $especie_id
+     * @return Response
      */
-    public function index()
+    public function index(int $especie_id = null)
     {
-        $mascotas = Mascota::paginate(9);
-        return view("mascotas.index", compact("mascotas"));
+        $mascotas = Mascota::query()->
+        when($especie_id, function ($query, $especie_id) {
+                return $query->where("especie_id", $especie_id);
+            })
+            ->paginate(self::PAGINATION);
+        return view("mascotas.index", compact("mascotas", "especie_id"));
+    }
+
+    public function busqueda(Request $request)
+    {
+        $busqueda = "%". $request->busqueda. "%";
+        $especie_id = $request->especie;
+        $mascotas = Mascota::query()
+            ->where("slug", "like", $busqueda)
+            ->when($especie_id, function ($q, $especie_id) {
+                $q->where('especie_id', $especie_id);
+            })
+            ->paginate(self::PAGINATION);
+        return view("mascotas.index", compact("mascotas", "especie_id"));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -35,8 +57,8 @@ class MascotasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -74,17 +96,8 @@ class MascotasController extends Controller
             $mascota->descripcion = $request->descripcion;
         }
         if ($request->imagen !== null) {
-            // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
-            Storage::delete($mascota->imagen);
-            $mascota->imagen = $request->file("imagen")->storeAs("mascotas", Str::slug($request->nombre).".".$request->file("imagen")->extension());
-        } else {
-            // Establece el nombre de la imagen por el nombre que se edite
-            $cadena = explode(".", $mascota->imagen);
-            $nuevoFichero = Str::slug($request->nombre).".$cadena[1]";
-            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción. Esta con copy para evitar borrar las imagenes de prueba
-            $mascota->imagen = $nuevoFichero;
+            $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
-
         $mascota->save();
         return redirect()->route("administrar-mascotas.index");
     }
@@ -93,7 +106,7 @@ class MascotasController extends Controller
      * Display the specified resource.
      *
      * @param Mascota $mascota
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Mascota $mascota)
     {
@@ -104,7 +117,7 @@ class MascotasController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Mascota $mascota
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Mascota $mascota)
     {
@@ -114,9 +127,9 @@ class MascotasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Mascota $mascota
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Mascota $mascota)
     {
@@ -153,24 +166,19 @@ class MascotasController extends Controller
         if ($request->imagen !== null) {
             // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
             Storage::delete($mascota->imagen);
-            $mascota->imagen = $request->file("imagen")->storeAs("mascotas", Str::slug($request->nombre).".".$request->file("imagen")->extension());
-        } else {
-            // Establece el nombre de la imagen por el nombre que se edite
-            $cadena = explode(".", $mascota->imagen);
-            $nuevoFichero = "mascotas/" . Str::slug($request->nombre).".$cadena[1]";
-            Storage::copy($mascota->imagen, $nuevoFichero);//TODO: Cambiar por metodo move() al subir a producción. Esta con copy para evitar borrar las imagenes de prueba
-            $mascota->imagen = $nuevoFichero;
+            $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
         $mascota->save();
         return redirect()->route("administrar-mascotas.index");
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
      * @param Mascota $mascota
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(Mascota $mascota)
     {
@@ -178,15 +186,4 @@ class MascotasController extends Controller
         return redirect()->route("administrar-mascotas.index");
     }
 
-    public function perros()
-    {
-        $perros = Mascota::where("especie_id", "=", 1)->paginate(9);
-        return view("mascotas.perros", compact("perros"));
-    }
-
-    public function gatos()
-    {
-        $gatos = Mascota::where("especie_id", "=", 2)->paginate(9);
-        return view("mascotas.gatos", compact("gatos"));
-    }
 }

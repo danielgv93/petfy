@@ -23,11 +23,11 @@
     </div>
     <div class="row mt-5">
         <div class="col-4">
-            <a href="{{route("mascotas.perros")}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
+            <a href="{{route("mascotas", [1, null])}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
                             src="{{url(asset("storage/web/perro.png"))}}"></a>
         </div>
         <div class="col-4 offset-4">
-            <a href="{{route("mascotas.gatos")}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
+            <a href="{{route("mascotas", [2, null])}}"><img style="width: 300px; pointer-events: none" class="img-fluid mx-auto d-block"
                  src="{{url(asset("storage/web/gato.png"))}}"></a>
         </div>
     </div>

@@ -10,7 +10,7 @@
             <div class="col-6 mt-3">
                 <div class="card">
                     <div class="card-horizontal">
-                        <div class="img-square-wrapper">
+                        <div class="img-square-wrapper mt-3">
                             <img class="img-fluid mx-auto d-block rounded" src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}">
                         </div>
                         <div class="card-body">

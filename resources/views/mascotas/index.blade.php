@@ -1,11 +1,26 @@
 @extends('layouts.master.master')
 
 @section('title')
-    Listado Mascotas
+    @if ($especie_id == 1)
+        Perros
+    @elseif($especie_id == 2)
+        Gatos
+    @else
+        Listado Mascotas
+    @endif
+
 @endsection
 
 @section('main')
-    <h1>Parque de mascotas</h1>
+    <h1>
+        @if ($especie_id == 1)
+            Zona canina
+        @elseif($especie_id == 2)
+            Zona felina
+        @else
+            Parque de mascotas
+        @endif
+    </h1>
     {{$mascotas->links("view.name")}}
     <div class="row justify-content-center">
         @foreach($mascotas as $mascota)
