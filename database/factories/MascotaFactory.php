@@ -41,6 +41,7 @@ class MascotaFactory extends Factory
             "descripcion" => $this->faker->text(400),
             "user_id" => User::all()->random()->id,
             "especie_id" => Especie::all()->random()->id,
+            "created_at" => $this->faker->dateTimeThisYear
         ];
     }
 }

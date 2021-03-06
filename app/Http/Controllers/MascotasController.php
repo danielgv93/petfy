@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Especie;
 use App\Models\Mascota;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class MascotasController extends Controller
 {
@@ -27,6 +27,7 @@ class MascotasController extends Controller
         when($especie_id, function ($query, $especie_id) {
                 return $query->where("especie_id", $especie_id);
             })
+            ->orderBy("created_at")
             ->paginate(self::PAGINATION);
         return view("mascotas.index", compact("mascotas", "especie_id"));
     }
@@ -40,6 +41,7 @@ class MascotasController extends Controller
             ->when($especie_id, function ($q, $especie_id) {
                 $q->where('especie_id', $especie_id);
             })
+            ->orderBy("created_at")
             ->paginate(self::PAGINATION);
         return view("mascotas.index", compact("mascotas", "especie_id"));
     }
@@ -99,6 +101,15 @@ class MascotasController extends Controller
             $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
         $mascota->save();
+
+        // Enviar mensaje Telegram
+        $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
+        $texto = "*$request->nombre* está list$sufijo para que l$sufijo adoptes!. Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
+        Telegram::sendMessage([
+            'chat_id' => env("TELEGRAM_CHANNEL_ID"),
+            "text" => $texto,
+            "parse_mode" => "Markdown"
+        ]);
         return redirect()->route("administrar-mascotas.index");
     }
 
@@ -172,6 +183,19 @@ class MascotasController extends Controller
         return redirect()->route("administrar-mascotas.index");
     }
 
+
+    public function adoptar(Request $request)
+    {
+        $mascota = Mascota::query()->findOrFail($request->id);
+        // QUITAR DE LA BASE DE DATOS
+        $texto = "Han adoptado a *$mascota->nombre*!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+        Telegram::sendMessage([
+            'chat_id' => env("TELEGRAM_CHANNEL_ID"),
+            "text" => $texto,
+            "parse_mode" => "Markdown"
+        ]);
+        return redirect()->route("mascotas")->with("mensaje", "Has adoptado a $mascota->nombre!");
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{url("/assets/css/master.css")}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.ico")}}">
 </head>
 <body>
 @include('layouts.partials.navbar')

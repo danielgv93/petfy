@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\TelegramController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,10 @@ Route::post("/mascotas/busqueda", [MascotasController::class, "busqueda"])
 Route::get("/mascota/{mascota}", [MascotasController::class, "show"])
     ->name("mascotas.show");
 
+Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
+    ->name("mascotas.adoptar")
+    ->middleware("auth");
+
 Route::get("/administrar-mascotas", [UserController::class, "index"])
     ->name("administrar-mascotas.index")
     ->middleware("auth");
@@ -52,6 +57,12 @@ Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
 Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::class, "destroy"])
     ->name("mascotas.destroy")
     ->middleware("auth");
+
+Route::get("telegram/getMe", [TelegramController::class, "getMe"])
+    ->name("telegram.getMe");
+
+Route::post("telegram/store", [TelegramController::class, "mascotaNueva"])
+    ->name("telegram.store");
 
 // USUARIOS JETSTREAM
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

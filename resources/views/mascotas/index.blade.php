@@ -6,12 +6,15 @@
     @elseif($especie_id == 2)
         Gatos
     @else
-        Listado Mascotas
+        Petfy
     @endif
 
 @endsection
 
 @section('main')
+    @if (session("mensaje"))
+        <div class="alert-danger">{{session("mensaje")}}</div>
+    @endif
     <h1>
         @if ($especie_id == 1)
             Zona canina

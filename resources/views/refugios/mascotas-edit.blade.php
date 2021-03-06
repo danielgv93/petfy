@@ -34,8 +34,8 @@
                 <div class="col form-group">
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
-                        <option value="Macho">Macho</option>
-                        <option value="Hembra">Hembra</option>
+                        <option value="Macho" >Macho</option>
+                        <option value="Hembra"{{$mascota->sexo == "Hembra" ? "selected":""}}>Hembra</option>
                     </select>
                     <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
                 </div>

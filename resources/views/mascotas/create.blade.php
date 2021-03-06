@@ -11,7 +11,7 @@
             <div class="col form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                       placeholder="Introduzca un nombre">
+                       placeholder="Introduzca un nombre" required>
                 <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
             </div>
             <div class="col form-group">
@@ -28,13 +28,13 @@
             <div class="col form-group">
                 <label for="fechaNacimiento">Fecha Nacimiento:</label>
                 <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
-                       aria-describedby="helpId">
+                       aria-describedby="helpId" required>
                 <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
             </div>
             <div class="col form-group">
                 <label for="peso">Peso:</label>
                 <input type="number" class="form-control" name="peso" id="peso" aria-describedby="helpId"
-                       placeholder="Introduzca un peso" min="0">
+                       placeholder="Introduzca un peso" min="0" required>
                 <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
             </div>
             <div class="col form-group">
@@ -74,7 +74,7 @@
             <label for="imagen">Imagen</label>
             <input type="file" class="form-control-file" name="imagen" id="imagen"
                    placeholder="Imagen de la mascota"
-                   aria-describedby="fileHelpId">
+                   aria-describedby="fileHelpId" required>
         </div>
         <button type="submit" name="submit" class="row btn btn-primary">Añadir</button>
     </form>

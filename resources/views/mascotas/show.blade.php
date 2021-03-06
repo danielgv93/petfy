@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <h3 class="card-title text-center">{{$mascota->nombre}}</h3>
                             <h5 class="card-title text-center">Fecha Nacimiento: {{$mascota->fechaNacimiento}}</h5>
-                            <h5 class="card-title text-center">Refugio: {{$mascota->refugio->name}}</h5>
+                            <h5 class="card-title text-center">Refugio: <a href="">{{$mascota->refugio->name}}</a></h5>
                             <h5 class="card-title text-center">Peso: {{$mascota->peso}} Kg</h5>
                             <h5 class="card-title text-center">Sexo: {{$mascota->sexo}}</h5>
                             @if ($mascota->raza !== null)
@@ -38,7 +38,12 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a style="width: 50%" href="{{--TODO: ADOPTAR--}}" class="btn btn-primary adoptar-btn">Adoptar</a>
+                        <form action="{{route("mascotas.adoptar")}}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$mascota->id}}">
+                            <input type="submit" style="width: 50%" href="{{--TODO: ADOPTAR--}}" class="btn btn-primary adoptar-btn" value="Adoptar">
+                        </form>
+
                     </div>
                 </div>
             </div>
