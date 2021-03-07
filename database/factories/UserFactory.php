@@ -22,9 +22,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $nombre = $this->faker->company;
+        $slug = Str::slug($nombre);
         return [
-            'name' => $this->faker->company,
-            'email' => $this->faker->unique()->safeEmail,
+            'name' => $nombre,
+            "slug" => $slug,
+            'email' => "$slug@gmail.com",
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

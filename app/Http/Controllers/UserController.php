@@ -22,4 +22,9 @@ class UserController extends Controller
             ->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
+
+    public function show(User $refugio)
+    {
+        return view("refugios.show", compact("refugio"));
+    }
 }

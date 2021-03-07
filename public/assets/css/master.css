@@ -12,6 +12,12 @@ body{
     padding: 0.5rem 2rem;
 }
 
+#mapa{
+    min-height: 521px;
+    display: block;
+    width: 100%;
+}
+
 h1{
     text-align: center;
 }

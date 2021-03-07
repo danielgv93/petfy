@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MapaController;
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\TelegramController;
@@ -34,6 +35,9 @@ Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
     ->name("mascotas.adoptar")
     ->middleware("auth");
 
+Route::get("/refugio/{refugio}", [UserController::class, "show"])
+    ->name("refugio.show");
+
 Route::get("/administrar-mascotas", [UserController::class, "index"])
     ->name("administrar-mascotas.index")
     ->middleware("auth");
@@ -58,11 +62,16 @@ Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::cla
     ->name("mascotas.destroy")
     ->middleware("auth");
 
+// APIS
+
 Route::get("telegram/getMe", [TelegramController::class, "getMe"])
     ->name("telegram.getMe");
 
 Route::post("telegram/store", [TelegramController::class, "mascotaNueva"])
     ->name("telegram.store");
+
+Route::any("maps/generar/{id}", [MapaController::class, "generarXML"])
+    ->name("maps.xml");
 
 // USUARIOS JETSTREAM
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
