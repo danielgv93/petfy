@@ -177,6 +177,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Thujohn\Twitter\TwitterServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Twitter'   => Thujohn\Twitter\Facades\Twitter::class,
 
     ],
 

@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mascota;
+use CURLFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Thujohn\Twitter\Facades\Twitter;
 
 class MascotasController extends Controller
 {
@@ -102,13 +106,18 @@ class MascotasController extends Controller
         }
         $mascota->save();
 
-        // Enviar mensaje Telegram
+        // CONEXION CON LAS APIS
         $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
-        $texto = "*$request->nombre* está list$sufijo para que l$sufijo adoptes!. Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
+        $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
         Telegram::sendMessage([
-            'chat_id' => env("TELEGRAM_CHANNEL_ID"),
+            'chat_id' => "-1001301205495",
             "text" => $texto,
-            "parse_mode" => "Markdown"
+        ]);
+
+        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
+        Twitter::postTweet([
+            "status" => $texto,
+            "media_ids" => $photo->media_id_string
         ]);
         return redirect()->route("administrar-mascotas.index");
     }
@@ -187,12 +196,27 @@ class MascotasController extends Controller
     public function adoptar(Request $request)
     {
         $mascota = Mascota::query()->findOrFail($request->id);
-        // QUITAR DE LA BASE DE DATOS
-        $texto = "Han adoptado a *$mascota->nombre*!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+        // TODO: Lógica de adopción
+
+        // CONEXION CON LAS APIS
+        $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+        // POSTEAR EN TELEGRAM MENSAJE
         Telegram::sendMessage([
-            'chat_id' => env("TELEGRAM_CHANNEL_ID"),
+            'chat_id' => "-1001301205495",
             "text" => $texto,
-            "parse_mode" => "Markdown"
+        ]);
+        // POSTEAR EN TELEGRAM FOTO
+        /*Telegram::sendPhoto([
+            'chat_id' => "-1001301205495",
+            "caption" => $texto,
+            "photo" => InputFile::create(File::get(public_path("storage/$mascota->imagen")))
+        ]);*/
+
+        // POSTEAR EN TWITTER
+        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
+        Twitter::postTweet([
+            "status" => $texto,
+            "media_ids" => $photo->media_id_string
         ]);
         return redirect()->route("mascotas")->with("mensaje", "Has adoptado a $mascota->nombre!");
     }
