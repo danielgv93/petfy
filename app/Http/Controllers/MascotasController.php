@@ -46,8 +46,8 @@ class MascotasController extends Controller
                 $q->where('especie_id', $especie_id);
             })
             ->orderBy("created_at")
-            ->paginate(self::PAGINATION);
-        return view("mascotas.index", compact("mascotas", "especie_id"));
+            ->pluck("nombre");
+        return \response()->json($mascotas);
     }
 
     /**
@@ -109,16 +109,9 @@ class MascotasController extends Controller
         // CONEXION CON LAS APIS
         $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
         $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
-        Telegram::sendMessage([
-            'chat_id' => "-1001301205495",
-            "text" => $texto,
-        ]);
+        $this->postTwitter($texto, $mascota);
+        $this->postPhotoTelegram($texto, $mascota);
 
-        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
-        Twitter::postTweet([
-            "status" => $texto,
-            "media_ids" => $photo->media_id_string
-        ]);
         return redirect()->route("administrar-mascotas.index");
     }
 
@@ -201,23 +194,8 @@ class MascotasController extends Controller
         // CONEXION CON LAS APIS
         $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
         // POSTEAR EN TELEGRAM MENSAJE
-        Telegram::sendMessage([
-            'chat_id' => "-1001301205495",
-            "text" => $texto,
-        ]);
-        // POSTEAR EN TELEGRAM FOTO
-        /*Telegram::sendPhoto([
-            'chat_id' => "-1001301205495",
-            "caption" => $texto,
-            "photo" => InputFile::create(File::get(public_path("storage/$mascota->imagen")))
-        ]);*/
-
-        // POSTEAR EN TWITTER
-        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
-        Twitter::postTweet([
-            "status" => $texto,
-            "media_ids" => $photo->media_id_string
-        ]);
+        $this->postTwitter($texto, $mascota);
+        $this->postPhotoTelegram($texto, $mascota);
         return redirect()->route("mascotas")->with("mensaje", "Has adoptado a $mascota->nombre!");
     }
 
@@ -232,6 +210,32 @@ class MascotasController extends Controller
     {
         $mascota->delete();
         return redirect()->route("administrar-mascotas.index");
+    }
+
+    private function postTelegram($texto)
+    {
+        Telegram::sendMessage([
+            'chat_id' => "-1001301205495",
+            "text" => $texto,
+        ]);
+    }
+
+    private function postTwitter($texto, $mascota)
+    {
+        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
+        Twitter::postTweet([
+            "status" => $texto,
+            "media_ids" => $photo->media_id_string
+        ]);
+    }
+
+    private function postPhotoTelegram($texto, $mascota)
+    {
+        Telegram::sendPhoto([
+            'chat_id' => '-1001301205495',
+            'photo' => InputFile::create(public_path("storage/$mascota->imagen"), $mascota->imagen),
+            'caption' => $texto
+        ]);
     }
 
 }

@@ -20,15 +20,12 @@
         </div>
         @if (request()->routeIs('mascotas'))
 
-            <form method="post" action="{{route("mascotas.busqueda")}}" class="input-group justify-content-center">
-                @csrf
-                <div class="form-outline">
-                    <input type="hidden" name="especie" value="{{isset($especie_id) ? $especie_id : null}}">
-                    <input type="search" name="busqueda" id="form1" class="form-control"
-                           placeholder="Busca un{{isset($especie_id) ? ($especie_id == 1 ? " perro" : " gato" ) : "a mascota" }}"/>
-                </div>
-                <button class="btn btn-outline-success ml-2" type="submit" data-mdb-ripple-color="dark">Buscar</button>
-            </form>
+            <div class="form-outline">
+                    <input type="hidden" name="especie" id="especie" value="{{isset($especie_id) ? $especie_id : null}}">
+                <input type="search" name="busqueda" id="busqueda" class="form-control"
+                       placeholder="Busca un{{isset($especie_id) ? ($especie_id == 1 ? " perro" : " gato" ) : "a mascota" }}"/>
+            </div>
+
         @endif
         @if (\Illuminate\Support\Facades\Auth::check())
             <div class="dropdown custom-control-inline" style="margin-right: 7px">
@@ -70,3 +67,39 @@
         @endif
     </div>
 </nav>
+<script>
+    $(document).ready(function () {
+        $("#busqueda").autocomplete({
+            source: function (request, response) {
+                let especie = $("#especie").id;
+                $.ajax({
+                    type: "POST",
+                    url: "{{url("mascotas/busqueda")}}",
+                    dataType: "json",
+                    data: {
+                        "_token": "{{csrf_token()}}",
+                        "busqueda": request.term,
+                        "especie": especie
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            position: {
+                my: "left+0 top+8"
+            },
+            select: function (event, ui) {
+                window.location = window.location.origin + "/mascota/" + convertToSlug(ui.item.value);
+            }
+        });
+
+        function convertToSlug(text) {
+            text = text.normalize("NFD") // Normalizamos para obtener los códigos
+                .replace(/[\u0300-\u036f|.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitamos los acentos y símbolos de puntuación
+                .replace(/ +/g, '-') // Reemplazamos los espacios por guiones
+                .toLowerCase(); // Todo minúscula
+            return text;
+        }
+    })
+</script>

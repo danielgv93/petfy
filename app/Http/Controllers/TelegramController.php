@@ -17,10 +17,9 @@ class TelegramController extends Controller
 
     public function mascotaNueva(Request $request)
     {
-        $texto = "$request->nombre está listo para que lo adoptes!";
         Telegram::sendMessage([
-            'chat_id' => env("TELEGRAM_CHANNEL_ID"),
-            "text" => $texto,
+            'chat_id' => "-1001301205495",
+            "text" => $request->texto,
         ]);
     }
 
