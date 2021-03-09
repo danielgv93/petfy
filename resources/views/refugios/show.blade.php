@@ -25,11 +25,8 @@
     </div>
     <script>
         var customLabel = {
-            instituto: {
-                label: 'I'
-            },
-            colegio: {
-                label: 'C'
+            refugio: {
+                label: 'R'
             }
         };
 
