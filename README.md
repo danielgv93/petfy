@@ -72,8 +72,8 @@ La API-KEY de este servicio se encuentra en ``config/telegram.php``
 
 Se establece una conexión con la API en dos momentos concretos:
 
-- Introducir nueva mascota a la base de datos.
-- Adoptar una mascota.
+- Introducir nueva mascota a la base de datos (función store de MascotasController).
+- Adoptar una mascota (función adoptar de MascotasController).
 
 La funcionalidad es la misma en ambas acciones y es la siguiente.
 ```php
