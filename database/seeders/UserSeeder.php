@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $slug = Str::slug($nombre);
         $usuario = new User();
         $usuario->name = $nombre;
+        $usuario->user_role_id = 2;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         $slug = Str::slug($nombre);
         $usuario = new User();
         $usuario->name = $nombre;
+        $usuario->user_role_id = 1;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
         $slug = Str::slug($nombre);
         $usuario = new User();
         $usuario->name = $nombre;
+        $usuario->user_role_id = 1;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");
@@ -53,6 +56,7 @@ class UserSeeder extends Seeder
         $slug = Str::slug($nombre);
         $usuario = new User();
         $usuario->name = $nombre;
+        $usuario->user_role_id = 1;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");

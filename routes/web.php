@@ -33,34 +33,35 @@ Route::get("/mascota/{mascota}", [MascotasController::class, "show"])
 
 Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
     ->name("mascotas.adoptar")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 Route::get("/refugio/{refugio}", [UserController::class, "show"])
     ->name("refugio.show");
 
 Route::get("/administrar-mascotas", [UserController::class, "index"])
     ->name("administrar-mascotas.index")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 Route::put("/administrar-mascotas/{mascota}", [MascotasController::class, "update"])
     ->name("administrar-mascotas.update")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 Route::get("/administrar-mascotas/{mascota}/editar", [MascotasController::class, "edit"])
     ->name("administrar-mascotas.edit")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 Route::get("/administrar-mascotas/crear", [MascotasController::class, "create"])
     ->name("mascotas.create")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
+
 
 Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
     ->name("mascotas.store")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::class, "destroy"])
     ->name("mascotas.destroy")
-    ->middleware("auth");
+    ->middleware(["accessrole", "auth"]);
 
 // APIS
 

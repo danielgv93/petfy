@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{url("/assets/css/master.css")}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.ico")}}">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.png")}}">
     <script type="text/javascript" src="{{url("/assets/js/jquery-3.5.1.min.js")}}"></script>
     <script type="text/javascript" src="{{url("/assets/js/jquery-ui.js")}}"></script>
     <link rel="stylesheet" href="{{url("/assets/css/jquery-ui.css")}}">
