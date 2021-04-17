@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{url("/assets/bootstrap/css/bootstrap.min.css")}}">
-    <link rel="stylesheet" href="{{url("/assets/css/master.css")}}">
+    <link rel="stylesheet" href="{{url("/assets/css/master.css?v=").time()}}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.png")}}">

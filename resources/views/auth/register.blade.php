@@ -3,7 +3,7 @@
         <x-slot name="logo">
             <a href="{{route("welcome")}}"><h1 style="font-size: 50px">Petfy</h1></a>
         </x-slot>
-
+        <x-jet-authentication-card-logo />
         <x-jet-validation-errors class="mb-4" />
 
 
@@ -23,7 +23,7 @@
             <div class="mt-4">
                 <x-jet-label for="user_role_id" value="{{ __('Tipo de usuario') }}" />
                 <select name="user_role_id" id="user_role_id">
-                    @foreach(\App\Models\UserRol::all() as $rol)
+                    @foreach(\App\Models\UserRol::query()->orderBy("id", "desc")->get() as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->role_name }}</option>
                     @endforeach
                 </select>

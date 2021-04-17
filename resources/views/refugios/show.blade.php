@@ -5,6 +5,7 @@
 @endsection
 
 @section('main')
+
     <div class="">
         <div class="row justify-content-center">
             <div class="col-6 mt-3">
@@ -13,6 +14,23 @@
                         <div class="card-body">
                             <h3 class="card-title text-center">{{$refugio->name}}</h3>
                             <h5 class="card-title text-center">Email de contacto: {{$refugio->email}}</h5>
+                            <!-- Direccion -->
+                            <h5 class="card-title text-center">
+                                @if ($refugio->direccion != "")
+                                    Direccion: {{$refugio->direccion}}
+                                @endif
+                                @if ($refugio->ciudad != "" && $refugio->direccion != "")
+                                    , {{$refugio->ciudad}}
+                                @elseif($refugio->ciudad != "")
+                                    Ciudad: {{$refugio->ciudad}}
+                                @endif
+                            </h5>
+                            <h5 class="card-title text-center" id="donaciones" >
+                                @if ($refugio->direccion_donacion != "")
+                                    Dirección de donaciones: <span class="copy-click" data-tooltip-text="Haz click para copiar"
+                                                                   data-tooltip-text-copied="✔ Copiado">{{$refugio->direccion_donacion}}</span>
+                                @endif
+                            </h5>
 
                         </div>
                     </div>
@@ -23,6 +41,46 @@
             <div class="card" id="mapa"></div>
         </div>
     </div>
+    <script>
+        const links = document.querySelectorAll('.copy-click');
+        const cls = {
+            copied: 'is-copied',
+            hover: 'is-hovered' };
+
+
+        const copyToClipboard = str => {
+            const el = document.createElement('input');
+            str.dataset.copyString ? el.value = str.dataset.copyString : el.value = str.text;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.opacity = 0;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        };
+
+        const clickInteraction = e => {
+            e.preventDefault();
+            copyToClipboard(e.target);
+            e.target.classList.add(cls.copied);
+            setTimeout(() => e.target.classList.remove(cls.copied), 1000);
+            setTimeout(() => e.target.classList.remove(cls.hover), 700);
+        };
+
+        Array.from(links).forEach(link => {
+            link.addEventListener('click', e => clickInteraction(e));
+            link.addEventListener('keypress', e => {
+                if (e.keyCode === 13) clickInteraction(e);
+            });
+            link.addEventListener('mouseover', e => e.target.classList.add(cls.hover));
+            link.addEventListener('mouseleave', e => {
+                if (!e.target.classList.contains(cls.copied)) {
+                    e.target.classList.remove(cls.hover);
+                }
+            });
+        });
+    </script>
     <script>
         var customLabel = {
             refugio: {

@@ -15,11 +15,11 @@ class UserRolesSeeder extends Seeder
     public function run()
     {
         $rol = new UserRol();
-        $rol->role_name = "refugio";
+        $rol->role_name = "Refugio";
         $rol->save();
 
         $rol = new UserRol();
-        $rol->role_name = "familia";
+        $rol->role_name = "Familia";
         $rol->save();
     }
 }

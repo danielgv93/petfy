@@ -34,3 +34,52 @@ h5:hover {
     color: black;
     text-decoration: none;
 }
+
+/* Copiar al portapapeles */
+.copy-click {
+    position: relative;
+    padding-bottom: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #3c71aa;
+    transition: background-color calc(var(--duration) * 2) var(--ease);
+}
+
+.copy-click:after {
+    content: attr(data-tooltip-text);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    padding: 8px 16px;
+    white-space: nowrap;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 -12px rgba(0, 0, 0, 0);
+    pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translate(-50%, 12px);
+    transform: translate(-50%, 12px);
+    transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+    transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce);
+    transition: box-shadow calc(var(--duration) / 1.5) var(--bounce), opacity calc(var(--duration) / 1.5) var(--bounce), transform calc(var(--duration) / 1.5) var(--bounce), -webkit-transform calc(var(--duration) / 1.5) var(--bounce);
+}
+
+.copy-click.is-hovered:after {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    transition-timing-function: var(--ease);
+}
+
+.copy-click.is-copied {
+    border-bottom: 1px dashed #767676;
+}
+
+.copy-click.is-copied:after {
+    content: attr(data-tooltip-text-copied);
+}
+/***************************/

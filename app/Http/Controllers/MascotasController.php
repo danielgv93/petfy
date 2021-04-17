@@ -39,12 +39,8 @@ class MascotasController extends Controller
     public function busqueda(Request $request)
     {
         $busqueda = "%". $request->busqueda. "%";
-        $especie_id = $request->especie;
         $mascotas = Mascota::query()
             ->where("slug", "like", $busqueda)
-            ->when($especie_id, function ($q, $especie_id) {
-                $q->where('especie_id', $especie_id);
-            })
             ->orderBy("created_at")
             ->pluck("nombre");
         return \response()->json($mascotas);

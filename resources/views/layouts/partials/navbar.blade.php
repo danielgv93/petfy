@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-sm navbar-dark mb-2" style="background-color: rgb(148,193,31);">
     <div class="container-fluid">
+        <a href="{{route("welcome")}}">
+            <img class="mr-3" src="{{asset("storage/web/favicon.png")}}" alt="Logo de Petfy" height="37px">
+        </a>
         <a class="navbar-brand" href="{{route("welcome")}}">Petfy</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
                 aria-controls="collapsibleNavId"
@@ -20,27 +23,30 @@
         </div>
         @if (request()->routeIs('mascotas'))
 
-            <div class="form-outline">
-                    <input type="hidden" name="especie" id="especie" value="{{isset($especie_id) ? $especie_id : null}}">
+            <div class="form-outline mr-3">
                 <input type="search" name="busqueda" id="busqueda" class="form-control"
-                       placeholder="Busca un{{isset($especie_id) ? ($especie_id == 1 ? " perro" : " gato" ) : "a mascota" }}"/>
+                       placeholder="Busca una mascota"/>
             </div>
 
         @endif
         @if (\Illuminate\Support\Facades\Auth::check())
             <div class="dropdown custom-control-inline" style="margin-right: 7px">
-                <img class="dropdown-toggle rounded-circle mr-2"
-                     height="37"
-                     width="37"
-                     alt=""
-                     loading="lazy" id="dropdownMenuButton" data-toggle="dropdown"
-                     style="cursor: pointer"
-                     src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}" alt="">
+                @if (Illuminate\Support\Facades\Auth::user()->profile_photo_path)
+                    <img class="dropdown-toggle rounded-circle mr-2"
+                         height="37"
+                         width="37"
+                         alt=""
+                         loading="lazy" id="dropdownMenuButton" data-toggle="dropdown"
+                         style="cursor: pointer"
+                         src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}"
+                         alt="">
+                @endif
+
                 <button class="btn bg-light dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                    @if (\Illuminate\Support\Facades\Auth::user())
-                        
+                    @if (\Illuminate\Support\Facades\Auth::user()->user_role_id == 1)
+                        Refugio:
                     @endif
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
@@ -52,7 +58,6 @@
                            onclick="event.preventDefault(); this.closest('form').submit();" title="Logout"><i
                                 class="fas fa-sign-out-alt mr-2"></i>Logout</a>
                     </form>
-
 
                 </div>
             </div>

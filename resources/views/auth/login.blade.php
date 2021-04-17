@@ -3,7 +3,7 @@
         <x-slot name="logo">
             <a href="{{route("welcome")}}"><h1 style="font-size: 50px">Petfy</h1></a>
         </x-slot>
-
+        <x-jet-authentication-card-logo class="text-center" />
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
