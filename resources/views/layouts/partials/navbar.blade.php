@@ -39,6 +39,9 @@
                 <button class="btn bg-light dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                    @if (\Illuminate\Support\Facades\Auth::user())
+                        
+                    @endif
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

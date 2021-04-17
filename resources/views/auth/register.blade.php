@@ -6,6 +6,8 @@
 
         <x-jet-validation-errors class="mb-4" />
 
+
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -18,6 +20,15 @@
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
+            <div class="mt-4">
+                <x-jet-label for="user_role_id" value="{{ __('Tipo de usuario') }}" />
+                <select name="user_role_id" id="user_role_id">
+                    @foreach(\App\Models\UserRol::all() as $rol)
+                        <option value="{{ $rol->id }}">{{ $rol->role_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Contraseña') }}" />
