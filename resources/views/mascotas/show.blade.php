@@ -37,14 +37,15 @@
                             @endif
                         </div>
                     </div>
+                    @if(!auth()->user() || auth()->user()->isFamilia())
                     <div class="card-footer text-center">
                         <form action="{{route("mascotas.adoptar")}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$mascota->id}}">
-                            <input type="submit" style="width: 50%" href="{{--TODO: ADOPTAR--}}" class="btn btn-primary adoptar-btn" value="Adoptar">
+                            <input type="submit" style="width: 50%" class="btn btn-primary adoptar-btn" value="Adoptar">
                         </form>
-
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

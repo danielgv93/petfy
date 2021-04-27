@@ -32,7 +32,6 @@ class CreateUsersTable extends Migration
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
 
-
             $table->foreign("user_role_id")->references("id")->on("user_roles");
         });
 

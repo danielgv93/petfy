@@ -19,6 +19,7 @@ class CreateMascotasTable extends Migration
             $table->string("slug");
             $table->string("imagen");
             $table->date("fechaNacimiento");
+            $table->boolean("adoptado")->default(false);
             $table->integer("peso")->unsigned();
             $table->string("sexo", 6);
             $table->string("raza")->nullable();
@@ -30,11 +31,11 @@ class CreateMascotasTable extends Migration
             //Campos Gato
 
             //Foreign Keys
-            $table->foreignId("user_id");
+            $table->foreignId("refugio_id");
             $table->foreignId("especie_id");
             $table->timestamps();
 
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("refugio_id")->references("id")->on("users");
             $table->foreign("especie_id")->references("id")->on("especies");
         });
     }

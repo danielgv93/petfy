@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Familia;
 use App\Models\Mascota;
 use CURLFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -70,33 +72,13 @@ class MascotasController extends Controller
         $mascota->fechaNacimiento = $request->fechaNacimiento;
         $mascota->peso = $request->peso;
         $mascota->sexo = $request->sexo;
-        $mascota->user_id = Auth::user()->id;
+        $mascota->refugio_id = Auth::user()->id;
         $mascota->especie_id = $request->especie;
-        if ($request->raza === "") {
-            $mascota->raza = null;
-        } else {
-            $mascota->raza = $request->raza;
-        }
-        if ($request->color === "") {
-            $mascota->color = null;
-        } else {
-            $mascota->color = $request->color;
-        }
-        if ($request->pelaje === "") {
-            $mascota->pelaje = null;
-        } else {
-            $mascota->pelaje = $request->pelaje;
-        }
-        if ($request->tamano === "") {
-            $mascota->tamano = null;
-        } else {
-            $mascota->tamano = $request->tamano;
-        }
-        if ($request->descripcion === "") {
-            $mascota->descripcion = null;
-        } else {
-            $mascota->descripcion = $request->descripcion;
-        }
+        $mascota->raza = $request->raza === "" ? null : $request->raza;
+        $mascota->color = $request->color === "" ? null : $request->color;
+        $mascota->pelaje = $request->pelaje === "" ? null : $request->pelaje;
+        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
+        $mascota->descripcion = $request->descripcion === "" ? null : $request->descripcion;
         if ($request->imagen !== null) {
             $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
@@ -105,8 +87,8 @@ class MascotasController extends Controller
         // CONEXION CON LAS APIS
         $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
         $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
-        $this->postTwitter($texto, $mascota);
-        $this->postPhotoTelegram($texto, $mascota);
+        $this->postTwitter($texto, $mascota->imagen);
+        $this->postPhotoTelegram($texto, $mascota->imagen);
 
         return redirect()->route("administrar-mascotas.index");
     }
@@ -147,31 +129,11 @@ class MascotasController extends Controller
         $mascota->fechaNacimiento = $request->fechaNacimiento;
         $mascota->peso = $request->peso;
         $mascota->sexo = $request->sexo;
-        if ($request->raza === "") {
-            $mascota->raza = null;
-        } else {
-            $mascota->raza = $request->raza;
-        }
-        if ($request->color === "") {
-            $mascota->color = null;
-        } else {
-            $mascota->color = $request->color;
-        }
-        if ($request->pelaje === "") {
-            $mascota->pelaje = null;
-        } else {
-            $mascota->pelaje = $request->pelaje;
-        }
-        if ($request->tamano === "") {
-            $mascota->tamano = null;
-        } else {
-            $mascota->tamano = $request->tamano;
-        }
-        if ($request->descripcion === "") {
-            $mascota->descripcion = null;
-        } else {
-            $mascota->descripcion = $request->descripcion;
-        }
+        $mascota->raza = $request->raza === "" ? null : $request->raza;
+        $mascota->color = $request->color === "" ? null : $request->color;
+        $mascota->pelaje = $request->pelaje === "" ? null : $request->pelaje;
+        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
+        $mascota->descripcion = $request->descripcion === "" ? null : $request->descripcion;
         if ($request->imagen !== null) {
             // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
             Storage::delete($mascota->imagen);
@@ -185,14 +147,24 @@ class MascotasController extends Controller
     public function adoptar(Request $request)
     {
         $mascota = Mascota::query()->findOrFail($request->id);
-        // TODO: Lógica de adopción
-
+        $familia = auth()->user()->id;
+        if ($mascota->hasAdopcionesPorFamilia($familia)) {
+            $mensaje = "No puedes solicitar otra adopción por $mascota->nombre. Ya lo has hecho anteriormente.";
+        } else {
+            if ($mascota->hasAdopciones()) {
+                $mensaje = "$mascota->nombre parece que esta muy solicitado. Has enviado una solicitud de adopción.";
+            } else {
+                $mensaje = "Has enviado una solicitud de adopción por $mascota->nombre.";
+            }
+            DB::table("adopciones")->where("mascota_id", $request->id)->where("familia_id", $familia);
+            $mascota->familias()->attach([$familia]);
+        }
         // CONEXION CON LAS APIS
-        $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+        //$texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
         // POSTEAR EN TELEGRAM MENSAJE
-        $this->postTwitter($texto, $mascota);
-        $this->postPhotoTelegram($texto, $mascota);
-        return redirect()->route("mascotas")->with("mensaje", "Has adoptado a $mascota->nombre!");
+        //$this->postTwitter($texto, $mascota->imagen);
+        //$this->postPhotoTelegram($texto, $mascota->imagen);
+        return redirect()->route("mascotas")->with("mensaje", $mensaje);
     }
 
     /**
@@ -216,20 +188,30 @@ class MascotasController extends Controller
         ]);
     }
 
+    /**
+     * Postea en Twitter un tweet con una imagen
+     * @param $texto
+     * @param $mascota
+     */
     private function postTwitter($texto, $mascota)
     {
-        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota->imagen"))]);
+        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota"))]);
         Twitter::postTweet([
             "status" => $texto,
             "media_ids" => $photo->media_id_string
         ]);
     }
 
+    /**
+     * Postea en Telegram un mensaje con un texto y una imagen
+     * @param $texto
+     * @param $mascota
+     */
     private function postPhotoTelegram($texto, $mascota)
     {
         Telegram::sendPhoto([
             'chat_id' => '-1001301205495',
-            'photo' => InputFile::create(public_path("storage/$mascota->imagen"), $mascota->imagen),
+            'photo' => InputFile::create(public_path("storage/$mascota"), $mascota),
             'caption' => $texto
         ]);
     }

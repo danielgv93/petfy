@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Especie;
 use App\Models\Mascota;
+use App\Models\Refugio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -39,7 +40,7 @@ class MascotaFactory extends Factory
             "pelaje" => $this->faker->randomElement(["Corto", "Largo"]),
             "tamano" => $this->faker->randomElement(["Pequeño", "Mediano", "Grande"]),
             "descripcion" => $this->faker->text(400),
-            "user_id" => User::all()->random()->id,
+            "refugio_id" => Refugio::all()->random()->id,
             "especie_id" => Especie::all()->random()->id,
             "created_at" => $this->faker->dateTimeThisYear
         ];

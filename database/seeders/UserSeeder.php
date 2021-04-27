@@ -26,6 +26,17 @@ class UserSeeder extends Seeder
         $usuario->remember_token = Str::random(10);
         $usuario->save();
 
+        $nombre = "Karla";
+        $slug = Str::slug($nombre);
+        $usuario = new User();
+        $usuario->name = $nombre;
+        $usuario->user_role_id = 2;
+        $usuario->slug = $slug;
+        $usuario->email = "$slug@gmail.com";
+        $usuario->password = bcrypt("123");
+        $usuario->remember_token = Str::random(10);
+        $usuario->save();
+
         $nombre = "Refugio Canino de Torres";
         $slug = Str::slug($nombre);
         $usuario = new User();
@@ -36,6 +47,9 @@ class UserSeeder extends Seeder
         $usuario->password = bcrypt("123");
         $usuario->latitud = 43.354763751156746;
         $usuario->longitud =  -4.075958235989857;
+        $usuario->ciudad =  "Torrelavega";
+        $usuario->direccion =  "Calle canina, 11";
+        $usuario->direccion_donacion =  "$slug@paypal.com";
         $usuario->remember_token = Str::random(10);
         $usuario->save();
 

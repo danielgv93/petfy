@@ -4,7 +4,7 @@ use App\Http\Controllers\MapaController;
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\TelegramController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\RefugioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,13 +35,6 @@ Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
     ->name("mascotas.adoptar")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/refugio/{refugio}", [UserController::class, "show"])
-    ->name("refugio.show");
-
-Route::get("/administrar-mascotas", [UserController::class, "index"])
-    ->name("administrar-mascotas.index")
-    ->middleware(["accessrole", "auth"]);
-
 Route::put("/administrar-mascotas/{mascota}", [MascotasController::class, "update"])
     ->name("administrar-mascotas.update")
     ->middleware(["accessrole", "auth"]);
@@ -54,7 +47,6 @@ Route::get("/administrar-mascotas/crear", [MascotasController::class, "create"])
     ->name("mascotas.create")
     ->middleware(["accessrole", "auth"]);
 
-
 Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
     ->name("mascotas.store")
     ->middleware(["accessrole", "auth"]);
@@ -63,8 +55,26 @@ Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::cla
     ->name("mascotas.destroy")
     ->middleware(["accessrole", "auth"]);
 
-// APIS
+Route::get("/refugio/{refugio}", [RefugioController::class, "show"])
+    ->name("refugio.show");
 
+Route::get("/administrar-mascotas", [RefugioController::class, "index"])
+    ->name("administrar-mascotas.index")
+    ->middleware(["accessrole", "auth"]);
+
+Route::get("/administrar-mascotas/peticiones-adopcion", [RefugioController::class, "indexPeticionesAdopciones"])
+    ->name("peticiones-adopcion")
+    ->middleware(["accessrole", "auth"]);
+
+Route::get("/administrar-mascotas/aceptar-peticion/{mascota}/{familia}", [RefugioController::class, "aceptarPeticion"])
+    ->name("aceptar-peticion")
+    ->middleware(["accessrole", "auth"]);
+
+Route::get("/administrar-mascotas/historial-adopciones", [RefugioController::class, "indexHistorial"])
+    ->name("historial-adopciones")
+    ->middleware(["accessrole", "auth"]);
+
+// APIS
 Route::get("telegram/getMe", [TelegramController::class, "getMe"])
     ->name("telegram.getMe");
 

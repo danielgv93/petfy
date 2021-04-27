@@ -10,6 +10,22 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * @package App\Models
+ * @property $id
+ * @property $name
+ * @property $slug
+ * @property $user_role_id
+ * @property $email
+ * @property $password
+ * @property $direccion
+ * @property $ciudad
+ * @property $nif
+ * @property $latitud
+ * @property $longitud
+ * @property $direccion_donacion
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -63,12 +79,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function mascotas() {
-        return $this->hasMany(Mascota::class);
-    }
-
     public function rol() {
         return $this->belongsTo(UserRol::class, "user_role_id");
+    }
+
+    public function isRefugio() {
+        return $this->user_role_id == 1;
+    }
+
+    public function isFamilia() {
+        return $this->user_role_id == 2;
     }
 
     public function getRouteKeyName()
