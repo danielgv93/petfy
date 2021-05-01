@@ -3,7 +3,7 @@
 use App\Http\Controllers\MapaController;
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\InicioController;
-use App\Http\Controllers\TelegramController;
+use App\Http\Controllers\MensajeriaController;
 use App\Http\Controllers\RefugioController;
 use Illuminate\Support\Facades\Route;
 
@@ -75,10 +75,10 @@ Route::get("/administrar-mascotas/historial-adopciones", [RefugioController::cla
     ->middleware(["accessrole", "auth"]);
 
 // APIS
-Route::get("telegram/getMe", [TelegramController::class, "getMe"])
+Route::get("telegram/getMe", [MensajeriaController::class, "getMe"])
     ->name("telegram.getMe");
 
-Route::post("telegram/store", [TelegramController::class, "mascotaNueva"])
+Route::post("telegram/store", [MensajeriaController::class, "mascotaNueva"])
     ->name("telegram.store");
 
 Route::any("maps/generar/{id}", [MapaController::class, "generarXML"])

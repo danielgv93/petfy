@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Gmail;
+use App\Models\Adopcion;
 use App\Models\Familia;
 use App\Models\Mascota;
 use CURLFile;
@@ -11,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Telegram\Bot\FileUpload\InputFile;
@@ -29,6 +32,7 @@ class MascotasController extends Controller
      */
     public function index(int $especie_id = null)
     {
+
         $mascotas = Mascota::query()->
         when($especie_id, function ($query, $especie_id) {
                 return $query->where("especie_id", $especie_id);
@@ -87,8 +91,8 @@ class MascotasController extends Controller
         // CONEXION CON LAS APIS
         $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
         $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
-        $this->postTwitter($texto, $mascota->imagen);
-        $this->postPhotoTelegram($texto, $mascota->imagen);
+        MensajeriaController::postTwitter($texto, $mascota->imagen);
+        MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
 
         return redirect()->route("administrar-mascotas.index");
     }
@@ -159,11 +163,6 @@ class MascotasController extends Controller
             DB::table("adopciones")->where("mascota_id", $request->id)->where("familia_id", $familia);
             $mascota->familias()->attach([$familia]);
         }
-        // CONEXION CON LAS APIS
-        //$texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
-        // POSTEAR EN TELEGRAM MENSAJE
-        //$this->postTwitter($texto, $mascota->imagen);
-        //$this->postPhotoTelegram($texto, $mascota->imagen);
         return redirect()->route("mascotas")->with("mensaje", $mensaje);
     }
 
@@ -180,40 +179,6 @@ class MascotasController extends Controller
         return redirect()->route("administrar-mascotas.index");
     }
 
-    private function postTelegram($texto)
-    {
-        Telegram::sendMessage([
-            'chat_id' => "-1001301205495",
-            "text" => $texto,
-        ]);
-    }
 
-    /**
-     * Postea en Twitter un tweet con una imagen
-     * @param $texto
-     * @param $mascota
-     */
-    private function postTwitter($texto, $mascota)
-    {
-        $photo = Twitter::uploadMedia(["media" => File::get(public_path("storage/$mascota"))]);
-        Twitter::postTweet([
-            "status" => $texto,
-            "media_ids" => $photo->media_id_string
-        ]);
-    }
-
-    /**
-     * Postea en Telegram un mensaje con un texto y una imagen
-     * @param $texto
-     * @param $mascota
-     */
-    private function postPhotoTelegram($texto, $mascota)
-    {
-        Telegram::sendPhoto([
-            'chat_id' => '-1001301205495',
-            'photo' => InputFile::create(public_path("storage/$mascota"), $mascota),
-            'caption' => $texto
-        ]);
-    }
 
 }

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adopcion;
 use App\Models\Familia;
 use App\Models\Mascota;
 use App\Models\Refugio;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class RefugioController extends Controller
 {
@@ -21,7 +18,8 @@ class RefugioController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $mascotas = Mascota::where("refugio_id", "=", $user_id)
+        $mascotas = Mascota::query()
+            ->where("refugio_id", "=", $user_id)
             ->orderBy("created_at", "desc")
             ->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
@@ -53,17 +51,16 @@ class RefugioController extends Controller
 
     public function aceptarPeticion(Mascota $mascota, Familia $familia) {
         try {
-            Adopcion::query()
-                ->where("familia_id", "!=", $familia->id)
-                ->where("mascota_id", $mascota->id)
-                ->delete();
-            Adopcion::query()
-                ->where("familia_id", $familia->id)
-                ->where("mascota_id", $mascota->id)->get()[0]->save();
-            $mascota->adoptar();
+            Refugio::rechazarSolicitudes($mascota, $familia);
+            Refugio::aceptarSolicitudes($mascota, $familia);
+            // CONEXION CON LAS APIS
+            $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+            MensajeriaController::postTwitter($texto, $mascota->imagen);
+            MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
             $mensaje = "$familia->name ha adoptado a $mascota->nombre con éxito!";
         } catch (\Exception $e) {
             $mensaje = "No se ha podido adoptar a $mascota->nombre";
+            $mensaje = $e->getMessage();
         }
         return back()->with("mensaje", $mensaje);
     }

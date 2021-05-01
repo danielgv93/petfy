@@ -21,12 +21,23 @@ class UserSeeder extends Seeder
         $usuario->name = $nombre;
         $usuario->user_role_id = 2;
         $usuario->slug = $slug;
+        $usuario->email = "danielgarciavarela93@gmail.com";
+        $usuario->password = bcrypt("123");
+        $usuario->remember_token = Str::random(10);
+        $usuario->save();
+
+        $nombre = "Usuario2";
+        $slug = Str::slug($nombre);
+        $usuario = new User();
+        $usuario->name = $nombre;
+        $usuario->user_role_id = 2;
+        $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
 
-        $nombre = "Karla";
+        $nombre = "Usuario3";
         $slug = Str::slug($nombre);
         $usuario = new User();
         $usuario->name = $nombre;

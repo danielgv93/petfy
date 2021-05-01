@@ -26,6 +26,7 @@ class CreateMascotasTable extends Migration
             $table->string("color")->nullable();
             $table->string("pelaje")->nullable();
             $table->text("descripcion")->nullable();
+            $table->date("fecha_adopcion")->nullable();
             //Campos Perro
             $table->string("tamano")->nullable();
             //Campos Gato
