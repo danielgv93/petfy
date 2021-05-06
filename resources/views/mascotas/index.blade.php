@@ -1,9 +1,9 @@
 @extends('layouts.master.master')
 
 @section('title')
-    @if ($especie_id == 1)
+    @if ($especie->slug == "perros")
         Perros
-    @elseif($especie_id == 2)
+    @elseif($especie->slug == "gatos")
         Gatos
     @else
         Petfy
@@ -16,9 +16,9 @@
         <div class="alert-danger">{{session("mensaje")}}</div>
     @endif
     <h1>
-        @if ($especie_id == 1)
+        @if ($especie->slug == "perros")
             Zona canina
-        @elseif($especie_id == 2)
+        @elseif($especie->slug == "gatos")
             Zona felina
         @else
             Parque de mascotas

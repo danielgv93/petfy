@@ -21,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InicioController::class, "index"])
     ->name("welcome");
 
-Route::get("/mascotas/{especie_id?}", [MascotasController::class, "index"])
-    ->name("mascotas")
-    ->where("especie", "[0-9]+");
+Route::get("/mascotas/{especie?}", [MascotasController::class, "index"])
+    ->name("mascotas");
 
 Route::post("/mascotas/busqueda", [MascotasController::class, "busqueda"])
     ->name("mascotas.busqueda");

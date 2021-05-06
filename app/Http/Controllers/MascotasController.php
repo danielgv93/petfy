@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Especie;
 use App\Models\Mascota;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,20 +18,21 @@ class MascotasController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @param int|null $especie_id
+     * @param Especie $especie
      * @return Response
      */
-    public function index(int $especie_id = null)
+    public function index(Especie $especie)
     {
-
-        $mascotas = Mascota::query()->
-        when($especie_id, function ($query, $especie_id) {
-                return $query->where("especie_id", $especie_id);
-            })
-            ->orderBy("created_at")
-            ->paginate(self::PAGINATION);
-        return view("mascotas.index", compact("mascotas", "especie_id"));
+        $especie_id = isset($especie) ? $especie->id : null;
+        if (!isset($especie_id)) {
+            $mascotas = Mascota::paginate(self::PAGINATION);
+        } else {
+            $mascotas = Especie::query()->
+                find($especie_id)->
+                mascotas()->
+                paginate(self::PAGINATION);
+        }
+        return view("mascotas.index", compact("mascotas", "especie"));
     }
 
     public function busqueda(Request $request)

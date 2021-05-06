@@ -9,20 +9,19 @@
                 aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item {{ request()->routeIs('mascotas') ? ' active' : ''}}">
+                <li class="nav-item {{ empty(\Illuminate\Support\Facades\Request::segment(2)) ? ' active' : ""}}">
                     <a class="nav-link" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{ isset($especie_id) ?  ($especie_id == 1 ? ' active' : ''): ""}}">
-                    <a class="nav-link " href="{{route("mascotas", 1)}}">Perros</a>
+                <li class="nav-item {{ isset($especie->slug) ?  ($especie->slug == "perros" ? ' active' : ''): ""}}">
+                    <a class="nav-link " href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
                 </li>
-                <li class="nav-item {{ isset($especie_id) && $especie_id == 2 ? ' active' : ''}}">
-                    <a class="nav-link" href="{{route("mascotas", 2)}}">Gatos</a>
+                <li class="nav-item {{ isset($especie->slug) && $especie->slug == "gatos" ? ' active' : ''}}">
+                    <a class="nav-link" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
                 </li>
             </ul>
 
         </div>
-        @if (request()->routeIs('mascotas'))
-
+        @if (request()->routeIs(['mascotas', "mascotas.show"]))
             <div class="form-outline mr-3">
                 <input type="search" name="busqueda" id="busqueda" class="form-control"
                        placeholder="Busca una mascota"/>

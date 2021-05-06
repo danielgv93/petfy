@@ -13,7 +13,12 @@ class Especie extends Model
 
     protected $table = "especies";
 
-    public function mascota() {
+    public function mascotas() {
         return $this->hasMany(Mascota::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return "slug";
     }
 }
