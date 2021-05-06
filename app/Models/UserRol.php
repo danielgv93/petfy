@@ -10,6 +10,7 @@ class UserRol extends Model
     use HasFactory;
 
     protected $table = "user_roles";
+    public $timestamps = false;
 
     public function usuarios() {
         return $this->hasMany(User::class);

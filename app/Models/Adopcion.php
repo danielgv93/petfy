@@ -10,5 +10,8 @@ class Adopcion extends Model
     use HasFactory;
 
     protected $table = "adopciones";
-
+    public $timestamps = true;
+    protected $fillable = [
+        "updated_at"
+    ];
 }

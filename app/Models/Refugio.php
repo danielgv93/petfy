@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Http\Controllers\RefugioController;
 use App\Mail\Gmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class Refugio extends User
@@ -27,12 +29,22 @@ class Refugio extends User
         return $this->hasMany(Mascota::class);
     }
 
+    /**
+     * Envía una notificación por email a los usuarios cuyas solicitudes han sido rechazadas y borra
+     * de la tabla Adopción el registro de dichas solicitudes
+     * @param Mascota $mascota
+     * @param Familia $familia
+     */
     public static function rechazarSolicitudes(Mascota $mascota, Familia $familia)
     {
-        $idsRechazo = Adopcion::query()
+        $rechazados = Adopcion::query()
             ->where("familia_id", "!=", $familia->id)
             ->where("mascota_id", $mascota->id)->pluck("familia_id");
-        $emails = User::query()->whereIn('id', $idsRechazo)->pluck("email");
+        if ($rechazados->count() > 0) {
+            $idsRechazados = $rechazados->pluck("familia_id");
+            $emails = User::query()->whereIn('id', $idsRechazados)->pluck("email");
+        }
+
         if (isset($emails)) {
             $details = [
                 "title" => "Solicitud de adopción de $mascota->nombre rechazada",
@@ -47,27 +59,45 @@ class Refugio extends User
             ->where("mascota_id", $mascota->id)
             ->delete();
     }
-
+    /**
+     * Se establece que la mascota pasa a estado adoptado y envía una notificación por email
+     * al usuario cuya solicitud ha sido aceptada
+     * @param Mascota $mascota
+     * @param Familia $familia
+     */
     public static function aceptarSolicitudes(Mascota $mascota, Familia $familia) {
         $details = [
             "title" => "$mascota->nombre adoptado",
             "body" => Refugio::aceptarPetcionHTML($mascota, $mascota->refugio)
         ];
-        Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción"));
-        Adopcion::query()
+        /* TODO: Actualizar fecha
+         * $adopcion = Adopcion::query()
             ->where("familia_id", $familia->id)
-            ->where("mascota_id", $mascota->id)->get()[0]->save();
+            ->where("mascota_id", $mascota->id)->get()[0];
+        $adopcion->save();*/
         $mascota->adoptar();
+        Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción"));
     }
 
-    private static function rechazarPetcionHTML(Mascota $mascota)
+    /**
+     * Genera el contenido de texto para enviar por correo como notificación al rechazar una solicitud
+     * @param Mascota $mascota
+     * @return string Contenido del correo
+     */
+    private static function rechazarPetcionHTML(Mascota $mascota): string
     {
         return "Lo sentimos mucho, pero no has podido adoptar a $mascota->nombre. El refugio ha decidido
                 entregarselo a otra familia. Pero no desesperes!! Hay muchas otras mascotas deseando que las acojas. Entra en www.petfy.es y
                 enamórate de tu futura mascota.";
     }
 
-    private static function aceptarPetcionHTML(Mascota $mascota, User $refugio)
+    /**
+     * Genera el contenido de texto para enviar por correo como notificación al aceptar una solicitud
+     * @param Mascota $mascota
+     * @param User $refugio
+     * @return string Contenido del correo
+     */
+    private static function aceptarPetcionHTML(Mascota $mascota, User $refugio): string
     {
         return "¡¡Enhorabuena, $refugio->name ha aceptado tu solicitud de adopción sobre $mascota->nombre!!
                 Podrás venir a recoger a $mascota->nombre a las instalaciones en $refugio->direccion";

@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Gmail;
-use App\Models\Adopcion;
-use App\Models\Familia;
 use App\Models\Mascota;
-use CURLFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Telegram\Bot\FileUpload\InputFile;
-use Telegram\Bot\Laravel\Facades\Telegram;
-use Thujohn\Twitter\Facades\Twitter;
 
 class MascotasController extends Controller
 {
@@ -152,10 +143,10 @@ class MascotasController extends Controller
     {
         $mascota = Mascota::query()->findOrFail($request->id);
         $familia = auth()->user()->id;
-        if ($mascota->hasAdopcionesPorFamilia($familia)) {
+        if ($mascota->hasSolicitudesPorFamilia($familia)) {
             $mensaje = "No puedes solicitar otra adopción por $mascota->nombre. Ya lo has hecho anteriormente.";
         } else {
-            if ($mascota->hasAdopciones()) {
+            if ($mascota->hasSolicitudesAdopcion()) {
                 $mensaje = "$mascota->nombre parece que esta muy solicitado. Has enviado una solicitud de adopción.";
             } else {
                 $mensaje = "Has enviado una solicitud de adopción por $mascota->nombre.";

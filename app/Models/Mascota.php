@@ -48,13 +48,13 @@ class Mascota extends Model
         return $this->belongsToMany(User::class, "adopciones", "mascota_id", "familia_id");
     }
 
-    public function hasAdopciones(): bool
+    public function hasSolicitudesAdopcion(): bool
     {
         $adopciones = DB::table("adopciones")->where("mascota_id", $this->id);
         return $adopciones->exists();
     }
 
-    public function hasAdopcionesPorFamilia($idFamilia): bool
+    public function hasSolicitudesPorFamilia(int $idFamilia): bool
     {
         $adopciones = DB::table("adopciones")
             ->where("mascota_id", $this->id)
@@ -62,7 +62,7 @@ class Mascota extends Model
         return $adopciones->exists();
     }
 
-    public function adoptar()
+    public function adoptar(): void
     {
         $this->adoptado = true;
         $this->fecha_adopcion = now();
