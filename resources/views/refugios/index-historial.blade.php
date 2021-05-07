@@ -4,6 +4,7 @@
     Historial de adopciones
 @endsection
 @section("main")
+    @include("layouts.partials.mapa")
     <table class="table table-striped table-hover">
         <thead>
         <tr>

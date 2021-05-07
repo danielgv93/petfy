@@ -34,42 +34,42 @@ Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
     ->name("mascotas.adoptar")
     ->middleware(["accessrole", "auth"]);
 
-Route::put("/administrar-mascotas/{mascota}", [MascotasController::class, "update"])
+Route::put("/dashboard/administrar-mascotas/{mascota}", [MascotasController::class, "update"])
     ->name("administrar-mascotas.update")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/administrar-mascotas/{mascota}/editar", [MascotasController::class, "edit"])
+Route::get("/dashboard/administrar-mascotas/{mascota}/editar", [MascotasController::class, "edit"])
     ->name("administrar-mascotas.edit")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/administrar-mascotas/crear", [MascotasController::class, "create"])
+Route::get("/dashboard/administrar-mascotas/crear", [MascotasController::class, "create"])
     ->name("mascotas.create")
     ->middleware(["accessrole", "auth"]);
 
-Route::post("/administrar-mascotas/crear", [MascotasController::class, "store"])
+Route::post("/dashboard/administrar-mascotas/crear", [MascotasController::class, "store"])
     ->name("mascotas.store")
     ->middleware(["accessrole", "auth"]);
 
-Route::delete("/administrar-mascotas/{mascota}/borrar", [MascotasController::class, "destroy"])
+Route::delete("/dashboard/administrar-mascotas/{mascota}/borrar", [MascotasController::class, "destroy"])
     ->name("mascotas.destroy")
     ->middleware(["accessrole", "auth"]);
 
 Route::get("/refugio/{refugio}", [RefugioController::class, "show"])
     ->name("refugio.show");
 
-Route::get("/administrar-mascotas", [RefugioController::class, "index"])
+Route::get("/dashboard/administrar-mascotas", [RefugioController::class, "index"])
     ->name("administrar-mascotas.index")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/administrar-mascotas/peticiones-adopcion", [RefugioController::class, "indexPeticionesAdopciones"])
+Route::get("/dashboard/peticiones-adopcion", [RefugioController::class, "indexPeticionesAdopciones"])
     ->name("peticiones-adopcion")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/administrar-mascotas/aceptar-peticion/{mascota}/{familia}", [RefugioController::class, "aceptarPeticion"])
+Route::get("/dashboard/peticiones-adopcion/aceptar-peticion/{mascota}/{familia}", [RefugioController::class, "aceptarPeticion"])
     ->name("aceptar-peticion")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/administrar-mascotas/historial-adopciones", [RefugioController::class, "indexHistorial"])
+Route::get("/dashboard/historial-adopciones", [RefugioController::class, "indexHistorial"])
     ->name("historial-adopciones")
     ->middleware(["accessrole", "auth"]);
 
@@ -80,7 +80,7 @@ Route::get("telegram/getMe", [MensajeriaController::class, "getMe"])
 Route::post("telegram/store", [MensajeriaController::class, "mascotaNueva"])
     ->name("telegram.store");
 
-Route::any("maps/generar/{id}", [MapaController::class, "generarXML"])
+Route::any("maps/generar/{refugio}", [MapaController::class, "generarXML"])
     ->name("maps.xml");
 
 // USUARIOS JETSTREAM

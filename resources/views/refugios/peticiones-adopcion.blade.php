@@ -7,6 +7,7 @@
     @if (session("mensaje"))
         <div class="alert-danger">{{session("mensaje")}}</div>
     @endif
+    @include("layouts.partials.mapa")
     <table class="table table-striped table-hover">
         <thead>
         <tr>

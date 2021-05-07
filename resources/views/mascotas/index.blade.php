@@ -12,6 +12,7 @@
 @endsection
 
 @section('main')
+    @include("layouts.partials.mapa")
     @if (session("mensaje"))
         <div class="alert-danger">{{session("mensaje")}}</div>
     @endif

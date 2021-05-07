@@ -5,6 +5,7 @@
 @endsection
 
 @section('main')
+    @include("layouts.partials.mapa")
     <h1>Estas son tus mascotas</h1>
     {{$mascotas->links("view.name")}}
     <div class="row justify-content-center">
