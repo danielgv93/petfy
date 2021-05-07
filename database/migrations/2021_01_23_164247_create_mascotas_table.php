@@ -17,22 +17,20 @@ class CreateMascotasTable extends Migration
             $table->id();
             $table->string("nombre");
             $table->string("slug");
-            $table->string("imagen");
+            $table->foreignId("especie_id");
             $table->date("fechaNacimiento");
-            $table->boolean("adoptado")->default(false);
-            $table->integer("peso")->unsigned();
             $table->string("sexo", 6);
+            $table->string("tamano")->nullable();
             $table->string("raza")->nullable();
             $table->string("color")->nullable();
             $table->string("pelaje")->nullable();
+            $table->boolean("urgente")->default(false);
+            $table->boolean("sociable")->nullable();
+            $table->boolean("esterilizado")->nullable();
             $table->text("descripcion")->nullable();
-            //Campos Perro
-            $table->string("tamano")->nullable();
-            //Campos Gato
-
-            //Foreign Keys
+            $table->string("imagen");
             $table->foreignId("refugio_id");
-            $table->foreignId("especie_id");
+            $table->boolean("adoptado")->default(false);
 
             $table->foreign("refugio_id")->references("id")->on("users");
             $table->foreign("especie_id")->references("id")->on("especies");

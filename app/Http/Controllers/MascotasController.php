@@ -74,24 +74,26 @@ class MascotasController extends Controller
         $mascota = new Mascota();
         $mascota->nombre = $request->nombre;
         $mascota->slug = Str::slug($request->nombre);
-        $mascota->fechaNacimiento = $request->fechaNacimiento;
-        $mascota->peso = $request->peso;
-        $mascota->sexo = $request->sexo;
-        $mascota->refugio_id = Auth::user()->id;
         $mascota->especie_id = $request->especie;
+        $mascota->fechaNacimiento = $request->fechaNacimiento;
+        $mascota->sexo = $request->sexo;
+        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
         $mascota->raza = $request->raza === "" ? null : $request->raza;
         $mascota->color = $request->color === "" ? null : $request->color;
         $mascota->pelaje = $request->pelaje === "" ? null : $request->pelaje;
-        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
+        $mascota->urgente = $request->urgente === "Si";
+        $mascota->sociable = $request->sociable === "-" ? null : $request->urgente === "Si";
+        $mascota->esterilizado = $request->esterilizado === "-" ? null : $request->esterilizado === "Si";
         $mascota->descripcion = $request->descripcion === "" ? null : $request->descripcion;
         if ($request->imagen !== null) {
             $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
+        $mascota->refugio_id = Auth::user()->id;
         $mascota->save();
 
         // CONEXION CON LAS APIS
         $sufijo = $mascota->sexo == "Macho" ? "o" : "a";
-        $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en https://petfy.es/mascota/$mascota->slug";
+        $texto = "$request->nombre está list$sufijo para que l$sufijo adoptes! Adoptal$sufijo en http://petfy.es/mascota/$mascota->slug";
         MensajeriaController::postTwitter($texto, $mascota->imagen);
         MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
 
@@ -132,12 +134,14 @@ class MascotasController extends Controller
         $mascota->nombre = $request->nombre;
         $mascota->slug = Str::slug($request->nombre);
         $mascota->fechaNacimiento = $request->fechaNacimiento;
-        $mascota->peso = $request->peso;
         $mascota->sexo = $request->sexo;
+        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
         $mascota->raza = $request->raza === "" ? null : $request->raza;
         $mascota->color = $request->color === "" ? null : $request->color;
         $mascota->pelaje = $request->pelaje === "" ? null : $request->pelaje;
-        $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
+        $mascota->urgente = $request->urgente === "Si";
+        $mascota->sociable = $request->sociable === "-" ? null : $request->urgente === "Si";
+        $mascota->esterilizado = $request->esterilizado === "-" ? null : $request->esterilizado === "Si";
         $mascota->descripcion = $request->descripcion === "" ? null : $request->descripcion;
         if ($request->imagen !== null) {
             // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre

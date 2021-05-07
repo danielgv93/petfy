@@ -13,19 +13,20 @@ use Illuminate\Support\Facades\DB;
  * @property int id
  * @property string nombre
  * @property string slug
- * @property string imagen
+ * @property int especie_id
  * @property mixed fechaNacimiento
- * @property int peso
  * @property string sexo
+ * @property string tamano
  * @property string raza
  * @property string color
  * @property string pelaje
+ * @property boolean urgente
+ * @property boolean sociable
+ * @property boolean esterilizado
  * @property string descripcion
- * @property string tamano
+ * @property string imagen
  * @property int refugio_id
- * @property int especie_id
  * @property boolean adoptado
- * @property mixed fecha_adopcion
  */
 class Mascota extends Model
 {

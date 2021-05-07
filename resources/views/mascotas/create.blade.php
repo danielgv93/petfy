@@ -5,6 +5,7 @@
 @endsection
 
 @section("main")
+    @include("layouts.partials.mapa")
     <form class="col" action="{{route("mascotas.store")}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -32,16 +33,19 @@
                 <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
             </div>
             <div class="col form-group">
-                <label for="peso">Peso:</label>
-                <input type="number" class="form-control" name="peso" id="peso" aria-describedby="helpId"
-                       placeholder="Introduzca un peso" min="0" required>
-                <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
-            </div>
-            <div class="col form-group">
                 <label for="sexo">Sexo:</label>
                 <select class="form-control" name="sexo" id="sexo">
                     <option value="Macho">Macho</option>
                     <option value="Hembra">Hembra</option>
+                </select>
+                <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
+            </div>
+            <div class="col form-group">
+                <label for="tamano">Tamaño:</label>
+                <select class="form-control" name="tamano" id="tamano">
+                    <option value="pequeño">Pequeño</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
                 </select>
                 <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
             </div>
@@ -62,6 +66,32 @@
                 <select class="form-control" name="pelaje" id="pelaje">
                     <option value="Largo">Largo</option>
                     <option value="Corto">Corto</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <label for="urgente">¿Urgente?:</label>
+                <select class="form-control" name="urgente" id="urgente">
+                    <option>Si</option>
+                    <option selected>No</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="sociable">¿Sociable?:</label>
+                <select class="form-control" name="sociable" id="sociable">
+                    <option>-</option>
+                    <option>Si</option>
+                    <option>No</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="esterilizado">¿Esterilizado?:</label>
+                <select class="form-control" name="esterilizado" id="esterilizado">
+                    <option>-</option>
+                    <option>Si</option>
+                    <option>No</option>
                 </select>
             </div>
         </div>

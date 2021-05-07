@@ -26,16 +26,19 @@
                     <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
                 </div>
                 <div class="col form-group">
-                    <label for="peso">Peso:</label>
-                    <input type="number" class="form-control" name="peso" id="peso" aria-describedby="helpId"
-                           placeholder="Introduzca un peso" min="0" value="{{$mascota->peso}}">
-                    <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
-                </div>
-                <div class="col form-group">
                     <label for="sexo">Sexo:</label>
                     <select class="form-control" name="sexo" id="sexo">
                         <option value="Macho" >Macho</option>
-                        <option value="Hembra"{{$mascota->sexo == "Hembra" ? "selected":""}}>Hembra</option>
+                        <option value="Hembra" {{$mascota->sexo == "Hembra" ? "selected":""}}>Hembra</option>
+                    </select>
+                    <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
+                </div>
+                <div class="col form-group">
+                    <label for="tamano">Tamaño:</label>
+                    <select class="form-control" name="tamano" id="tamano">
+                        <option value="pequeño" {{$mascota->tamano == "pequeño" ? "selected":""}}>Pequeño</option>
+                        <option value="mediano" {{$mascota->tamano == "mediano" ? "selected":""}}>Mediano</option>
+                        <option value="grande" {{$mascota->tamano == "grande" ? "selected":""}}>Grande</option>
                     </select>
                     <small id="helpId" class="form-text text-muted text-danger">*Campo obligatorio</small>
                 </div>
@@ -54,8 +57,33 @@
                 <div class="col form-group">
                     <label for="pelaje">Pelaje:</label>
                     <select class="form-control" name="pelaje" id="pelaje">
-                        <option value="Largo">Largo</option>
-                        <option value="Corto">Corto</option>
+                        <option value="Largo" {{$mascota->pelaje == "Largo" ? "selected":""}}>Largo</option>
+                        <option value="Corto" {{$mascota->pelaje == "Corto" ? "selected":""}}>Corto</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="urgente">¿Urgente?:</label>
+                    <select class="form-control" name="urgente" id="urgente">
+                        <option>Si</option>
+                        <option {{ !$mascota->urgente ? "selected":""}}>No</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="sociable">¿Sociable?:</label>
+                    <select class="form-control" name="sociable" id="sociable">
+                        <option {{ $mascota->sociable === null ? "selected":"" }}>-</option>
+                        <option {{ $mascota->sociable ? "selected":"" }}>Si</option>
+                        <option {{ !$mascota->sociable ? "selected":"" }}>No</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="esterilizado">¿Esterilizado?:</label>
+                    <select class="form-control" name="esterilizado" id="esterilizado">
+                        <option {{ $mascota->esterilizado === null ? "selected":"" }}>-</option>
+                        <option {{ $mascota->esterilizado ? "selected":"" }}>Si</option>
+                        <option {{ !$mascota->esterilizado ? "selected":"" }}>No</option>
                     </select>
                 </div>
             </div>
