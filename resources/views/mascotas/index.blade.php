@@ -25,8 +25,11 @@
         @endif
     </h1>
     {{$mascotas->links("view.name")}}
+
     <div class="row justify-content-center">
+        @include("layouts.partials.filtro")
         @foreach($mascotas as $mascota)
+            @if(!$mascota->adoptado)
             <a href="{{ route('mascotas.show' , $mascota) }}">
                 <div class="card m-1 bg-light border-secondary" style="width: 18rem;">
                     <img class="card-img-top" src="{{asset("storage")}}/{{$mascota->imagen}}"
@@ -36,6 +39,7 @@
                     </div>
                 </div>
             </a>
+            @endif
         @endforeach
     </div>
     {{$mascotas->links("view.name")}}

@@ -22,6 +22,7 @@ class EspecieSeeder extends Seeder
         foreach ($especies as $especie) {
             $objeto = new Especie();
             $objeto->especie = $especie;
+            $objeto->slug = strtolower($especie)."s";
             $objeto->save();
         }
     }

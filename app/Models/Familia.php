@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Familia extends User
 {
@@ -21,6 +20,6 @@ class Familia extends User
     }
 
     function mascotas() {
-        return $this->belongsToMany(Mascota::class, "adopciones", "familia_id", "mascota_id");
+        return $this->belongsToMany(Mascota::class, "adopciones", "familia_id", "mascota_id")->withPivot("fecha_adopcion");
     }
 }

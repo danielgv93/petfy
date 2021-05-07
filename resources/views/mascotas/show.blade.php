@@ -14,8 +14,8 @@
                             <img class="img-fluid mx-auto d-block rounded" src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}">
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title text-center">{{$mascota->nombre}}</h3>
-                            <h5 class="card-title text-center">Fecha Nacimiento: {{$mascota->fechaNacimiento}}</h5>
+                            <h3 class="card-title text-center">{{ $mascota->nombre }}</h3>
+                            <h5 class="card-title text-center">Tiene {{$mascota->getEdad()}}.</h5>
                             <h5 class="card-title text-center">Refugio: <a href="{{route("refugio.show", $mascota->refugio)}}">{{$mascota->refugio->name}}</a></h5>
                             <h5 class="card-title text-center">Peso: {{$mascota->peso}} Kg</h5>
                             <h5 class="card-title text-center">Sexo: {{$mascota->sexo}}</h5>

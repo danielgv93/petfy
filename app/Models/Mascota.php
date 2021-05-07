@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +25,6 @@ use Illuminate\Support\Facades\DB;
  * @property int refugio_id
  * @property int especie_id
  * @property boolean adoptado
- * @property mixed created_at
- * @property mixed updated_at
  * @property mixed fecha_adopcion
  */
 class Mascota extends Model
@@ -45,7 +44,7 @@ class Mascota extends Model
     }
 
     public function familias() {
-        return $this->belongsToMany(User::class, "adopciones", "mascota_id", "familia_id");
+        return $this->belongsToMany(User::class, "adopciones", "mascota_id", "familia_id")->withPivot("fecha_adopcion");
     }
 
     public function hasSolicitudesAdopcion(): bool
@@ -64,15 +63,48 @@ class Mascota extends Model
 
     public function adoptar(): void
     {
+        $adopcion = Adopcion::query()
+            ->where("mascota_id", $this->id)->get()[0];
+        $adopcion->fecha_adopcion = now();
         $this->adoptado = true;
-        $this->fecha_adopcion = now();
+        $adopcion->save();
         $this->save();
     }
 
-    public function isAdoptado(): bool
+    public function getEdad()
     {
-        $adoptado = DB::table("adopciones")->where("adopcion_final", true);
-        return $adoptado->exists();
+        $edad = "";
+        $fecha = Carbon::parse($this->fechaNacimiento);
+        $mesesTotales = $fecha->diffInMonths(Carbon::now());
+        $anios = $fecha->diffInYears(Carbon::now());
+        $meses = $mesesTotales - $anios * 12;
+        if ($anios > 0 || $mesesTotales % 12 === 0 && $anios >= 2) {
+            $edad .= "$anios años";
+            if ($mesesTotales % 12 !== 0) {
+                $edad .= " y $meses meses";
+            }
+        } else {
+            $edad .= "$meses meses";
+        }
+        return $edad;
+    }
+
+    public function isCachorro()
+    {
+        return Carbon::parse($this->fechaNacimiento)->diffInYears(now()) < 1;
+    }
+
+    public function isAdulto() {
+        return !$this->isCachorro() && Carbon::parse($this->fechaNacimiento)->diffInYears(now()) < 10;
+    }
+
+    public function isAnciano() {
+        return !$this->isCachorro() && !$this->isAdulto();
+    }
+
+    public static function getRazas()
+    {
+        return self::query()->distinct()->pluck("raza");
     }
 
     public function getRouteKeyName()

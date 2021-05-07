@@ -16,7 +16,7 @@ class CreateAdopcionesTable extends Migration
         Schema::create('adopciones', function (Blueprint $table) {
             $table->foreignId("mascota_id");
             $table->foreignId("familia_id");
-            $table->timestamps();
+            $table->dateTime("fecha_adopcion")->nullable();
 
             $table->primary(["mascota_id", "familia_id"]);
             $table->foreign("mascota_id")->references("id")->on("mascotas");

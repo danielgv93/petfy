@@ -26,7 +26,6 @@ class CreateMascotasTable extends Migration
             $table->string("color")->nullable();
             $table->string("pelaje")->nullable();
             $table->text("descripcion")->nullable();
-            $table->date("fecha_adopcion")->nullable();
             //Campos Perro
             $table->string("tamano")->nullable();
             //Campos Gato
@@ -34,7 +33,6 @@ class CreateMascotasTable extends Migration
             //Foreign Keys
             $table->foreignId("refugio_id");
             $table->foreignId("especie_id");
-            $table->timestamps();
 
             $table->foreign("refugio_id")->references("id")->on("users");
             $table->foreign("especie_id")->references("id")->on("especies");

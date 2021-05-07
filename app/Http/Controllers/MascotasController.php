@@ -23,15 +23,23 @@ class MascotasController extends Controller
      */
     public function index(Especie $especie)
     {
-        $especie_id = isset($especie) ? $especie->id : null;
-        if (!isset($especie_id)) {
-            $mascotas = Mascota::paginate(self::PAGINATION);
+        $procedencia = \Illuminate\Support\Facades\Request::segment(2);
+        // Creacion de la query
+        if (!$procedencia) {
+            $mascotas = Mascota::query();
         } else {
             $mascotas = Especie::query()->
-                find($especie_id)->
-                mascotas()->
-                paginate(self::PAGINATION);
+            find($especie->id)->
+            mascotas();
+
         }
+        // Filtrado
+        if (isset($_GET["sexo"])) $mascotas->where("sexo", $_GET["sexo"]);
+        if (isset($_GET["tamano"])) $mascotas->where("tamano", $_GET["tamano"]);
+        if (isset($_GET["peso"])) $mascotas->where("peso", $_GET["peso"]);
+
+        // Ejecutar query con paginacion
+        $mascotas = $mascotas->paginate(self::PAGINATION);
         return view("mascotas.index", compact("mascotas", "especie"));
     }
 

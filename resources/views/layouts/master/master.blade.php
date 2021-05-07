@@ -26,5 +26,6 @@
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="{{url("/assets/bootstrap/js/bootstrap.min.js")}}"></script>
+<script src="{{url("/assets/js/master.js")}}"></script>
 </body>
 </html>

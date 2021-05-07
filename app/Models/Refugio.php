@@ -2,12 +2,8 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\RefugioController;
 use App\Mail\Gmail;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class Refugio extends User
@@ -70,11 +66,7 @@ class Refugio extends User
             "title" => "$mascota->nombre adoptado",
             "body" => Refugio::aceptarPetcionHTML($mascota, $mascota->refugio)
         ];
-        /* TODO: Actualizar fecha
-         * $adopcion = Adopcion::query()
-            ->where("familia_id", $familia->id)
-            ->where("mascota_id", $mascota->id)->get()[0];
-        $adopcion->save();*/
+        /* TODO: Actualizar fecha*/
         $mascota->adoptar();
         Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción"));
     }

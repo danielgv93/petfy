@@ -27,12 +27,13 @@ class RefugioController extends Controller
 
     public function indexHistorial()
     {
-        $aux = Mascota::query()->where("adoptado", true)->orderBy("fecha_adopcion", "desc")->get();
+        $query = Mascota::query()->join("adopciones", "adopciones.mascota_id", "=", "mascotas.id")->
+            where("adoptado", true)->
+            where("refugio_id", auth()->user()->id)->
+            orderBy("fecha_adopcion", "desc")->get();
         $adopciones = null;
-        foreach ($aux as $mascota) {
-            if ($mascota->refugio->id == auth()->user()->id) {
-                $adopciones[] = ["mascota" => $mascota, "familia" => $mascota->familias[0]];
-            }
+        foreach ($query as $mascota) {
+            $adopciones[] = ["mascota" => $mascota, "familia" => $mascota->familias[0]];
         }
         return view("refugios.index-historial", compact("adopciones"));
     }
@@ -59,8 +60,8 @@ class RefugioController extends Controller
             MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
             $mensaje = "$familia->name ha adoptado a $mascota->nombre con éxito!";
         } catch (\Exception $e) {
-            $mensaje = "No se ha podido adoptar a $mascota->nombre";
-            $mensaje = $e->getMessage();
+            $mensaje = "No se ha podido adoptar a $mascota->nombre.";
+            $mensaje .= $e->getMessage();
         }
         return back()->with("mensaje", $mensaje);
     }
