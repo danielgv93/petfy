@@ -6,6 +6,8 @@ use App\Models\Familia;
 use App\Models\Mascota;
 use App\Models\Refugio;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class RefugioController extends Controller
@@ -24,6 +26,10 @@ class RefugioController extends Controller
         return view("refugios.mascotas-index", compact("mascotas"));
     }
 
+    /**
+     * Lista el historial de adopciones del refugio
+     * @return View
+     */
     public function indexHistorial()
     {
         $query = Mascota::query()->join("adopciones", "adopciones.mascota_id", "=", "mascotas.id")->
@@ -49,12 +55,19 @@ class RefugioController extends Controller
         return view("refugios.peticiones-adopcion", compact("familias", "refugio"));
     }
 
-    public function aceptarPeticion(Mascota $mascota, Familia $familia) {
+    /**
+     * El refugio acepta la solicitud de la familia en cuestión y rechaza el resto de solicitudes.
+     * Se envían notificaciones a Twitter y Telegram y se informa al refugio.
+     * @param Mascota $mascota Mascota que pasa a ser adoptada
+     * @param Familia $familia Familia la cual es aceptada la solicitud de adopción
+     * @return RedirectResponse
+     */
+    public function aceptarSolicitud(Mascota $mascota, Familia $familia) {
         try {
             Refugio::rechazarSolicitudes($mascota, $familia);
             Refugio::aceptarSolicitudes($mascota, $familia);
             // CONEXION CON LAS APIS
-            $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo https://petfy.es/";
+            $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo http://petfy.es/";
             MensajeriaController::postTwitter($texto, $mascota->imagen);
             MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
             $mensaje = "$familia->name ha adoptado a $mascota->nombre con éxito!";

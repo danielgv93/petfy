@@ -30,7 +30,7 @@ Route::post("/mascotas/busqueda", [MascotasController::class, "busqueda"])
 Route::get("/mascota/{mascota}", [MascotasController::class, "show"])
     ->name("mascotas.show");
 
-Route::post("/mascota/adoptar", [MascotasController::class, "adoptar"])
+Route::post("/mascota/adoptar", [MascotasController::class, "solicitarAdopcion"])
     ->name("mascotas.adoptar")
     ->middleware(["accessrole", "auth"]);
 
@@ -65,7 +65,7 @@ Route::get("/dashboard/peticiones-adopcion", [RefugioController::class, "indexPe
     ->name("peticiones-adopcion")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/dashboard/peticiones-adopcion/aceptar-peticion/{mascota}/{familia}", [RefugioController::class, "aceptarPeticion"])
+Route::get("/dashboard/peticiones-adopcion/aceptar-peticion/{mascota}/{familia}", [RefugioController::class, "aceptarSolicitud"])
     ->name("aceptar-peticion")
     ->middleware(["accessrole", "auth"]);
 

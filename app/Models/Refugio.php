@@ -44,7 +44,7 @@ class Refugio extends User
         if (isset($emails)) {
             $details = [
                 "title" => "Solicitud de adopción de $mascota->nombre rechazada",
-                "body" => Refugio::rechazarPetcionHTML($mascota)
+                "body" => self::rechazarPetcionHTML($mascota)
             ];
             foreach ($emails as $email) {
                 Mail::to($email)->send(new Gmail($details, "Solicitud Adopción"));
@@ -64,9 +64,8 @@ class Refugio extends User
     public static function aceptarSolicitudes(Mascota $mascota, Familia $familia) {
         $details = [
             "title" => "$mascota->nombre adoptado",
-            "body" => Refugio::aceptarPetcionHTML($mascota, $mascota->refugio)
+            "body" => self::aceptarPetcionHTML($mascota, $mascota->refugio)
         ];
-        /* TODO: Actualizar fecha*/
         $mascota->adoptar();
         Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción"));
     }

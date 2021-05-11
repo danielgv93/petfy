@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use DOMDocument;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
 class MapaController extends Controller
 {
+    /**
+     * Genera el fichero XML necesario para mostrar en un mapa las coordenadas del refugio
+     * @param int $id Identificador del refugio
+     * @return Application|ResponseFactory|Response
+     */
     public function generarXML(int $id) {
         $refugio = User::query()->findOrFail($id);
         $dom = new DOMDocument("1.0");

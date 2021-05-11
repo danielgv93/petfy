@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Especie;
 use App\Models\Mascota;
 use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as RequestUrl;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,13 +20,13 @@ class MascotasController extends Controller
     const PAGINATION = 9;
 
     /**
-     * Display a listing of the resource.
-     * @param Especie $especie
-     * @return Response
+     * Se lista a todas las mascotas que cumplan con los filtros de especie y/o caracteristicas y se paginan.
+     * @param Especie $especie Especie
+     * @return View
      */
     public function index(Especie $especie)
     {
-        $procedencia = \Illuminate\Support\Facades\Request::segment(2);
+        $procedencia = RequestUrl::segment(2);
         // Creacion de la query
         if (!$procedencia) {
             $mascotas = Mascota::query();
@@ -31,12 +34,14 @@ class MascotasController extends Controller
             $mascotas = Especie::query()->
             find($especie->id)->
             mascotas();
-
         }
         // Filtrado
         if (isset($_GET["sexo"])) $mascotas->where("sexo", $_GET["sexo"]);
         if (isset($_GET["tamano"])) $mascotas->where("tamano", $_GET["tamano"]);
-        if (isset($_GET["peso"])) $mascotas->where("peso", $_GET["peso"]);
+        if (isset($_GET["raza"])) $mascotas->where("raza", $_GET["raza"]);
+        if (isset($_GET["urgente"])) $mascotas->where("urgente", $_GET["urgente"]);
+        if (isset($_GET["sociable"])) $mascotas->where("sociable", $_GET["sociable"]);
+        if (isset($_GET["esterilizado"])) $mascotas->where("esterilizado", $_GET["esterilizado"]);
 
         // Ejecutar query con paginacion
         $mascotas = $mascotas->paginate(self::PAGINATION);
@@ -64,10 +69,10 @@ class MascotasController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una mascota en BD
      *
-     * @param Request $request
-     * @return Response
+     * @param Request $request Recoge los inputs del formulario
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -123,11 +128,11 @@ class MascotasController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar la informacion de la mascota pasada por parametros.
      *
-     * @param Request $request
-     * @param Mascota $mascota
-     * @return Response
+     * @param Request $request Recoge los inputs del formulario
+     * @param Mascota $mascota Mascota a la que se le van a actualizar sus valores
+     * @return RedirectResponse
      */
     public function update(Request $request, Mascota $mascota)
     {
@@ -144,7 +149,7 @@ class MascotasController extends Controller
         $mascota->esterilizado = $request->esterilizado === "-" ? null : $request->esterilizado === "Si";
         $mascota->descripcion = $request->descripcion === "" ? null : $request->descripcion;
         if ($request->imagen !== null) {
-            // Borra la imagen anterior y guarda una nueva con (o sin) nuevo nombre
+            // Borra la imagen anterior y guarda una nueva con nuevo nombre
             Storage::delete($mascota->imagen);
             $mascota->imagen = $request->file("imagen")->store("mascotas");
         }
@@ -152,8 +157,13 @@ class MascotasController extends Controller
         return redirect()->route("administrar-mascotas.index");
     }
 
-
-    public function adoptar(Request $request)
+    /**
+     * El usuario genera una solicitud de adopción sobre la mascota pasada por parámetro y se guarda en la tabla "adopciones".
+     * Si el usuario ya ha enviado una solicitud, se le informa pero no se guarda nada en BD.
+     * @param Request $request Recoge el input id de mascota
+     * @return RedirectResponse
+     */
+    public function solicitarAdopcion(Request $request)
     {
         $mascota = Mascota::query()->findOrFail($request->id);
         $familia = auth()->user()->id;
@@ -172,10 +182,10 @@ class MascotasController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una mascota de la base de datos
      *
-     * @param Mascota $mascota
-     * @return Response
+     * @param Mascota $mascota Mascota que se quiere eliminar
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(Mascota $mascota)
