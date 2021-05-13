@@ -1,6 +1,9 @@
 <x-app-layout>
 
     @include("layouts.partials.navbar")
+    <div class="container">
+        {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.perfil") }}
+    </div>
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

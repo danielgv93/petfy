@@ -12,7 +12,17 @@
 @endsection
 
 @section('main')
-    @include("layouts.partials.mapa")
+    @php
+        use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+        use Illuminate\Support\Facades\Request;
+        $procedencia = Request::segment(2);
+        if (!$procedencia) {
+            echo Breadcrumbs::render("mascotas");
+        } else {
+            echo $procedencia === "perros" ? Breadcrumbs::render("mascotas.perros") : Breadcrumbs::render("mascotas.gatos");
+        }
+    @endphp
+
     @if (session("mensaje"))
         <div class="alert-danger">{{session("mensaje")}}</div>
     @endif
@@ -31,15 +41,32 @@
         @include("layouts.partials.filtro")
         @foreach($mascotas as $mascota)
             @if(!$mascota->adoptado)
-            <a href="{{ route('mascotas.show' , $mascota) }}">
-                <div class="card m-1 bg-light border-secondary" style="width: 18rem;">
-                    <img class="card-img-top" src="{{asset("storage")}}/{{$mascota->imagen}}"
-                         alt="Imagen de {{$mascota->nombre}}">
-                    <div class="card-body text-center text-dark">
-                        <h5 class="tdn card-title">{{$mascota->nombre}}</h5>
-                    </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <a class="tarjeta-mascota" href="{{ route('mascotas.show' , $mascota) }}">
+                        <div class="tarjeta-mascota__image">
+                            <img class="" src="{{asset("storage")}}/{{$mascota->imagen}}"
+                                 alt="Imagen de {{$mascota->nombre}}">
+                            <div class="tarjeta-mascota__overlay">
+                            </div>
+                        </div>
+                        <div class="tarjeta-mascota__text">
+                            <div class="tarjeta-mascota__badges d-flex">
+                                <div class="tarjeta-mascota__badge"
+                                     style="background: rgba({{ $mascota->sexo === "Macho" ? "71, 158, 255, 0.8" : "255, 85, 100, 0.8"}})">
+                                    {{ $mascota->sexo }}
+                                </div>
+                                <div class="tarjeta-mascota__badge">
+                                    {{$mascota->getEdadCorta()}}
+                                </div>
+
+                            </div>
+                            <h3>{{$mascota->nombre}}</h3>
+                            <div>
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $mascota->refugio->name }}
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
             @endif
         @endforeach
     </div>

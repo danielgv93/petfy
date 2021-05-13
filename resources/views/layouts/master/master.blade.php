@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.png")}}">
+    <link rel="stylesheet" href="{{url("/assets/font-awesome-4.7.0/css/font-awesome.min.css")}}">
     <script type="text/javascript" src="{{url("/assets/js/jquery-3.5.1.min.js")}}"></script>
     <script type="text/javascript" src="{{url("/assets/js/jquery-ui.js")}}"></script>
     <link rel="stylesheet" href="{{url("/assets/css/jquery-ui.css")}}">

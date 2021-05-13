@@ -5,7 +5,7 @@
 @endsection
 
 @section('main')
-    @include("layouts.partials.mapa")
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("mascotas.nombre", $mascota) }}
     <div class="">
         <div class="row justify-content-center">
             <div class="col-6 mt-3">
@@ -19,7 +19,7 @@
                                 <h6 class="card-title text-center">*Urge adopción*</h6>
                             @endif
                             <h3 class="card-title text-center">{{ $mascota->nombre }}</h3>
-                            <h5 class="card-title text-center">Tiene {{$mascota->getEdad()}}.</h5>
+                            <h5 class="card-title text-center">Tiene {{$mascota->getEdadLarga()}}.</h5>
                             <h5 class="card-title text-center">Refugio: <a href="{{route("refugio.show", $mascota->refugio)}}">{{$mascota->refugio->name}}</a></h5>
                             <h5 class="card-title text-center">Sexo: {{$mascota->sexo}}</h5>
                             @if ($mascota->tamano !== null)

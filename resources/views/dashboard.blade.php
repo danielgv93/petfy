@@ -4,7 +4,7 @@
     Menu de {{\Illuminate\Support\Facades\Auth::user()->name}}
 @endsection
 @section("main")
-    @include("layouts.partials.mapa")
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard") }}
     <div class="row">
         <table class="table">
             <thead class="thead-light">

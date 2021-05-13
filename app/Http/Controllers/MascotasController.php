@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 
 class MascotasController extends Controller
 {
-    const PAGINATION = 9;
+    const PAGINATION = 12;
 
     /**
      * Se lista a todas las mascotas que cumplan con los filtros de especie y/o caracteristicas y se paginan.
@@ -53,7 +53,6 @@ class MascotasController extends Controller
         $busqueda = "%". $request->busqueda. "%";
         $mascotas = Mascota::query()
             ->where("slug", "like", $busqueda)
-            ->orderBy("created_at")
             ->pluck("nombre");
         return \response()->json($mascotas);
     }

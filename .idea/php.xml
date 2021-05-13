@@ -123,6 +123,7 @@
       <path value="$PROJECT_DIR$/vendor/atymic/tmhoauth" />
       <path value="$PROJECT_DIR$/vendor/thujohn/twitter" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/davejamesmiller/laravel-breadcrumbs" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

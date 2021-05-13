@@ -4,7 +4,7 @@
     Historial de adopciones
 @endsection
 @section("main")
-    @include("layouts.partials.mapa")
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.historial-adopcion") }}
     <table class="table table-striped table-hover">
         <thead>
         <tr>

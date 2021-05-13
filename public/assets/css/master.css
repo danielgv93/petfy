@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,300&display=swap');
+
 * {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
+    box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #f3f4f6;
 }
 
@@ -12,19 +14,20 @@ body{
     padding: 0.5rem 2rem;
 }
 
-#mapa{
+#mapa {
     min-height: 521px;
     display: block;
     width: 100%;
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
 .centrar {
     flex-grow: 1;
 }
+
 .btn-dark {
     background-color: #1f2937;
     border: 1px solid #dee2e6;
@@ -82,4 +85,84 @@ h5:hover {
 .copy-click.is-copied:after {
     content: attr(data-tooltip-text-copied);
 }
+
 /***************************/
+
+
+/*Tarjeta Mascotas*/
+.tarjeta-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #d4d4d4;
+    border-radius: 24px;
+    display: block;
+    margin: 8px 0px 16px;
+    overflow: hidden;
+    background: white;
+}
+
+.tarjeta-mascota:hover {
+    text-decoration: none;
+}
+
+.tarjeta-mascota__image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom-right-radius: 24px;
+    position: relative;
+}
+
+.tarjeta-mascota__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: white;
+    opacity: 0.2;
+    transition: opacity .3s;
+}
+
+.tarjeta-mascota__image:hover .tarjeta-mascota__overlay{
+    opacity: 0;
+}
+
+.tarjeta-mascota__image img {
+    width: 100%;
+}
+
+.tarjeta-mascota__text {
+    padding: 8px 16px;
+}
+
+.tarjeta-mascota__text h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #35495e;
+}
+
+.tarjeta-mascota__badges {
+    margin-bottom: 16px;
+}
+
+.tarjeta-mascota__badge {
+    padding: 4px 16px;
+    background: #dbdbdb;
+    color: #646464;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+.tarjeta-mascota__badge:first-child {
+    margin-right: 8px;
+}
+
+.tarjeta-mascota__badge:last-child {
+    background: #FDF7E5;
+    color: rgb(233, 166, 50);
+}

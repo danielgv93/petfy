@@ -1,6 +1,6 @@
-<div class="card m-1 bg-light border-secondary" style="width: 18rem;">
+<div class="col-12">
     <h2>Filtro</h2>
-    <div class="card-body text-center text-dark">
+    <div>
         <form action="{{route("mascotas", \Illuminate\Support\Facades\Request::segment(2))}}">
             <label class="form-check">
                 <input class="form-check-input" type="radio" name="sexo" value="Macho">

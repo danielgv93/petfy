@@ -5,7 +5,7 @@
 @endsection
 
 @section("main")
-    @include("layouts.partials.mapa")
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.crear-mascota") }}
     <form class="col" action="{{route("mascotas.store")}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">

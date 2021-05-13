@@ -72,7 +72,7 @@ class Mascota extends Model
         $this->save();
     }
 
-    public function getEdad()
+    public function getEdadLarga()
     {
         $edad = "";
         $fecha = Carbon::parse($this->fechaNacimiento);
@@ -86,6 +86,21 @@ class Mascota extends Model
             }
         } else {
             $edad .= "$meses meses";
+        }
+        return $edad;
+    }
+
+    public function getEdadCorta()
+    {
+        $edad = "";
+        $fecha = Carbon::parse($this->fechaNacimiento);
+        $mesesTotales = $fecha->diffInMonths(Carbon::now());
+        $anios = $fecha->diffInYears(Carbon::now());
+        $meses = $mesesTotales - $anios * 12;
+        if ($anios > 0 || $mesesTotales % 12 === 0) {
+            $edad = $anios === 1 ? "$anios año" : "$anios años";
+        } else {
+            $edad = "$meses meses";
         }
         return $edad;
     }

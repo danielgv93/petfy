@@ -42,7 +42,7 @@ Route::get("/dashboard/administrar-mascotas/{mascota}/editar", [MascotasControll
     ->name("administrar-mascotas.edit")
     ->middleware(["accessrole", "auth"]);
 
-Route::get("/dashboard/administrar-mascotas/crear", [MascotasController::class, "create"])
+Route::get("/dashboard/anadir-mascota", [MascotasController::class, "create"])
     ->name("mascotas.create")
     ->middleware(["accessrole", "auth"]);
 

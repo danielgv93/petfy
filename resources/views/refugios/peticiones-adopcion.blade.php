@@ -7,7 +7,7 @@
     @if (session("mensaje"))
         <div class="alert-danger">{{session("mensaje")}}</div>
     @endif
-    @include("layouts.partials.mapa")
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.peticiones-adopcion") }}
     <table class="table table-striped table-hover">
         <thead>
         <tr>

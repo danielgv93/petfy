@@ -37,25 +37,21 @@
                          alt=""
                          loading="lazy" id="dropdownMenuButton" data-toggle="dropdown"
                          style="cursor: pointer"
-                         src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}"
-                         alt="">
+                         src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}">
                 @endif
 
                 <button class="btn bg-light dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                    @if (\Illuminate\Support\Facades\Auth::user()->user_role_id == 1)
-                        Refugio:
-                    @endif
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fas fa-user mr-2"></i>Menú</a>
+                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fa fa-tachometer" aria-hidden="true"></i> Menú</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"
-                           onclick="event.preventDefault(); this.closest('form').submit();" title="Logout"><i
-                                class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                           onclick="event.preventDefault(); this.closest('form').submit();" title="Logout">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                     </form>
 
                 </div>

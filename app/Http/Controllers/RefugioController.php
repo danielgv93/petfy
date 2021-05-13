@@ -8,6 +8,7 @@ use App\Models\Refugio;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class RefugioController extends Controller
@@ -36,7 +37,7 @@ class RefugioController extends Controller
             where("adoptado", true)->
             where("refugio_id", auth()->user()->id)->
             orderBy("fecha_adopcion", "desc")->get();
-        $adopciones = null;
+        $adopciones = array();
         foreach ($query as $mascota) {
             $adopciones[] = ["mascota" => $mascota, "familia" => $mascota->familias[0]];
         }
