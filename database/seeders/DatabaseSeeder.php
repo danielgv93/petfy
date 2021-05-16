@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPermissionsSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(EspecieSeeder::class);
-        Mascota::factory(28)->create();
+        Mascota::factory(44)->create();
     }
 }

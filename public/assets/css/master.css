@@ -140,6 +140,10 @@ h5:hover {
     padding: 8px 16px;
 }
 
+.tarjeta-mascota__text div:last-child {
+    padding-bottom: 8px;
+}
+
 .tarjeta-mascota__text h3 {
     font-size: 20px;
     font-weight: bold;

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Mail\Gmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class Refugio extends User
 {
@@ -62,12 +63,15 @@ class Refugio extends User
      * @param Familia $familia
      */
     public static function aceptarSolicitudes(Mascota $mascota, Familia $familia) {
+        $refugio = $mascota->refugio;
         $details = [
             "title" => "$mascota->nombre adoptado",
-            "body" => self::aceptarPetcionHTML($mascota, $mascota->refugio)
+            "body" => self::aceptarPetcionHTML($mascota, $refugio)
         ];
         $mascota->adoptar();
-        Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción"));
+        $pdf = PDF::loadview("pdf.contrato", compact("mascota", "familia", "refugio"));
+        Mail::to($familia->email)->send(new Gmail($details, "Solicitud Adopción", $pdf->output(), "Contrato $mascota->nombre.pdf"));
+
     }
 
     /**
@@ -91,6 +95,7 @@ class Refugio extends User
     private static function aceptarPetcionHTML(Mascota $mascota, User $refugio): string
     {
         return "¡¡Enhorabuena, $refugio->name ha aceptado tu solicitud de adopción sobre $mascota->nombre!!
-                Podrás venir a recoger a $mascota->nombre a las instalaciones en $refugio->direccion";
+                Podrás venir a recoger a $mascota->nombre a las instalaciones en $refugio->direccion. Se adjunta el
+                contrato que deberá de ser entregado y firmado a la recogida de la mascota.";
     }
 }

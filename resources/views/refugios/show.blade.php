@@ -26,7 +26,7 @@
                                 @endif
                             </h5>
                             <h5 class="card-title text-center" id="donaciones" >
-                                @if ($refugio->direccion_donacion != "")
+                                @if (!empty($refugio->direccion_donacion))
                                     Dirección de donaciones: <span class="copy-click" data-tooltip-text="Haz click para copiar"
                                                                    data-tooltip-text-copied="✔ Copiado">{{$refugio->direccion_donacion}}</span>
                                 @endif
@@ -50,7 +50,7 @@
 
         const copyToClipboard = str => {
             const el = document.createElement('input');
-            str.dataset.copyString ? el.value = str.dataset.copyString : el.value = str.text;
+            str.dataset.copyString ? el.value = str.dataset.copyString : el.value = str.innerText;
             el.setAttribute('readonly', '');
             el.style.position = 'absolute';
             el.style.opacity = 0;

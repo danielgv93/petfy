@@ -62,6 +62,10 @@ class Mascota extends Model
         return $adopciones->exists();
     }
 
+    /**
+     * Establece el estado de la mascota a adoptado y la fecha de adopción
+     * actual en la tabla de adopciones.
+     */
     public function adoptar(): void
     {
         $adopcion = Adopcion::query()

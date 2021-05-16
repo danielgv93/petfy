@@ -13,17 +13,23 @@ class Gmail extends Mailable
 
     public $details;
     public $header;
+    public $pdf;
+    public $pdfName;
 
     /**
      * Create a new message instance.
      *
      * @param $details
      * @param $header
+     * @param null $pdf
+     * @param null $pdfName
      */
-    public function __construct($details, $header)
+    public function __construct($details, $header, $pdf = null, $pdfName = null)
     {
         $this->details = $details;
         $this->header = $header;
+        $this->pdf = $pdf;
+        $this->pdfName = $pdfName;
     }
 
     /**
@@ -33,8 +39,10 @@ class Gmail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->header)
+        $this->subject($this->header)
             ->view('email.gmail')
-            ->from('daniel.garciavarela@iesmiguelherrero.com');
+            ->from('petfy.es@gmail.com');
+        if ($this->pdf !== null || $this->pdfName !== null)  $this->attachData($this->pdf, $this->pdfName);
+        return $this;
     }
 }

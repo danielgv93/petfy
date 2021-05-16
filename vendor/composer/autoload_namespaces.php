@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'tmhOAuth' => array($vendorDir . '/atymic/tmhoauth'),
     'Thujohn\\Twitter' => array($vendorDir . '/thujohn/twitter/src'),
+    'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );

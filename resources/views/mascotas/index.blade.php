@@ -39,8 +39,8 @@
 
     <div class="row justify-content-center">
         @include("layouts.partials.filtro")
-        @foreach($mascotas as $mascota)
-            @if(!$mascota->adoptado)
+        @if(count($mascotas))
+            @foreach($mascotas as $mascota)
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                     <a class="tarjeta-mascota" href="{{ route('mascotas.show' , $mascota) }}">
                         <div class="tarjeta-mascota__image">
@@ -53,7 +53,7 @@
                             <div class="tarjeta-mascota__badges d-flex">
                                 <div class="tarjeta-mascota__badge"
                                      style="background: rgba({{ $mascota->sexo === "Macho" ? "71, 158, 255, 0.8" : "255, 85, 100, 0.8"}})">
-                                    {{ $mascota->sexo }}
+                                    {{ $mascota->sexo }} {!!  $mascota->sexo === "Macho" ? '<i class="fa fa-mars" aria-hidden="true"></i>' : '<i class="fa fa-venus" aria-hidden="true"></i>' !!}
                                 </div>
                                 <div class="tarjeta-mascota__badge">
                                     {{$mascota->getEdadCorta()}}
@@ -67,8 +67,10 @@
                         </div>
                     </a>
                 </div>
-            @endif
-        @endforeach
+            @endforeach
+        @else
+            <h2 class="mt-5">No hay mascotas disponibles</h2>
+        @endif
     </div>
     {{$mascotas->links("view.name")}}
 @endsection

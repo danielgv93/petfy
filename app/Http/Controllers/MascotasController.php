@@ -26,6 +26,7 @@ class MascotasController extends Controller
      */
     public function index(Especie $especie)
     {
+        if (isset($_GET["limpiarFiltro"])) unset($_GET);
         $procedencia = RequestUrl::segment(2);
         // Creacion de la query
         if (!$procedencia) {
@@ -38,13 +39,14 @@ class MascotasController extends Controller
         // Filtrado
         if (isset($_GET["sexo"])) $mascotas->where("sexo", $_GET["sexo"]);
         if (isset($_GET["tamano"])) $mascotas->where("tamano", $_GET["tamano"]);
-        if (isset($_GET["raza"])) $mascotas->where("raza", $_GET["raza"]);
+        if (isset($_GET["raza"]) && $_GET["raza"] != "") $mascotas->where("raza", $_GET["raza"]);
         if (isset($_GET["urgente"])) $mascotas->where("urgente", $_GET["urgente"]);
         if (isset($_GET["sociable"])) $mascotas->where("sociable", $_GET["sociable"]);
         if (isset($_GET["esterilizado"])) $mascotas->where("esterilizado", $_GET["esterilizado"]);
 
         // Ejecutar query con paginacion
-        $mascotas = $mascotas->paginate(self::PAGINATION);
+        $mascotas = $mascotas->where("adoptado", false)
+            ->paginate(self::PAGINATION);
         return view("mascotas.index", compact("mascotas", "especie"));
     }
 
@@ -60,7 +62,7 @@ class MascotasController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
     public function create()
     {
@@ -108,7 +110,7 @@ class MascotasController extends Controller
      * Display the specified resource.
      *
      * @param Mascota $mascota
-     * @return Response
+     * @return View
      */
     public function show(Mascota $mascota)
     {
@@ -119,7 +121,7 @@ class MascotasController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Mascota $mascota
-     * @return Response
+     * @return View
      */
     public function edit(Mascota $mascota)
     {
