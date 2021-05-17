@@ -10,4 +10,7 @@ class InicioController extends Controller
         return view('welcome');
     }
 
+    public function aboutUs() {
+        return view("about-us");
+    }
 }

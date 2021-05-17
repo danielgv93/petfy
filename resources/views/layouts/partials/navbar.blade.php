@@ -1,22 +1,25 @@
-<nav class="navbar navbar-expand-sm navbar-dark mb-2" style="background-color: rgb(148,193,31);">
+<nav class="navbar fixed-top navbar-expand-sm">
     <div class="container-fluid">
-        <a href="{{route("welcome")}}">
+        <a id="logo" href="{{route("welcome")}}">
             <img class="mr-3" src="{{asset("storage/web/favicon.png")}}" alt="Logo de Petfy" height="37px">
         </a>
-        <a class="navbar-brand" href="{{route("welcome")}}">Petfy</a>
+        <a class="logoText" title="Petfy" href="{{route("welcome")}}">Petfy</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
                 aria-controls="collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item {{ empty(\Illuminate\Support\Facades\Request::segment(2)) ? ' active' : ""}}">
-                    <a class="nav-link" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" title="Mascotas" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item {{ isset($especie->slug) ?  ($especie->slug == "perros" ? ' active' : ''): ""}}">
-                    <a class="nav-link " href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
+                    <a class="nav-link " title="Perros" href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
                 </li>
                 <li class="nav-item {{ isset($especie->slug) && $especie->slug == "gatos" ? ' active' : ''}}">
-                    <a class="nav-link" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
+                    <a class="nav-link" title="Gatos" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
+                </li>
+                <li class="nav-item {{ isset($especie->slug) && $especie->slug == "gatos" ? ' active' : ''}}">
+                    <a class="nav-link" title="Sobre nosotros" href="{{route("about-us")}}">Sobre nosotros</a>
                 </li>
             </ul>
 
@@ -46,7 +49,7 @@
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fa fa-tachometer" aria-hidden="true"></i> Menú</a>
+                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fa fa-id-card-o" aria-hidden="true"></i> Menú</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"
@@ -58,13 +61,13 @@
             </div>
         @else
             <a href="{{route("register")}}">
-                <button class="btn bg-light mr-4" type="button">
-                    Registro
+                <button class="btn btn-petfy mr-4" type="button">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i> Registro
                 </button>
             </a>
             <a href="{{route("login")}}">
-                <button class="btn bg-light" type="button">
-                    Login
+                <button class="btn btn-petfy" type="button">
+                    <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </a>
         @endif

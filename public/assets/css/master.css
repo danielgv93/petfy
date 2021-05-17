@@ -1,18 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,300&display=swap');
 
+:root {
+    --fondo: #f3f4f6;
+    --primario: #ff5364;
+    --primario-rgb: 255, 83, 100;
+    --secundario: #35495e;
+    --secundario-rgb: 53, 73, 94;
+    --duration: 0.2s;
+    --bounce: 0.1s;
+    --ease: 0.1s;
+}
+
 * {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
     box-sizing: border-box;
+    color: var(--secundario);
 }
 
-body {
-    background-color: #f3f4f6;
+
+#page-container {
+    background-color: var(--fondo);
+    position: relative;
+    min-height: 100vh;
 }
 
+#page-container > .container {
+    padding-top: 6rem;
+    padding-bottom: 12rem;
+}
+a, a:hover{
+    color: var(--primario);
+}
+.btn-petfy {
+    background: rgba(var(--secundario-rgb), 0.2);
+    color: var(--secundario);
+}
+btn-petfy-active {
+    background: var(--primario);
+    color: var(--fondo);
+}
+.btn-petfy:hover {
+    background: rgba(var(--primario-rgb), 0.6);
+}
+.btn-petfy:active {
+    background: var(--primario);
+    color: var(--fondo);
+}
+/* Navbar */
+nav {
+    background: var(--fondo);
+}
+nav li a {
+    color: var(--secundario) ;
+    transition: 0.2s;
+}
+nav li a:hover {
+    color: var(--primario);
+    text-shadow: -2px 1px 5px rgba(var(--primario-rgb), 0.6);
+    font-weight: bold;
+}
+nav li a::before {
+    display: block;
+    content: attr(title);
+    font-weight: bold;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
 .navbar {
-    padding: 0.5rem 2rem;
+    padding: 1rem 3rem;
 }
+.logoText {
+    font-weight: bold;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    color: var(--secundario);
+    transition: 0.2s;
+}
+#logo:hover + .logoText, .logoText:hover {
+    text-decoration: none;
+    color: var(--secundario);
+    text-shadow: -2px 1px 20px rgba(var(--primario-rgb), 0.7);
+}
+
 
 #mapa {
     min-height: 521px;
@@ -44,7 +117,7 @@ h5:hover {
     padding-bottom: 2px;
     text-decoration: none;
     cursor: pointer;
-    color: #3c71aa;
+    color: var(--secundario);
     transition: background-color calc(var(--duration) * 2) var(--ease);
 }
 
@@ -147,7 +220,7 @@ h5:hover {
 .tarjeta-mascota__text h3 {
     font-size: 20px;
     font-weight: bold;
-    color: #35495e;
+    color: var(--secundario);
 }
 
 .tarjeta-mascota__badges {
@@ -156,10 +229,15 @@ h5:hover {
 
 .tarjeta-mascota__badge {
     padding: 4px 16px;
-    background: #dbdbdb;
-    color: #646464;
     border-radius: 20px;
     font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.tarjeta-mascota__badge p {
+    margin: 0;
+    padding: 0;
+    color: var(--fondo);
 }
 
 .tarjeta-mascota__badge:first-child {
@@ -169,4 +247,41 @@ h5:hover {
 .tarjeta-mascota__badge:last-child {
     background: #FDF7E5;
     color: rgb(233, 166, 50);
+}
+
+.tarjeta-mascota__refugio {
+    color: #0035d2;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: var(--secundario);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 11rem;            /* Footer height */
+    padding-top: 1.5em;
+    margin-top: 1.5em;
+}
+footer i {
+    color: var(--primario);
+}
+footer li, footer h6, footer p {
+    color: var(--primario);
+}
+
+footer h6 {
+    text-decoration: underline;
+}
+
+footer p, footer li {
+    font-size: 11px;
+}
+
+.copyright {
+    font-size: 11px;
+    font-style: italic;
+    text-align: center;
 }

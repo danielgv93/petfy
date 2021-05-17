@@ -86,10 +86,10 @@ class Mascota extends Model
         if ($anios > 0 || $mesesTotales % 12 === 0 && $anios >= 2) {
             $edad .= "$anios años";
             if ($mesesTotales % 12 !== 0) {
-                $edad .= " y $meses meses";
+                $edad .= $meses === 1 ? " y $meses mes" : " y $meses meses";
             }
         } else {
-            $edad .= "$meses meses";
+            $edad .= $meses === 1 ? "$meses mes" : "$meses meses";
         }
         return $edad;
     }
@@ -104,7 +104,7 @@ class Mascota extends Model
         if ($anios > 0 || $mesesTotales % 12 === 0) {
             $edad = $anios === 1 ? "$anios año" : "$anios años";
         } else {
-            $edad = "$meses meses";
+            $edad = $meses === 1 ? "$meses mes" : "$meses meses";
         }
         return $edad;
     }

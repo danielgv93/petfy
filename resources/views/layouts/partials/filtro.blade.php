@@ -40,6 +40,8 @@
 				    Pequeño
 				  </span>
                 </label>
+            </div>
+            <div class="col-6">
                 <h3>Raza</h3>
                 <label for="pequeno" class="form-check">
                     <select name="raza" id="raza">
@@ -52,8 +54,6 @@
                         @endforeach
                     </select>
                 </label>
-            </div>
-            <div class="col-6">
                 <h3>Otros datos</h3>
                 <label for="urgente" class="form-check">
                     <input class="form-check-input" type="checkbox" name="urgente" id="urgente"
@@ -77,8 +77,8 @@
 				  </span>
                 </label>
             </div>
-            <button onclick="limpiarFiltro()" style="width: 50%" class="btn btn-primary adoptar-btn">Limpiar Filtro</button>
-            <input type="submit" style="width: 50%" class="btn btn-primary adoptar-btn" value="Filtrar">
+            <button onclick="limpiarFiltro()" style="width: 50%" class="btn btn-petfy">Limpiar Filtro</button>
+            <input type="submit" style="width: 50%" class="btn btn-petfy" value="Aplicar filtro">
         </form>
     </div>
 </div>

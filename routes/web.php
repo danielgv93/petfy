@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InicioController::class, "index"])
     ->name("welcome");
 
+Route::get('/sobre-nosotros', [InicioController::class, "aboutUs"])
+    ->name("about-us");
+
 Route::get("/mascotas/{especie?}", [MascotasController::class, "index"])
     ->name("mascotas");
 

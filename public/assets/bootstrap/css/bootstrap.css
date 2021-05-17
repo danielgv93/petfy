@@ -33,6 +33,11 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --fondo: #f3f4f6;
+  --primario: #ff5364;
+  --primario-rgb: 255, 83, 100;
+  --secundario: #35495e;
+  --secundario-rgb: 53, 73, 94;
 }
 
 *,
@@ -4734,8 +4739,8 @@ tbody.collapse.show {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
-  background-color: #fff;
+  color: var(--secundario);
+  background-color: var(--fondo);
   border: 1px solid #dee2e6;
 }
 
@@ -4769,9 +4774,9 @@ tbody.collapse.show {
 
 .page-item.active .page-link {
   z-index: 1;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  color: var(--fondo);
+  background-color: var(--primario);
+  border-color: var(--primario);
 }
 
 .page-item.disabled .page-link {

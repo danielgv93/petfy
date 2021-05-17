@@ -11,7 +11,7 @@ interface PasswordBroker
      *
      * @var string
      */
-    const RESET_LINK_SENT = 'passwords.sent';
+    const RESET_LINK_SENT = 'Correo enviado con exito';
 
     /**
      * Constant representing a successfully reset password.

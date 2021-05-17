@@ -53,16 +53,16 @@
                             <div class="tarjeta-mascota__badges d-flex">
                                 <div class="tarjeta-mascota__badge"
                                      style="background: rgba({{ $mascota->sexo === "Macho" ? "71, 158, 255, 0.8" : "255, 85, 100, 0.8"}})">
-                                    {{ $mascota->sexo }} {!!  $mascota->sexo === "Macho" ? '<i class="fa fa-mars" aria-hidden="true"></i>' : '<i class="fa fa-venus" aria-hidden="true"></i>' !!}
+                                    <p>{{ $mascota->sexo }} {!! $mascota->sexo === "Macho" ? '<i class="fas fa-mars"></i>' : '<i class="fas fa-venus"></i>' !!}</p>
                                 </div>
                                 <div class="tarjeta-mascota__badge">
                                     {{$mascota->getEdadCorta()}}
                                 </div>
 
                             </div>
-                            <h3>{{$mascota->nombre}}</h3>
-                            <div>
-                                <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $mascota->refugio->name }}
+                            <h3>{{$mascota->nombre}} {!! $mascota->especie->especie === "Perro" ? '<i class="fas fa-dog"></i>' : '<i class="fas fa-cat"></i>' !!}  </h3>
+                            <div class="tarjeta-mascota__refugio">
+                                <i class="fas fa-map-marker-alt"></i> {{ $mascota->refugio->name }}
                             </div>
                         </div>
                     </a>
