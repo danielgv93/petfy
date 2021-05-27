@@ -9,6 +9,7 @@
     --duration: 0.2s;
     --bounce: 0.1s;
     --ease: 0.1s;
+    --sombra-boton: 0px 0px 5px rgba(var(--secundario-rgb), 0.3);
 }
 
 * {
@@ -32,18 +33,43 @@
 a, a:hover{
     color: var(--primario);
 }
+
+/* Botones */
 .btn-petfy {
-    background: rgba(var(--secundario-rgb), 0.2);
+    background: var(--fondo);
     color: var(--secundario);
+    cursor: pointer;
+    border: 1px solid rgba(var(--secundario-rgb), 0.2);
+    border-radius: 16px;
 }
-btn-petfy-active {
+.btn-petfy-inverse {
+    background: rgba(var(--primario-rgb), 0.7);
+    color: var(--fondo);
+    cursor: pointer;
+    border-radius: 16px;
+}
+.btn-petfy-inverse:hover {
+    background: var(--primario);
+    box-shadow: var(--sombra-boton);
+}
+.btn-petfy-paginacion {
+    background: var(--fondo);
+    color: var(--secundario);
+    cursor: pointer;
+}
+.btn-petfy-paginacion-active {
     background: var(--primario);
     color: var(--fondo);
+    cursor: pointer;
+}
+.btn-petfy-paginacion:hover {
+    color: var(--primario);
 }
 .btn-petfy:hover {
     background: rgba(var(--primario-rgb), 0.6);
+    box-shadow: var(--sombra-boton);
 }
-.btn-petfy:active {
+.btn-petfy-paginacion-active:hover, .btn-petfy:active {
     background: var(--primario);
     color: var(--fondo);
 }
@@ -54,6 +80,11 @@ nav {
 nav li a {
     color: var(--secundario) ;
     transition: 0.2s;
+}
+.menu-selected {
+    color: var(--primario);
+    text-shadow: -2px 1px 5px rgba(var(--primario-rgb), 0.6);
+    font-weight: bold;
 }
 nav li a:hover {
     color: var(--primario);
@@ -97,6 +128,10 @@ h1 {
     text-align: center;
 }
 
+a:hover h1 {
+    text-decoration: none;
+}
+
 .centrar {
     flex-grow: 1;
 }
@@ -106,10 +141,6 @@ h1 {
     border: 1px solid #dee2e6;
 }
 
-h5:hover {
-    color: black;
-    text-decoration: none;
-}
 
 /* Copiar al portapapeles */
 .copy-click {
@@ -152,7 +183,7 @@ h5:hover {
 }
 
 .copy-click.is-copied {
-    border-bottom: 1px dashed #767676;
+    border-bottom: 1px dashed var(--primario);
 }
 
 .copy-click.is-copied:after {
@@ -201,7 +232,7 @@ h5:hover {
     transition: opacity .3s;
 }
 
-.tarjeta-mascota__image:hover .tarjeta-mascota__overlay{
+.tarjeta-mascota:hover .tarjeta-mascota__overlay{
     opacity: 0;
 }
 
@@ -268,8 +299,8 @@ footer {
 footer i {
     color: var(--primario);
 }
-footer li, footer h6, footer p {
-    color: var(--primario);
+footer li, footer h6, footer p, footer a {
+    color: var(--fondo);
 }
 
 footer h6 {

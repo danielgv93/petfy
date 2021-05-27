@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-6">
-                <h6>Petfy</h6>
+                <h6>Petfy Cantabria</h6>
                 <p>Refugios asociados:
                     @php
                     $refugios = \App\Models\Refugio::all();

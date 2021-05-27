@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '841ba1fb5f0dbc56d94d6759fd9a856e04576050',
+    'reference' => '377a9a37ec7ca06d285bc6432926058b51c1c5d0',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -567,16 +567,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '841ba1fb5f0dbc56d94d6759fd9a856e04576050',
+      'reference' => '377a9a37ec7ca06d285bc6432926058b51c1c5d0',
     ),
     'laravel/sail' => 
     array (
-      'pretty_version' => 'v1.4.8',
-      'version' => '1.4.8.0',
+      'pretty_version' => 'v1.5.1',
+      'version' => '1.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '66b26181c3e86266b0b98f45a3398b090f37dee9',
+      'reference' => '695f616c228c9df923a10282e4989feeae212c52',
     ),
     'laravel/sanctum' => 
     array (

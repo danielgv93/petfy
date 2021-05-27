@@ -51,7 +51,7 @@
                         <form action="{{route("mascotas.adoptar")}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$mascota->id}}">
-                            <input type="submit" style="width: 50%" class="btn btn-primary adoptar-btn" value="Adoptar">
+                            <input type="submit" style="width: 50%" class="btn btn-petfy-inverse" value="Adoptar">
                         </form>
                     </div>
                     @endif

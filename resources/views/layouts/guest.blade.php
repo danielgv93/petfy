@@ -12,9 +12,18 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        <link rel="stylesheet" href="{{url("/assets/bootstrap/css/bootstrap.min.css")}}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="{{asset("storage/web/favicon.png")}}">
+        <link rel="stylesheet" href="{{url("/assets/font-awesome-4.7.0/css/font-awesome.min.css")}}">
+        <link rel="stylesheet" href="{{url("/assets/fontawesome-free-5.15.3-web/css/all.css")}}">
+        <link rel="stylesheet" href="{{url("/assets/css/jquery-ui.css")}}">
+        <link rel="stylesheet" href="{{url("/assets/css/master.css?v=").time()}}">
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script type="text/javascript" src="{{url("/assets/js/jquery-ui.js")}}"></script>
+        <script type="text/javascript" src="{{url("/assets/js/jquery-3.5.1.min.js")}}"></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

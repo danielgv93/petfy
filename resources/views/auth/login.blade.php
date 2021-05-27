@@ -32,16 +32,15 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-content-center mt-4">
+                <input type="submit" class="btn btn-petfy" value="Login">
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('¿Olvidaste tu contraseña?') }}
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>

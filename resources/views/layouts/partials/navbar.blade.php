@@ -9,17 +9,22 @@
                 aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item {{ empty(\Illuminate\Support\Facades\Request::segment(2)) ? ' active' : ""}}">
-                    <a class="nav-link" title="Mascotas" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link {{ \Illuminate\Support\Facades\Request::segment(1) === "mascotas" &&
+                                       empty(\Illuminate\Support\Facades\Request::segment(2)) ? ' menu-selected' : ""}}"
+                       title="Mascotas" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{ isset($especie->slug) ?  ($especie->slug == "perros" ? ' active' : ''): ""}}">
-                    <a class="nav-link " title="Perros" href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
+                <li class="nav-item">
+                    <a class="nav-link {{ isset($especie->slug) ?  ($especie->slug == "perros" ? ' menu-selected' : ''): ""}}"
+                       title="Perros" href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
                 </li>
-                <li class="nav-item {{ isset($especie->slug) && $especie->slug == "gatos" ? ' active' : ''}}">
-                    <a class="nav-link" title="Gatos" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
+                <li class="nav-item">
+                    <a class="nav-link {{ isset($especie->slug) && $especie->slug == "gatos" ? ' menu-selected' : ''}}"
+                       title="Gatos" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
                 </li>
-                <li class="nav-item {{ isset($especie->slug) && $especie->slug == "gatos" ? ' active' : ''}}">
-                    <a class="nav-link" title="Sobre nosotros" href="{{route("about-us")}}">Sobre nosotros</a>
+                <li class="nav-item">
+                    <a class="nav-link {{ \Illuminate\Support\Facades\Request::segment(1) === "sobre-nosotros" ? ' menu-selected' : ''}}"
+                       title="Sobre nosotros" href="{{route("about-us")}}">Sobre nosotros</a>
                 </li>
             </ul>
 
@@ -49,12 +54,12 @@
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fa fa-id-card-o" aria-hidden="true"></i> Menú</a>
+                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fas fa-user-cog"></i> Menú</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"
                            onclick="event.preventDefault(); this.closest('form').submit();" title="Logout">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                            <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout</a>
                     </form>
 
                 </div>

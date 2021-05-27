@@ -12,7 +12,7 @@ class Password implements Rule
      *
      * @var int
      */
-    protected $length = 8;
+    protected $length = 6;
 
     /**
      * Indicates if the password must contain one uppercase character.
@@ -130,7 +130,7 @@ class Password implements Rule
                 ]);
 
             default:
-                return __('The :attribute must be at least :length characters.', [
+                return __('La contraseña debe tener al menos :length caracteres.', [
                     'length' => $this->length,
                 ]);
         }

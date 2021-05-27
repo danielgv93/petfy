@@ -19,30 +19,30 @@
             <tr>
                 @if (auth()->user()->isRefugio())
                     <td><a href="{{route("administrar-mascotas.index")}}">
-                            <button class="btn btn-dark" type="button">Administra tus mascotas</button>
+                            <button class="btn btn-petfy" type="button">Administra tus mascotas</button>
                         </a>
                     </td>
                 @endif
                 <td><a href="{{route("profile.show")}}">
-                        <button class="btn btn-dark" type="button">Edita tu perfil</button>
+                        <button class="btn btn-petfy" type="button">Edita tu perfil</button>
                     </a></td>
             </tr>
             @if (auth()->user()->isRefugio())
                 <tr>
                     <td><a href="{{route("mascotas.create")}}">
-                            <button class="btn btn-dark" type="button">Añadir nueva mascota</button>
+                            <button class="btn btn-petfy" type="button">Añadir nueva mascota</button>
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td><a href="{{route("peticiones-adopcion")}}">
-                            <button class="btn btn-dark" type="button">Ver peticiones de adopción</button>
+                            <button class="btn btn-petfy" type="button">Ver peticiones de adopción</button>
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td><a href="{{route("historial-adopciones")}}">
-                            <button class="btn btn-dark" type="button">Ver historial de adopciones</button>
+                            <button class="btn btn-petfy" type="button">Ver historial de adopciones</button>
                         </a>
                     </td>
                 </tr>
