@@ -16,7 +16,7 @@ class RefugioController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -26,6 +26,12 @@ class RefugioController extends Controller
             ->paginate(9);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
+
+    public function showFamilia(User $familia)
+    {
+        return view("refugios.show-familia", compact("familia"));
+    }
+
 
     /**
      * Lista el historial de adopciones del refugio

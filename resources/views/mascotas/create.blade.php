@@ -106,6 +106,6 @@
                    placeholder="Imagen de la mascota"
                    aria-describedby="fileHelpId" required>
         </div>
-        <button type="submit" name="submit" class="row btn btn-primary">Añadir</button>
+        <button type="submit" name="submit" class="row btn btn-petfy-inverse">Añadir</button>
     </form>
 @endsection

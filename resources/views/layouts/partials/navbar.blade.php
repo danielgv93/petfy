@@ -54,7 +54,7 @@
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fas fa-user-cog"></i> Menú</a>
+                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fab fa-elementor"></i> Menú</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"

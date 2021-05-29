@@ -13,7 +13,6 @@
         <tr>
             <th class="font-weight-bold">Familia</th>
             <th class="font-weight-bold">Mascota</th>
-            <th class="font-weight-bold">Refugio</th>
             <th class="font-weight-bold"></th>
         </tr>
         </thead>
@@ -22,9 +21,9 @@
             @foreach($familia->mascotas as $mascota)
                 @if($mascota->refugio->id == $refugio->id && !$mascota->adoptado)
                     <tr>
-                        <td>{{$familia->name}}</td>
-                        <td><a href="{{ route('mascotas.show' , $mascota) }}">{{$mascota->nombre}}</a></td>
-                        <td>{{$mascota->refugio->name}}</td>
+                        <td><a href="{{ route('familia-peticion.show' , $familia) }}">{{$familia->name}}</a></td>
+                        <td><a href="{{ route('mascotas.show' , $mascota) }}">{{$mascota->nombre}}
+                            <img src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}" height="40px"></a></td>
                         <td><a href="{{route("aceptar-peticion", [$mascota, $familia])}}">
                                 <button class="btn btn-dark">Aceptar Adopción</button>
                             </a></td>

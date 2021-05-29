@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create("es_ES");
         $nombre = "Dani";
         $slug = Str::slug($nombre);
         $usuario = new User();
@@ -22,6 +23,8 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 2;
         $usuario->slug = $slug;
         $usuario->email = "danielgarciavarela93@gmail.com";
+        $usuario->direccion = "Calle Campoo, 6";
+        $usuario->nif = "72152050S";
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -33,6 +36,8 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 2;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
+        $usuario->direccion = $faker->streetAddress;
+        $usuario->nif = $faker->dni;
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -44,6 +49,8 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 2;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
+        $usuario->direccion = $faker->streetAddress;
+        $usuario->nif = $faker->dni;
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -56,10 +63,11 @@ class UserSeeder extends Seeder
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->password = bcrypt("123");
+        $usuario->nif = $faker->dni;
         $usuario->latitud = 43.354763751156746;
         $usuario->longitud =  -4.075958235989857;
         $usuario->ciudad =  "Torrelavega";
-        $usuario->direccion =  "Calle canina, 11";
+        $usuario->direccion = $faker->streetAddress;
         $usuario->direccion_donacion =  "$slug@paypal.com";
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -71,9 +79,13 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 1;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
+        $usuario->nif = $faker->dni;
         $usuario->password = bcrypt("123");
         $usuario->latitud = 43.407448;
         $usuario->longitud = -3.414076;
+        $usuario->ciudad =  "Laredo";
+        $usuario->direccion = $faker->streetAddress;
+        $usuario->direccion_donacion =  "$slug@paypal.com";
         $usuario->remember_token = Str::random(10);
         $usuario->save();
 
@@ -84,9 +96,13 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 1;
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
+        $usuario->nif = $faker->dni;
         $usuario->password = bcrypt("123");
         $usuario->latitud = 43.37920485595216;
         $usuario->longitud = -4.39873934601478;
+        $usuario->ciudad =  "San Vicente de la Barquera";
+        $usuario->direccion = $faker->streetAddress;
+        $usuario->direccion_donacion =  "$slug@paypal.com";
         $usuario->remember_token = Str::random(10);
         $usuario->save();
 

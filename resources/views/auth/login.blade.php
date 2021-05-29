@@ -32,8 +32,10 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-content-center mt-4">
-                <input type="submit" class="btn btn-petfy" value="Login">
+            <div class="flex items-center justify-content-around mt-4">
+                <x-jet-button class="mr-4">
+                    {{ __('Login') }}
+                </x-jet-button>
 
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">

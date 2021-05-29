@@ -76,6 +76,14 @@ Route::get("/dashboard/historial-adopciones", [RefugioController::class, "indexH
     ->name("historial-adopciones")
     ->middleware(["accessrole", "auth"]);
 
+Route::get("/dashboard/peticiones-adopcion/{familia}", [RefugioController::class, "showFamilia"])
+    ->name("familia-peticion.show")
+    ->middleware(["accessrole", "auth"]);
+
+Route::get("/dashboard/historial-adopciones/{familia}", [RefugioController::class, "showFamilia"])
+    ->name("familia-historial.show")
+    ->middleware(["accessrole", "auth"]);
+
 // APIS
 Route::get("telegram/getMe", [MensajeriaController::class, "getMe"])
     ->name("telegram.getMe");

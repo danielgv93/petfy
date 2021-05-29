@@ -5,7 +5,7 @@
 @endsection
 
 @section('main')
-
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("refugio.show", $refugio) }}
     <div class="">
         <div class="row justify-content-center">
             <div class="col-6 mt-3">

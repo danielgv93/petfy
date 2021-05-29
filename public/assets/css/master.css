@@ -51,6 +51,7 @@ a, a:hover{
 .btn-petfy-inverse:hover {
     background: var(--primario);
     box-shadow: var(--sombra-boton);
+    color: var(--fondo);
 }
 .btn-petfy-paginacion {
     background: var(--fondo);

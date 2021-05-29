@@ -2,6 +2,7 @@
 
 use App\Models\Especie;
 use App\Models\Mascota;
+use App\Models\User;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 // Home
@@ -12,6 +13,11 @@ Breadcrumbs::for('home', function ($trail) {
 Breadcrumbs::for('about-us', function ($trail) {
     $trail->parent("home");
     $trail->push('Sobre nosotros', route('about-us'));
+});
+// Home > Refugio
+Breadcrumbs::for('refugio.show', function ($trail, User $refugio) {
+    $trail->parent("home");
+    $trail->push('Refugio', route('refugio.show', compact("refugio")));
 });
 
 // Home > Mascotas
@@ -37,8 +43,8 @@ Breadcrumbs::for('mascotas.nombre', function ($trail, Mascota $mascota) {
     $mascota->especie->id === 1 ? $trail->parent('mascotas.perros') : $trail->parent('mascotas.gatos');
     $trail->push($mascota->nombre, route('mascotas.show', $mascota));
 });
-
-// Home > Mascotas > Dashboard
+/* ---------------------------------------------------------- */
+// Home > Dashboard
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->parent('home');
     $trail->push('Dashboard', route('dashboard'));
@@ -62,7 +68,7 @@ Breadcrumbs::for('dashboard.peticiones-adopcion', function ($trail) {
     $trail->push('Peticiones adopcion', route('peticiones-adopcion'));
 });
 
-// Home > Dashboard > Añadir nueva mascota
+// Home > Dashboard > Historial adopciones
 Breadcrumbs::for('dashboard.historial-adopcion', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Historial adopcion', route('historial-adopciones'));
@@ -73,3 +79,14 @@ Breadcrumbs::for('dashboard.perfil', function ($trail) {
     $trail->push('Perfil', route('profile.show'));
 });
 
+// Home > Dashboard > Ver Peticiones > [Familia]
+Breadcrumbs::for('familia.peticiones', function ($trail, User $familia) {
+    $trail->parent('dashboard.peticiones-adopcion');
+    $trail->push($familia->name, route('familia-peticion.show', compact("familia")));
+});
+
+// Home > Dashboard > Historial adopciones > [Familia]
+Breadcrumbs::for('familia.historial', function ($trail, User $familia) {
+    $trail->parent('dashboard.historial-adopcion');
+    $trail->push($familia->name, route('familia-historial.show', compact("familia")));
+});

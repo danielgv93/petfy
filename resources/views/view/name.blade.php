@@ -5,7 +5,7 @@
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
             @else
-                <li class="page-item"><a class="page-link btn-petfy" href="{{ $paginator->previousPageUrl() }}"
+                <li class="page-item"><a class="btn-petfy-paginacion page-link" href="{{ $paginator->previousPageUrl() }}"
                                          rel="prev">&laquo;</a></li>
             @endif
 

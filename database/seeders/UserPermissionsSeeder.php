@@ -16,7 +16,7 @@ class UserPermissionsSeeder extends Seeder
     {
         $rutasRefugios = array("administrar-mascotas.update", "administrar-mascotas.edit", "mascotas.create",
             "mascotas.store", "mascotas.destroy", "administrar-mascotas.index", "peticiones-adopcion", "aceptar-peticion",
-            "historial-adopciones");
+            "historial-adopciones", "familia.show", "familia-peticion.show", "familia-historial.show");
         $rutasFamilias = array("mascotas.adoptar");
 
         foreach ($rutasRefugios as $rutasFamilia) {

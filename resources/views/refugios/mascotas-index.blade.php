@@ -10,23 +10,45 @@
     {{$mascotas->links("view.name")}}
     <div class="row justify-content-center">
         @foreach($mascotas as $mascota)
-            <div class="card m-1 bg-light border-secondary" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("storage")}}/{{$mascota->imagen}}"
-                     alt="Imagen de {{$mascota->nombre}}">
-                <div class="card-body inlin">
-                    <h5 class="card-title">{{$mascota->nombre}}</h5>
-                    <div class="form-inline justify-content-around">
-                        <a href="{{ route('administrar-mascotas.edit' , $mascota) }}"
-                           class="btn btn-primary">Editar</a>
-                        <form action="{{ route('mascotas.destroy' , $mascota) }}" method="post">
-                            @csrf
-                            @method("delete")
-                            <input type="submit" class="btn btn-primary" value="Borrar">
-                        </form>
-                    </div>
+            @if (!$mascota->adoptado)
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="tarjeta-mascota">
+                        <div class="tarjeta-mascota__image">
+                            <img class="" src="{{asset("storage")}}/{{$mascota->imagen}}"
+                                 alt="Imagen de {{$mascota->nombre}}">
+                            <div class="tarjeta-mascota__overlay">
+                            </div>
+                        </div>
+                        <div class="tarjeta-mascota__text">
+                            <div class="tarjeta-mascota__badges d-flex">
+                                <div class="tarjeta-mascota__badge"
+                                     style="background: rgba({{ $mascota->sexo === "Macho" ? "71, 158, 255, 0.8" : "255, 85, 100, 0.8"}})">
+                                    <p>{{ $mascota->sexo }} {!! $mascota->sexo === "Macho" ? '<i class="fas fa-mars"></i>' : '<i class="fas fa-venus"></i>' !!}</p>
+                                </div>
+                                <div class="tarjeta-mascota__badge">
+                                    {{$mascota->getEdadCorta()}}
+                                </div>
 
+                            </div>
+                            <h3>{{$mascota->nombre}} {!! $mascota->especie->especie === "Perro" ? '<i class="fas fa-dog"></i>' : '<i class="fas fa-cat"></i>' !!}  </h3>
+                            <div class="tarjeta-mascota__refugio">
+                                <div class="form-inline justify-content-around">
+                                    <a href="{{ route('administrar-mascotas.edit' , $mascota) }}"
+                                       class="btn btn-petfy-inverse">Editar</a>
+                                    <form action="{{ route('mascotas.destroy' , $mascota) }}" method="post">
+                                        @csrf
+                                        @method("delete")
+                                        <input type="submit" class="btn btn-petfy-inverse" value="Borrar">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+
+            @endif
+
         @endforeach
     </div>
     {{$mascotas->links("view.name")}}
