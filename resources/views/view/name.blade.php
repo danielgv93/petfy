@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <div class="offset-1">
+    <div class="col-12">
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())

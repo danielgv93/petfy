@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12 mb-5">
     <h2>Filtro</h2>
     <div>
         <form class="row" id="filtro" action="{{route("mascotas", \Illuminate\Support\Facades\Request::segment(2))}}">

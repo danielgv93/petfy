@@ -35,10 +35,11 @@
             Parque de mascotas
         @endif
     </h1>
-    {{$mascotas->links("view.name")}}
+
 
     <div class="row justify-content-center">
         @include("layouts.partials.filtro")
+        {{$mascotas->links("view.name")}}
         @if(count($mascotas))
             @foreach($mascotas as $mascota)
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
@@ -71,6 +72,7 @@
         @else
             <h2 class="mt-5">No hay mascotas disponibles</h2>
         @endif
+        {{$mascotas->links("view.name")}}
     </div>
-    {{$mascotas->links("view.name")}}
+
 @endsection
