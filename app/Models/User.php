@@ -22,6 +22,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property $direccion
  * @property $ciudad
  * @property $nif
+ * @property $sobre_mi
  * @property $latitud
  * @property $longitud
  * @property $direccion_donacion

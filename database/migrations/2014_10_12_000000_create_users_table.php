@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->float('latitud', 8, 6)->nullable();
             $table->float('longitud', 8, 6)->nullable();
             $table->string('direccion_donacion')->nullable();
+            $table->text('sobre_mi')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

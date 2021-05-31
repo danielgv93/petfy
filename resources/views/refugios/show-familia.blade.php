@@ -30,9 +30,9 @@
                             @if ($familia->ciudad)
                                 <h5 class="card-title text-center">Ciudad: {{ $familia->ciudad }}</h5>
                             @endif
-                            @if ($familia->descripcion)
+                            @if ($familia->sobre_mi)
                                 <h5 class="card-title text-center">Sobre mi: </h5>
-                                <p class="text-justify">{{$mascota->descripcion}}</p>
+                                <p class="text-justify">{{$familia->sobre_mi}}</p>
                             @endif
                         </div>
                     </div>

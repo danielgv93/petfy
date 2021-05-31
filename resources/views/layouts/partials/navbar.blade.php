@@ -15,11 +15,11 @@
                        title="Mascotas" href="{{route("mascotas")}}">Mascotas <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ isset($especie->slug) ?  ($especie->slug == "perros" ? ' menu-selected' : ''): ""}}"
+                    <a class="nav-link {{ \Illuminate\Support\Facades\Request::segment(2) === "perros" ? ' menu-selected' : '' }}"
                        title="Perros" href="{{route("mascotas", \App\Models\Especie::find(1))}}">Perros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ isset($especie->slug) && $especie->slug == "gatos" ? ' menu-selected' : ''}}"
+                    <a class="nav-link {{ \Illuminate\Support\Facades\Request::segment(2) === "gatos" ? ' menu-selected' : ''}}"
                        title="Gatos" href="{{route("mascotas", \App\Models\Especie::find(2))}}">Gatos</a>
                 </li>
                 <li class="nav-item">

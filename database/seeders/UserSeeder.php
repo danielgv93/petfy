@@ -25,6 +25,8 @@ class UserSeeder extends Seeder
         $usuario->email = "danielgarciavarela93@gmail.com";
         $usuario->direccion = "Calle Campoo, 6";
         $usuario->nif = "72152050S";
+        $usuario->sobre_mi = "Enamorado de los gatos y los perros. Tengo una perrita que se llama Nami y busco a alguien
+            para hacerla compañía.";
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -38,6 +40,8 @@ class UserSeeder extends Seeder
         $usuario->email = "$slug@gmail.com";
         $usuario->direccion = $faker->streetAddress;
         $usuario->nif = $faker->dni;
+        $usuario->sobre_mi = "Me gustan los gatos y tengo ya dos, un siames y un persa. Me gustaría encontrar un bebe gatito
+            para que se una a la familia.";
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
@@ -51,6 +55,8 @@ class UserSeeder extends Seeder
         $usuario->email = "$slug@gmail.com";
         $usuario->direccion = $faker->streetAddress;
         $usuario->nif = $faker->dni;
+        $usuario->sobre_mi = "Soy un activista animal y busco un animal, me da igual el que sea, para cuidarlo y darle
+            acogida.";
         $usuario->password = bcrypt("123");
         $usuario->remember_token = Str::random(10);
         $usuario->save();
