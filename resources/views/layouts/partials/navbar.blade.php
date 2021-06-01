@@ -78,6 +78,7 @@
         @endif
     </div>
 </nav>
+@if (request()->routeIs(['mascotas', "mascotas.show"]))
 <script>
     $(document).ready(function () {
         $("#busqueda").autocomplete({
@@ -114,3 +115,4 @@
         }
     })
 </script>
+@endif

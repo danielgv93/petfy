@@ -48,10 +48,10 @@
                     </div>
                     @if(!auth()->user() || auth()->user()->isFamilia())
                     <div class="card-footer text-center">
-                        <form action="{{route("mascotas.adoptar")}}" method="post">
+                        <form id="{{ $mascota->id }}" action="{{route("mascotas.adoptar")}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$mascota->id}}">
-                            <input type="submit" style="width: 50%" class="btn btn-petfy-inverse" value="Adoptar">
+                            <input type="button" onclick="enviarSolicitud('{{ $mascota->nombre }}', '{{ $mascota->id }}')" style="width: 50%" class="btn btn-petfy-inverse" value="Adoptar">
                         </form>
                     </div>
                     @endif

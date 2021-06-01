@@ -142,7 +142,7 @@ a:hover h1 {
     border: 1px solid #dee2e6;
 }
 
-
+/***************************/
 /* Copiar al portapapeles */
 .copy-click {
     position: relative;
@@ -189,6 +189,11 @@ a:hover h1 {
 
 .copy-click.is-copied:after {
     content: attr(data-tooltip-text-copied);
+}
+/* Cargando Modal */
+svg path,
+svg rect{
+    fill: #ff5364;
 }
 
 /***************************/

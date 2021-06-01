@@ -67,7 +67,7 @@ class RefugioController extends Controller
      * Se envían notificaciones a Twitter y Telegram y se informa al refugio.
      * @param Mascota $mascota Mascota que pasa a ser adoptada
      * @param Familia $familia Familia la cual es aceptada la solicitud de adopción
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function aceptarSolicitud(Mascota $mascota, Familia $familia) {
         try {
@@ -77,11 +77,11 @@ class RefugioController extends Controller
             $texto = "Han adoptado a $mascota->nombre!!! Si tu también quieres adoptar entra aquí para hacerlo http://petfy.es/";
             MensajeriaController::postTwitter($texto, $mascota->imagen);
             MensajeriaController::postPhotoTelegram($texto, $mascota->imagen);
-            $mensaje = "$familia->name ha adoptado a $mascota->nombre con éxito!";
+            $mensaje = "<strong>$familia->name</strong> ha adoptado a <strong>$mascota->nombre</strong> con éxito!";
         } catch (\Exception $e) {
-            $mensaje = "No se ha podido adoptar a $mascota->nombre.";
+            $mensaje = "No se ha podido adoptar a <strong>$mascota->nombre</strong>. ";
             $mensaje .= $e->getMessage();
         }
-        return back()->with("mensaje", $mensaje);
+        return response()->json(["mensaje" => $mensaje]);
     }
 }

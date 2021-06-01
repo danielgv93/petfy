@@ -162,24 +162,20 @@ class MascotasController extends Controller
      * El usuario genera una solicitud de adopción sobre la mascota pasada por parámetro y se guarda en la tabla "adopciones".
      * Si el usuario ya ha enviado una solicitud, se le informa pero no se guarda nada en BD.
      * @param Request $request Recoge el input id de mascota
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function solicitarAdopcion(Request $request)
     {
         $mascota = Mascota::query()->findOrFail($request->id);
         $familia = auth()->user()->id;
         if ($mascota->hasSolicitudesPorFamilia($familia)) {
-            $mensaje = "No puedes solicitar otra adopción por $mascota->nombre. Ya lo has hecho anteriormente.";
+            $codigoRespuesta = 0;
         } else {
-            if ($mascota->hasSolicitudesAdopcion()) {
-                $mensaje = "$mascota->nombre parece que esta muy solicitado. Has enviado una solicitud de adopción.";
-            } else {
-                $mensaje = "Has enviado una solicitud de adopción por $mascota->nombre.";
-            }
+            $codigoRespuesta = $mascota->hasSolicitudesAdopcion() ? 1 : 2;
             DB::table("adopciones")->where("mascota_id", $request->id)->where("familia_id", $familia);
             $mascota->familias()->attach([$familia]);
         }
-        return redirect()->route("mascotas")->with("mensaje", $mensaje);
+        return response()->json(["respuesta" => $codigoRespuesta]);
     }
 
     /**

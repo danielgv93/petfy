@@ -30,5 +30,7 @@
         crossorigin="anonymous"></script>
 <script src="{{url("/assets/bootstrap/js/bootstrap.min.js")}}"></script>
 <script src="{{url("/assets/js/master.js")}}"></script>
+<script src="{{url("/js/app.js")}}"></script>
+@yield("scripts")
 </body>
 </html>

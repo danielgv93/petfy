@@ -35,10 +35,10 @@
                                 <div class="form-inline justify-content-around">
                                     <a href="{{ route('administrar-mascotas.edit' , $mascota) }}"
                                        class="btn btn-petfy-inverse">Editar</a>
-                                    <form action="{{ route('mascotas.destroy' , $mascota) }}" method="post">
+                                    <form id="{{ $mascota->id }}" action="{{ route('mascotas.destroy' , $mascota) }}" method="post">
                                         @csrf
                                         @method("delete")
-                                        <input type="submit" class="btn btn-petfy-inverse" value="Borrar">
+                                        <input type="button" onclick="borrarMascota('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy-inverse" value="Borrar">
                                     </form>
                                 </div>
                             </div>

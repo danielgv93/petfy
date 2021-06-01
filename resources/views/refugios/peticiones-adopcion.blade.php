@@ -22,9 +22,8 @@
                 @if($mascota->refugio->id == $refugio->id && !$mascota->adoptado)
                     <tr>
                         <td><a href="{{ route('familia-peticion.show' , $familia) }}">{{$familia->name}}</a></td>
-                        <td><a href="{{ route('mascotas.show' , $mascota) }}">{{$mascota->nombre}}
-                            <img src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}" height="40px"></a></td>
-                        <td><a href="{{route("aceptar-peticion", [$mascota, $familia])}}">
+                        <td><a href="{{ route('mascotas.show' , $mascota) }}">{{$mascota->nombre}}</a></td>
+                        <td><a href="#" onclick="aceptarSolicitud('{{ $mascota->nombre }}', '{{ $familia->name }}', '{{asset("storage")}}/{{$mascota->imagen}}')">
                                 <button class="btn btn-dark">Aceptar Adopción</button>
                             </a></td>
                     </tr>
