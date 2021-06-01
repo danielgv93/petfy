@@ -23,7 +23,8 @@ class RefugioController extends Controller
         $user_id = Auth::user()->id;
         $mascotas = Mascota::query()
             ->where("refugio_id", "=", $user_id)
-            ->paginate(9);
+            ->where("adoptado", false)
+            ->paginate(12);
         return view("refugios.mascotas-index", compact("mascotas"));
     }
 

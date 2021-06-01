@@ -60,7 +60,7 @@ window.borrarMascota = function(mascota, form)
 {
     Swal.fire({
         icon: 'warning',
-        text: '¿Quieres borrar definitivamente a <strong>' + mascota + '</strong>?',
+        html: '¿Quieres borrar definitivamente a <strong>' + mascota + '</strong>?',
         showCancelButton: true,
         confirmButtonText: 'Borrar',
         cancelButtonText: 'Cancelar',
@@ -70,29 +70,22 @@ window.borrarMascota = function(mascota, form)
         if (result.isConfirmed) {
             let formulario = document.getElementById(form);
             let tokenForm = formulario[0].value;
-            let idForm = formulario[1].value;
-            console.log(tokenForm)
+            let methodForm = formulario[1].value;
+            let idForm = formulario[2].value;
             $.ajax({
-                url: window.location.origin + "/mascota/adoptar",
+                url: window.location.origin + "/dashboard/administrar-mascotas/"+ convertToSlug(mascota) +"/borrar",
                 data: {
                     _token: tokenForm,
+                    _method: methodForm,
                     id: idForm
                 },
                 type: "POST",
                 dataType: "json",
                 success: function (json) {
-                    let codigo = json.respuesta;
-                    let mensajes = [
-                        "No puedes solicitar otra adopción por " + mascota +". Ya lo has hecho anteriormente.",
-                        mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción.",
-                        "Has enviado una solicitud de adopción por " + mascota +"."
-                    ]
-                    Swal.fire({
-                        icon : "info",
-                        text : mensajes[codigo],
-                        confirmButtonText: 'Aceptar',
-                        confirmButtonColor: '#ff5364',
-                    });
+                    window.location = window.location.origin + "/dashboard/administrar-mascotas";
+                },
+                error:function (json) {
+                    window.location = window.location.origin + "/dashboard/administrar-mascotas";
                 }
             })
         }

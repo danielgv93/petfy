@@ -3844,7 +3844,7 @@ window.aceptarSolicitud = function (mascota, familia, imagen) {
 window.borrarMascota = function (mascota, form) {
   sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
     icon: 'warning',
-    text: '¿Quieres borrar definitivamente a <strong>' + mascota + '</strong>?',
+    html: '¿Quieres borrar definitivamente a <strong>' + mascota + '</strong>?',
     showCancelButton: true,
     confirmButtonText: 'Borrar',
     cancelButtonText: 'Cancelar',
@@ -3854,25 +3854,22 @@ window.borrarMascota = function (mascota, form) {
     if (result.isConfirmed) {
       var formulario = document.getElementById(form);
       var tokenForm = formulario[0].value;
-      var idForm = formulario[1].value;
-      console.log(tokenForm);
+      var methodForm = formulario[1].value;
+      var idForm = formulario[2].value;
       jquery__WEBPACK_IMPORTED_MODULE_1___default().ajax({
-        url: window.location.origin + "/mascota/adoptar",
+        url: window.location.origin + "/dashboard/administrar-mascotas/" + convertToSlug(mascota) + "/borrar",
         data: {
           _token: tokenForm,
+          _method: methodForm,
           id: idForm
         },
         type: "POST",
         dataType: "json",
         success: function success(json) {
-          var codigo = json.respuesta;
-          var mensajes = ["No puedes solicitar otra adopción por " + mascota + ". Ya lo has hecho anteriormente.", mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción.", "Has enviado una solicitud de adopción por " + mascota + "."];
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-            icon: "info",
-            text: mensajes[codigo],
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#ff5364'
-          });
+          window.location = window.location.origin + "/dashboard/administrar-mascotas";
+        },
+        error: function error(json) {
+          window.location = window.location.origin + "/dashboard/administrar-mascotas";
         }
       });
     }

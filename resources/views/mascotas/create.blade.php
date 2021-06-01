@@ -96,15 +96,19 @@
             </div>
         </div>
 
-        <div class="row form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" rows="3"></textarea>
+        <div class="row">
+            <div class="col form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea class="form-control" name="descripcion" id="descripcion" rows="3"></textarea>
+            </div>
         </div>
-        <div class="row form-group">
-            <label for="imagen">Imagen</label>
-            <input type="file" class="form-control-file" name="imagen" id="imagen"
-                   placeholder="Imagen de la mascota"
-                   aria-describedby="fileHelpId" required>
+        <div class="row">
+            <div class="col form-group">
+                <label for="imagen">Imagen</label>
+                <input type="file" class="form-control-file" name="imagen" id="imagen"
+                       placeholder="Imagen de la mascota"
+                       aria-describedby="fileHelpId" required>
+            </div>
         </div>
         <button type="submit" name="submit" class="row btn btn-petfy-inverse">Añadir</button>
     </form>
