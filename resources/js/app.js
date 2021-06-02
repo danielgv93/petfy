@@ -141,6 +141,6 @@ function convertToSlug(text) {
     text = text.normalize("NFD") // Normalizamos para obtener los códigos
         .replace(/[\u0300-\u036f|.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitamos los acentos y símbolos de puntuación
         .replace(/ +/g, '-') // Reemplazamos los espacios por guiones
-        .toLowerCase(); // Todo minúscula
+        .toLowerCase();
     return text;
 }

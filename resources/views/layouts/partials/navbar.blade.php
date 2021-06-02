@@ -30,10 +30,7 @@
 
         </div>
         @if (request()->routeIs(['mascotas', "mascotas.show"]))
-            <div class="form-outline mr-3">
-                <input type="search" name="busqueda" id="busqueda" class="form-control"
-                       placeholder="Busca una mascota"/>
-            </div>
+
 
         @endif
         @if (\Illuminate\Support\Facades\Auth::check())
@@ -78,41 +75,3 @@
         @endif
     </div>
 </nav>
-@if (request()->routeIs(['mascotas', "mascotas.show"]))
-<script>
-    $(document).ready(function () {
-        $("#busqueda").autocomplete({
-            source: function (request, response) {
-                let especie = $("#especie").id;
-                $.ajax({
-                    type: "POST",
-                    url: "{{url("mascotas/busqueda")}}",
-                    dataType: "json",
-                    data: {
-                        "_token": "{{csrf_token()}}",
-                        "busqueda": request.term,
-                        "especie": especie
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            },
-            position: {
-                my: "left+0 top+8"
-            },
-            select: function (event, ui) {
-                window.location = window.location.origin + "/mascota/" + convertToSlug(ui.item.value);
-            }
-        });
-
-        function convertToSlug(text) {
-            text = text.normalize("NFD") // Normalizamos para obtener los códigos
-                .replace(/[\u0300-\u036f|.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitamos los acentos y símbolos de puntuación
-                .replace(/ +/g, '-') // Reemplazamos los espacios por guiones
-                .toLowerCase(); // Todo minúscula
-            return text;
-        }
-    })
-</script>
-@endif

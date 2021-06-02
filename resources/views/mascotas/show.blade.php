@@ -19,7 +19,7 @@
                     <h5>Edad:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->getEdadLarga() }}</h5>
+                    <p>{{ $mascota->getEdadLarga() }}</p>
                 </div>
             </div>
             <div class="row">
@@ -27,7 +27,7 @@
                     <h5>Refugio:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->refugio->name }}</h5>
+                    <p>{{ $mascota->refugio->name }}</p>
                 </div>
             </div>
             <div class="row">
@@ -35,7 +35,7 @@
                     <h5>Sexo:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->sexo }}</h5>
+                    <p>{{ $mascota->sexo }}</p>
                 </div>
             </div>
             @if ($mascota->tamano !== null)
@@ -44,7 +44,7 @@
                     <h5>Tamaño:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->tamano }}</h5>
+                    <p>{{ $mascota->tamano }}</p>
                 </div>
             </div>
             @endif
@@ -54,7 +54,7 @@
                     <h5>Raza:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->raza }}</h5>
+                    <p>{{ $mascota->raza }}</p>
                 </div>
             </div>
             @endif
@@ -64,7 +64,7 @@
                     <h5>Color:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->color }}</h5>
+                    <p>{{ $mascota->color }}</p>
                 </div>
             </div>
             @endif
@@ -74,7 +74,7 @@
                     <h5>Pelaje:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->pelaje }}</h5>
+                    <p>{{ $mascota->pelaje }}</p>
                 </div>
             </div>
             @endif
@@ -84,7 +84,7 @@
                     <h5>Sociable:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->sociable ? "Si" : "No" }}</h5>
+                    <p>{{ $mascota->sociable ? "Si" : "No" }}</p>
                 </div>
             </div>
             @endif
@@ -94,7 +94,7 @@
                     <h5>Esterilizado:</h5>
                 </div>
                 <div class="col-9">
-                    <h5>{{ $mascota->esterilizado ? "Si" : "No" }}</h5>
+                    <p>{{ $mascota->esterilizado ? "Si" : "No" }}</p>
                 </div>
             </div>
             @endif

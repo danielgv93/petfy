@@ -33,7 +33,7 @@
             </div>
 
             <div class="flex items-center justify-content-around mt-4">
-                <x-jet-button class="mr-4">
+                <x-jet-button class="mr-4" style="width: 22%">
                     {{ __('Login') }}
                 </x-jet-button>
 
