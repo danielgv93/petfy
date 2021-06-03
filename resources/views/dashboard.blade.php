@@ -1,53 +1,73 @@
 @extends("layouts.master.master")
 
 @section("title")
-    Menu de {{\Illuminate\Support\Facades\Auth::user()->name}}
+    Petfy | Dashboard
 @endsection
+
 @section("main")
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard") }}
     <div class="row">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                @if (auth()->user()->isRefugio())
-                    <th scope="col">Gestión de mascotas</th>
-                @endif
-                <th scope="col">Gestión de perfil</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                @if (auth()->user()->isRefugio())
-                    <td><a href="{{route("administrar-mascotas.index")}}">
-                            <button class="btn btn-petfy" type="button"><i class="fas fa-tools"></i> Administra tus mascotas</button>
-                        </a>
-                    </td>
-                @endif
-                <td><a href="{{route("profile.show")}}">
-                        <button class="btn btn-petfy" type="button"><i class="fas fa-user-cog"></i> Edita tu perfil</button>
-                    </a></td>
-            </tr>
-            @if (auth()->user()->isRefugio())
-                <tr>
-                    <td><a href="{{route("mascotas.create")}}">
-                            <button class="btn btn-petfy" type="button"><i class="fas fa-paw"></i> Añadir nueva mascota</button>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="{{route("peticiones-adopcion")}}">
-                            <button class="btn btn-petfy" type="button"><i class="fas fa-envelope-open-text"></i> Ver peticiones de adopción</button>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="{{route("historial-adopciones")}}">
-                            <button class="btn btn-petfy" type="button"><i class="fas fa-history"></i> Ver historial de adopciones</button>
-                        </a>
-                    </td>
-                </tr>
-            @endif
-            </tbody>
-        </table>
+        <div class="col-12 col-lg-6">
+            <a class="dashboard__enlace" href="{{ route("administrar-mascotas.index") }}">
+                <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="btn btn-petfy dashboard__boton">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fas fa-tools fa-lg"></i>
+                            </div>
+                            <div class="col-9 dashboard__boton__texto">
+                                Administra tus mascotas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="dashboard__enlace" href="{{ route("mascotas.create") }}">
+                <div class="row justify-content-center">
+                    <div class="btn btn-petfy dashboard__boton">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fas fa-paw fa-lg"></i>
+                            </div>
+                            <div class="col-9 dashboard__boton__texto">
+                                Añadir nueva mascota
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <a class="dashboard__enlace" href="{{ route("peticiones-adopcion") }}">
+                <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="btn btn-petfy dashboard__boton">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fas fa-envelope-open-text fa-lg"></i>
+                            </div>
+                            <div class="col-9 dashboard__boton__texto">
+                                Ver peticiones de adopción
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="dashboard__enlace" href="{{ route("historial-adopciones") }}">
+                <div class="row justify-content-center">
+                    <div class="btn btn-petfy dashboard__boton">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fas fa-history fa-lg"></i>
+                            </div>
+                            <div class="col-9 dashboard__boton__texto">
+                                Ver historial de adopciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 @endsection

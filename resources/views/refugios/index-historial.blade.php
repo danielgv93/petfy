@@ -1,7 +1,7 @@
 @extends("layouts.master.master")
 
 @section("title")
-    Historial de adopciones
+    Petfy | Historial de adopciones
 @endsection
 @section("main")
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.historial-adopcion") }}

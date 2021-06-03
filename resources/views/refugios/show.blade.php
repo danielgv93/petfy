@@ -1,44 +1,54 @@
 @extends('layouts.master.master')
 
 @section('title')
-    Refugio
+    Petfy | Refugio
 @endsection
 
 @section('main')
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("refugio.show", $refugio) }}
-    <div class="">
-        <div class="row justify-content-center">
-            <div class="col-6 mt-3">
-                <div class="card">
-                    <div class="card-horizontal">
-                        <div class="card-body">
-                            <h3 class="card-title text-center">{{$refugio->name}}</h3>
-                            <h5 class="card-title text-center">Email de contacto: {{$refugio->email}}</h5>
-                            <!-- Direccion -->
-                            <h5 class="card-title text-center">
-                                @if ($refugio->direccion != "")
-                                    Direccion: {{$refugio->direccion}}
-                                @endif
-                                @if ($refugio->ciudad != "" && $refugio->direccion != "")
-                                    , {{$refugio->ciudad}}
-                                @elseif($refugio->ciudad != "")
-                                    Ciudad: {{$refugio->ciudad}}
-                                @endif
-                            </h5>
-                            <h5 class="card-title text-center" id="donaciones" >
-                                @if (!empty($refugio->direccion_donacion))
-                                    Dirección de donaciones: <span class="copy-click" data-tooltip-text="Haz click para copiar"
-                                                                   data-tooltip-text-copied="✔ Copiado">{{$refugio->direccion_donacion}}</span>
-                                @endif
-                            </h5>
-
-                        </div>
-                    </div>
+    <div class="row mb-5">
+        <div class="col-12 col-lg-6">
+            <div class="" id="mapa"></div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h1>{{ $refugio->name }}</h1>
+            <div class="row ">
+                <div class="col-3">
+                    <h5>Email:</h5>
+                </div>
+                <div class="col-9">
+                    <p>{{ $refugio->email }}</p>
                 </div>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="card" id="mapa"></div>
+            @if ($refugio->direccion != "")
+            <div class="row">
+                <div class="col-3">
+                    <h5>Dirección:</h5>
+                </div>
+                <div class="col-9">
+                    <p>
+                        {{ $refugio->direccion }}
+                        @if ($refugio->ciudad != "" && $refugio->direccion != "")
+                            , {{$refugio->ciudad}}
+                        @elseif($refugio->ciudad != "")
+                            Ciudad: {{$refugio->ciudad}}
+                        @endif
+                    </p>
+                </div>
+            </div>
+            @endif
+            @if (!empty($refugio->direccion_donacion))
+            <div class="row">
+                <div class="col-3">
+                    <h5>Donaciones:</h5>
+                </div>
+                <div class="col-9">
+                    <p><span class="copy-click" data-tooltip-text="Haz click para copiar"
+                             data-tooltip-text-copied="✔ Copiado">{{$refugio->direccion_donacion}}</span></p>
+                </div>
+            </div>
+            @endif
+
         </div>
     </div>
     <script>

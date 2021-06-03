@@ -2,11 +2,11 @@
 
 @section('title')
     @if ($especie->slug == "perros")
-        Perros
+        Petfy | Perros
     @elseif($especie->slug == "gatos")
-        Gatos
+        Petfy | Gatos
     @else
-        Petfy
+        Petfy | Mascotas
     @endif
 
 @endsection

@@ -95,8 +95,17 @@ a, a:hover{
     padding: 8px 24px;
     font-weight: 600;
 }
+.dashboard__enlace:hover {
+    text-decoration: none;
+}
 .dashboard__boton {
-    padding: 24px 0;
+    padding: 24px 16px;
+    width: 65%;
+}
+
+.dashboard__boton__texto {
+    text-align: left;
+    font-weight: 600;
 }
 /* Navbar */
 nav {
@@ -147,6 +156,7 @@ nav li a::before {
 }
 
 #mapa {
+    border-radius: 16px;
     min-height: 521px;
     display: block;
     width: 100%;
@@ -174,8 +184,9 @@ a:hover h1 {
 /* Copiar al portapapeles */
 .copy-click {
     position: relative;
+    font-weight: 600;
+    text-decoration: underline;
     padding-bottom: 2px;
-    text-decoration: none;
     cursor: pointer;
     color: var(--secundario);
     transition: background-color calc(var(--duration) * 2) var(--ease);

@@ -1,7 +1,7 @@
 @extends('layouts.master.master')
 
 @section('title')
-    Añadir mascota
+    Petfy | Añadir mascota
 @endsection
 
 @section("main")

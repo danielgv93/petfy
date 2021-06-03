@@ -1,7 +1,7 @@
 @extends("layouts.master.master")
 
 @section("title")
-    Sobre Nosotros
+    Petfy | Sobre Nosotros
 @endsection
 
 @section("main")

@@ -1,7 +1,7 @@
 @extends("layouts.master.master")
 
 @section("title")
-    Peticiones de adopcion
+    Petfy | Peticiones de adopcion
 @endsection
 @section("main")
     @if (session("mensaje"))
@@ -32,4 +32,5 @@
         @endforeach
         </tbody>
     </table>
+
 @endsection

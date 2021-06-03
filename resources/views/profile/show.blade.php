@@ -1,9 +1,7 @@
 <x-app-layout>
 
     @include("layouts.partials.navbar")
-    <div class="container">
-        {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.perfil") }}
-    </div>
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("perfil") }}
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -17,8 +15,6 @@
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.update-password-form')
                 </div>
-
-                <x-jet-section-border />
             @endif
 
             {{--@if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())

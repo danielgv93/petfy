@@ -9,6 +9,11 @@ use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 Breadcrumbs::for('home', function ($trail) {
     $trail->push('Home', route('welcome'));
 });
+// Home > Perfil
+Breadcrumbs::for('perfil', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Perfil', route('profile.show'));
+});
 // Home > About Us
 Breadcrumbs::for('about-us', function ($trail) {
     $trail->parent("home");
@@ -72,11 +77,6 @@ Breadcrumbs::for('dashboard.peticiones-adopcion', function ($trail) {
 Breadcrumbs::for('dashboard.historial-adopcion', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Historial adopcion', route('historial-adopciones'));
-});
-// Home > Dashboard > Perfil
-Breadcrumbs::for('dashboard.perfil', function ($trail) {
-    $trail->parent('dashboard');
-    $trail->push('Perfil', route('profile.show'));
 });
 
 // Home > Dashboard > Ver Peticiones > [Familia]

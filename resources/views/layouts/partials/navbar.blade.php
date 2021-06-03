@@ -48,9 +48,9 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @if (auth()->user()->isRefugio())
-                        <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fab fa-elementor"></i> Menú</a>
+                        <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fas fa-tachometer-alt"></i> Menú</a>
                     @endif
-                    <a class="dropdown-item" href="{{route("profile.show")}}" title="Perfil"><i class="fas fa-user-cog"></i> Perfil</a>
+                    <a class="dropdown-item" href="{{route("profile.show")}}" title="Perfil"><i class="fas fa-user"></i> Perfil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"

@@ -1,15 +1,15 @@
 @extends('layouts.master.master')
 
 @section('title')
-    {{$mascota->nombre}}
+    Petfy | {{$mascota->nombre}}
 @endsection
 @section('main')
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("mascotas.nombre", $mascota) }}
     <div class="row mb-5">
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             <img style="border-radius: 24px" class="img-fluid mx-auto d-block" src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}">
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             @if ($mascota->urgente)
                 <h6 class="card-title text-center">*Urge adopción*</h6>
             @endif
@@ -100,10 +100,10 @@
             @endif
             @if ($mascota->descripcion !== null)
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 col-md-3">
                     <h5>Descripción:</h5>
                 </div>
-                <div class="col-9">
+                <div class="col-12 col-md-9">
                     <p>{{ $mascota->descripcion }}</p>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.master.master')
 
 @section('title')
-    Listado Mascotas
+    Petfy | Listado Mascotas
 @endsection
 
 @section('main')
