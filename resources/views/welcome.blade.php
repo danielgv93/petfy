@@ -5,22 +5,34 @@
 @endsection
 
 @section("main")
-    <div class="row justify-content-center">
-        <h1>Bienvenido a Petfy</h1>
-    </div>
-    <div class="row justify-content-center">
-        <h2>Elige que tipo de mascota vas a querer adoptar</h2>
-    </div>
-    <div class="row mt-5">
-        <div class="col-4">
-            <a class="btn btn-petfy" style="border: none" href="{{route("mascotas", \App\Models\Especie::find(1))}}"><img style="width: 300px; pointer-events: none"
-                                                            class="img-fluid mx-auto d-block"
-                                                            src="{{url(asset("storage/web/perro.png"))}}"></a>
+    <h1>Bienvenido a Petfy</h1>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <img class="img-fluid" id="refugioGif" src="{{url(asset("storage/web/Animal shelter.gif"))}}" alt="Animación de una ilustración de un refugio de mascotas">
         </div>
-        <div class="col-4 offset-4">
-            <a class="btn btn-petfy" style="border: none" href="{{route("mascotas", \App\Models\Especie::find(1))}}"><img style="width: 300px; pointer-events: none"
-                                                            class="img-fluid mx-auto d-block"
-                                                            src="{{url(asset("storage/web/gato.png"))}}"></a>
+        <div class="col-12 col-md-6">
+            <div class="d-flex align-items-center justify-content-center flex-column ">
+                <div class="row">
+                    <div class="col-12">
+                        <p>El lugar donde puedes encontrar a tu mascota</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>¿A qué esperas? Entra a mirar y busca la que mejor se adapte a tus circustancias.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <a href="{{ route("mascotas") }}" class="btn btn-petfy-inverse">ENTRAR</a>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
+    <script>
+        let refugio =  document.getElementById("refugioGif");
+        refugio.src = refugio.getAttribute("src");
+    </script>
 @endsection

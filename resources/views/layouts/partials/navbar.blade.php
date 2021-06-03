@@ -29,10 +29,6 @@
             </ul>
 
         </div>
-        @if (request()->routeIs(['mascotas', "mascotas.show"]))
-
-
-        @endif
         @if (\Illuminate\Support\Facades\Auth::check())
             <div class="dropdown custom-control-inline" style="margin-right: 7px">
                 @if (Illuminate\Support\Facades\Auth::user()->profile_photo_path)
@@ -51,7 +47,10 @@
                     {{\Illuminate\Support\Facades\Auth::user()->name}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fab fa-elementor"></i> Menú</a>
+                    @if (auth()->user()->isRefugio())
+                        <a class="dropdown-item" href="{{route("dashboard")}}" title="Menu"><i class="fab fa-elementor"></i> Menú</a>
+                    @endif
+                    <a class="dropdown-item" href="{{route("profile.show")}}" title="Perfil"><i class="fas fa-user-cog"></i> Perfil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{route("logout")}}"
