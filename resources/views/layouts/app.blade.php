@@ -23,7 +23,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
-    <div id="page-container">
+    <div id="page-container" class="pt-3 pt-md-0">
         <div class="container">
             <!-- Page Content -->
             <main>

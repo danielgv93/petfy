@@ -12,10 +12,10 @@
                 <div class="row mt-5 mb-5 justify-content-center">
                     <div class="btn btn-petfy dashboard__boton">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2 col-md-3">
                                 <i class="fas fa-tools fa-lg"></i>
                             </div>
-                            <div class="col-9 dashboard__boton__texto">
+                            <div class="col-10 col-md-9 dashboard__boton__texto">
                                 Administra tus mascotas
                             </div>
                         </div>
@@ -27,10 +27,10 @@
                 <div class="row justify-content-center">
                     <div class="btn btn-petfy dashboard__boton">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2 col-md-3">
                                 <i class="fas fa-paw fa-lg"></i>
                             </div>
-                            <div class="col-9 dashboard__boton__texto">
+                            <div class="col-10 col-md-9 dashboard__boton__texto">
                                 Añadir nueva mascota
                             </div>
                         </div>
@@ -44,10 +44,10 @@
                 <div class="row mt-5 mb-5 justify-content-center">
                     <div class="btn btn-petfy dashboard__boton">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2 col-md-3">
                                 <i class="fas fa-envelope-open-text fa-lg"></i>
                             </div>
-                            <div class="col-9 dashboard__boton__texto">
+                            <div class="col-10 col-md-9 dashboard__boton__texto">
                                 Ver peticiones de adopción
                             </div>
                         </div>
@@ -58,10 +58,10 @@
                 <div class="row justify-content-center">
                     <div class="btn btn-petfy dashboard__boton">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2 col-md-3">
                                 <i class="fas fa-history fa-lg"></i>
                             </div>
-                            <div class="col-9 dashboard__boton__texto">
+                            <div class="col-10 col-md-9 dashboard__boton__texto">
                                 Ver historial de adopciones
                             </div>
                         </div>

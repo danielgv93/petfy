@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{url("/assets/css/master.css?v=").time()}}">
 </head>
 <body>
-<div id="page-container">
+<div id="page-container" class="pt-3 pt-md-0">
     @include('layouts.partials.navbar')
     <div class="container">
         @yield('main')

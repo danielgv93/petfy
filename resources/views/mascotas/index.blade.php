@@ -38,7 +38,7 @@
                 {{$mascotas->links("view.name")}}
             </div>
             @if(count($mascotas))
-            <div class="row">
+            <div class="row justify-content-center justify-content-md-start">
                 @foreach($mascotas as $mascota)
                     <div class="col-10 col-md-6 col-lg-5 col-xl-4">
                         <a class="tarjeta-mascota" href="{{ route('mascotas.show' , $mascota) }}">

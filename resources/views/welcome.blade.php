@@ -6,7 +6,7 @@
 
 @section("main")
     <h1>Bienvenido a Petfy</h1>
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-md-6">
             <img class="img-fluid" id="refugioGif" src="{{url(asset("storage/web/Animal shelter.gif"))}}" alt="Animación de una ilustración de un refugio de mascotas">
         </div>

@@ -386,4 +386,5 @@ footer p, footer li {
     font-size: 11px;
     font-style: italic;
     text-align: center;
+    margin-bottom: 0;
 }
