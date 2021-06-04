@@ -3808,7 +3808,7 @@ window.aceptarSolicitud = function (mascota, familia, imagen) {
   var cargando = '<div class="loader loader--style2" title="1">\n' + '  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' + '     width="60px" height="60px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">\n' + '  <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">\n' + '    <animateTransform attributeType="xml"\n' + '      attributeName="transform"\n' + '      type="rotate"\n' + '      from="0 25 25"\n' + '      to="360 25 25"\n' + '      dur="0.6s"\n' + '      repeatCount="indefinite"/>\n' + '    </path>\n' + '  </svg>\n' + '</div>';
   sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
     imageUrl: imagen,
-    html: '¿Quieres realmente aceptar la solicitud que ha hecho <strong>' + familia + "</strong> por <strong>" + mascota + "</strong>",
+    html: '¿Quieres realmente aceptar la solicitud que ha hecho <strong>' + familia + "</strong> por <strong>" + mascota + "</strong>?<br>" + "Si continúas se procederá al envío del contrato por email y a notificar por RRSS.",
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
     cancelButtonText: 'Cancelar',
@@ -3901,10 +3901,10 @@ window.enviarSolicitud = function (mascota, form) {
         dataType: "json",
         success: function success(json) {
           var codigo = json.respuesta;
-          var mensajes = ["No puedes solicitar otra adopción por " + mascota + ". Ya lo has hecho anteriormente.", mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción.", "Has enviado una solicitud de adopción por " + mascota + "."];
+          var mensajes = ["No puedes solicitar otra adopción por " + mascota + ". Ya lo has hecho anteriormente.", mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción correctamente.", "Has enviado una solicitud de adopción por <strong>" + mascota + "</strong>.<br>Tanto si la solicitud se acepta como si" + "no, se te enviará un correo, así que estate atento."];
           sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
             icon: "info",
-            text: mensajes[codigo],
+            html: mensajes[codigo],
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#ff5364'
           }).then(function (result) {
@@ -3920,8 +3920,7 @@ function convertToSlug(text) {
   text = text.normalize("NFD") // Normalizamos para obtener los códigos
   .replace(/[\u0300-\u036f|.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") // Quitamos los acentos y símbolos de puntuación
   .replace(/ +/g, '-') // Reemplazamos los espacios por guiones
-  .toLowerCase(); // Todo minúscula
-
+  .toLowerCase();
   return text;
 }
 

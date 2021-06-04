@@ -17,7 +17,7 @@
                     <h5>Email:</h5>
                 </div>
                 <div class="col-9">
-                    <p>{{ $refugio->email }}</p>
+                    <p><a href="mailto:{{ $refugio->email }}">{{ $refugio->email }}</a></p>
                 </div>
             </div>
             @if ($refugio->direccion != "")

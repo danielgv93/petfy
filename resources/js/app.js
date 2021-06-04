@@ -23,7 +23,8 @@ window.aceptarSolicitud = function(mascota, familia, imagen)
         '</div>'
     Swal.fire({
         imageUrl: imagen,
-        html: '¿Quieres realmente aceptar la solicitud que ha hecho <strong>' + familia + "</strong> por <strong>" + mascota + "</strong>",
+        html: '¿Quieres realmente aceptar la solicitud que ha hecho <strong>' + familia + "</strong> por <strong>" + mascota + "</strong>?<br>" +
+            "Si continúas se procederá al envío del contrato por email y a notificar por RRSS.",
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
@@ -120,12 +121,13 @@ window.enviarSolicitud = function(mascota, form)
                     let codigo = json.respuesta;
                     let mensajes = [
                         "No puedes solicitar otra adopción por " + mascota +". Ya lo has hecho anteriormente.",
-                        mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción.",
-                        "Has enviado una solicitud de adopción por " + mascota +"."
+                        mascota + " parece que esta muy solicitado. Has enviado una solicitud de adopción correctamente.",
+                        "Has enviado una solicitud de adopción por <strong>" + mascota +"</strong>.<br>Tanto si la solicitud se acepta como si" +
+                        "no, se te enviará un correo, así que estate atento."
                     ]
                     Swal.fire({
                         icon : "info",
-                        text : mensajes[codigo],
+                        html : mensajes[codigo],
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#ff5364',
                     }).then((result) => {

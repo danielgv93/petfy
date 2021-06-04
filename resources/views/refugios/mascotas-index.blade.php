@@ -34,12 +34,12 @@
                         <div class="tarjeta-mascota__refugio">
                             <div class="form-inline justify-content-around">
                                 <a href="{{ route('administrar-mascotas.edit' , $mascota) }}"
-                                   class="btn btn-petfy-inverse">Editar</a>
+                                   class="btn btn-petfy">Editar</a>
                                 <form id="{{ $mascota->id }}" action="{{ route('mascotas.destroy' , $mascota) }}" method="post">
                                     @csrf
                                     @method("delete")
                                     <input type="hidden" value="{{ $mascota->id }}">
-                                    <input type="button" onclick="borrarMascota('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy-inverse" value="Borrar">
+                                    <input type="button" onclick="borrarMascota('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy" value="Borrar">
                                 </form>
                             </div>
                         </div>

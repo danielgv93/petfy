@@ -41,7 +41,7 @@
                          src="{{asset("storage")}}/{{\Illuminate\Support\Facades\Auth::user()->profile_photo_path}}">
                 @endif
 
-                <button class="btn bg-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     {{\Illuminate\Support\Facades\Auth::user()->name}}

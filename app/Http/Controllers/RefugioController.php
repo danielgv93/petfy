@@ -28,7 +28,7 @@ class RefugioController extends Controller
         return view("refugios.mascotas-index", compact("mascotas"));
     }
 
-    public function showFamilia(User $familia)
+    public function showFamilia(Familia $familia)
     {
         return view("refugios.show-familia", compact("familia"));
     }

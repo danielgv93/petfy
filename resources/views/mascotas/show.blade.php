@@ -111,11 +111,14 @@
 
             <div class="row justify-content-end ">
                 <a href="{{route("refugio.show", $mascota->refugio)}}"><button class="btn btn-petfy mr-3"><i class="fas fa-map-marker-alt"></i> Info del refugio</button></a>
-                <form id="{{ $mascota->id }}" action="{{route("mascotas.adoptar")}}" method="post">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$mascota->id}}">
-                    <button type="button" onclick="enviarSolicitud('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy-inverse"><i class="fas fa-envelope-open-text"></i> Adoptar</button>
-                </form>
+                @if (auth()->check() && auth()->user()->isFamilia())
+                    <form id="{{ $mascota->id }}" action="{{route("mascotas.adoptar")}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$mascota->id}}">
+                        <button type="button" onclick="enviarSolicitud('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy-inverse"><i class="fas fa-envelope-open-text"></i> Adoptar</button>
+                    </form>
+                @endif
+
             </div>
         </div>
     </div>

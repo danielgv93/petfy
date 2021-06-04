@@ -52,7 +52,7 @@ a, a:hover{
 }
 
 /* Botones */
-.btn-petfy {
+.btn-petfy, a .btn-petfy {
     background: var(--fondo);
     color: var(--secundario);
     cursor: pointer;
@@ -70,6 +70,17 @@ a, a:hover{
     box-shadow: var(--sombra-boton);
     color: var(--fondo);
 }
+.btn-petfy-secundario {
+    background: var(--secundario);
+    color: var(--fondo);
+    cursor: pointer;
+    border-radius: 16px;
+}
+.btn-petfy-secundario:hover {
+    background: var(--primario);
+    box-shadow: var(--sombra-boton);
+    color: var(--fondo);
+}
 .btn-petfy-paginacion {
     background: var(--fondo);
     color: var(--secundario);
@@ -83,8 +94,9 @@ a, a:hover{
 .btn-petfy-paginacion:hover {
     color: var(--primario);
 }
-.btn-petfy:hover {
+.btn-petfy:hover, a .btn-petfy:hover {
     background: rgba(var(--primario-rgb), 0.6);
+    color: var(--secundario);
     box-shadow: var(--sombra-boton);
 }
 .btn-petfy-paginacion-active:hover, .btn-petfy:active {
@@ -102,10 +114,16 @@ a, a:hover{
     padding: 24px 16px;
     width: 65%;
 }
-
 .dashboard__boton__texto {
     text-align: left;
     font-weight: 600;
+}
+.btn-dropdown {
+    background: var(--fondo);
+}
+
+.btn-dropdown:focus {
+    box-shadow: 0 0 0 .2rem rgba(var(--primario-rgb), 0.6);
 }
 /* Navbar */
 nav {
@@ -184,12 +202,15 @@ a:hover h1 {
 /* Copiar al portapapeles */
 .copy-click {
     position: relative;
-    font-weight: 600;
-    text-decoration: underline;
+    text-decoration: none;
     padding-bottom: 2px;
     cursor: pointer;
-    color: var(--secundario);
+    color: var(--primario);
     transition: background-color calc(var(--duration) * 2) var(--ease);
+}
+
+.copy-click:hover {
+    text-decoration: underline;
 }
 
 .copy-click:after {

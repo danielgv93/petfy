@@ -7,7 +7,7 @@
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.historial-adopcion") }}
     <table class="table table-striped table-hover">
         <thead>
-        <tr>
+        <tr class="text-center">
             <th class="font-weight-bold">Familia</th>
             <th class="font-weight-bold">Mascota</th>
             <th class="font-weight-bold">Fecha</th>
@@ -15,9 +15,9 @@
         </thead>
         <tbody>
         @foreach ($adopciones as $adopcion)
-            <tr>
+            <tr class="text-center">
                 <td><a href="{{ route('familia-historial.show' , $adopcion["familia"]) }}">{{$adopcion["familia"]->name}}</a></td>
-                <td><a href="{{ route('mascotas.show' , $adopcion["mascota"]) }}">{{$adopcion["mascota"]->nombre}}</a></td>
+                <td><a href="{{ route('mascotas.show' , $adopcion["mascota"]) }}">{{$adopcion["mascota"]->nombre}} {!! $adopcion["mascota"]->especie->especie === "Perro" ? '<i class="fas fa-dog"></i>' : '<i class="fas fa-cat"></i>' !!}</a></td>
                 <td>{{ $adopcion["mascota"]->fecha_adopcion }}</td>
             </tr>
         @endforeach

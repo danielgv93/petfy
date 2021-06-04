@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-6">
-                <h6>Petfy Cantabria</h6>
+                <h6>Petfy Cantabria<img class="ml-3" src="{{asset("storage/web/favicon.png")}}" alt="Logo de Petfy" height="19px"></h6>
                 <p>Refugios asociados:
                     @php
                     $refugios = \App\Models\Refugio::all();
@@ -16,6 +16,7 @@
                         }
                     }
                     @endphp</p>
+                <p><a href="mailto:petfy.es@gmail.com">petfy.es@gmail.com</a></p>
 
             </div>
             <div class="col-3">
@@ -27,8 +28,14 @@
             </div>
             <div class="col-3">
                 <h6>Redes Sociales</h6>
-                <a title="Twitter" target="_blank" href="https://twitter.com/Petfy_Es"><i class="fab fa-twitter-square"></i></a>
-                <a title="Telegram" target="_blank" href="https://t.me/petfy"><i class="fab fa-telegram"></i></a>
+                <div class="row">
+                    <div class="col-2">
+                        <a title="Twitter" target="_blank" href="https://twitter.com/Petfy_Es"><i class="fab fa-twitter-square fa-lg"></i></a>
+                    </div>
+                    <div class="col-2">
+                        <a title="Telegram" target="_blank" href="https://t.me/petfy"><i class="fab fa-telegram fa-lg"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>

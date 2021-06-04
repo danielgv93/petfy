@@ -30,10 +30,10 @@
 
 
     <div class="row">
-        <div class="col-3">
+        <div class="col-12 col-md-3">
             @include("layouts.partials.filtro")
         </div>
-        <div class="col-9">
+        <div class="col-12 col-md-9">
             <div class="row">
                 {{$mascotas->links("view.name")}}
             </div>
