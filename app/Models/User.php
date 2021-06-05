@@ -49,7 +49,8 @@ class User extends Authenticatable
         'password',
         "user_role_id",
         "nif",
-        "direccion"
+        "direccion",
+        "ciudad"
     ];
 
     /**

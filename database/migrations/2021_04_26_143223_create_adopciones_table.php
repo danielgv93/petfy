@@ -19,8 +19,8 @@ class CreateAdopcionesTable extends Migration
             $table->dateTime("fecha_adopcion")->nullable();
 
             $table->primary(["mascota_id", "familia_id"]);
-            $table->foreign("mascota_id")->references("id")->on("mascotas");
-            $table->foreign("familia_id")->references("id")->on("users");
+            $table->foreign("mascota_id")->references("id")->on("mascotas")->cascadeOnDelete();
+            $table->foreign("familia_id")->references("id")->on("users")->cascadeOnDelete();
         });
     }
 

@@ -1,10 +1,11 @@
 @extends('layouts.master.master')
 
 @section('title')
-    Editar datos de {{$mascota->nombre}}
+    Petfy | Editar datos de {{$mascota->nombre}}
 @endsection
 @section('main')
-    <div class="row">
+    {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.administrar-mascotas.edit", $mascota) }}
+    <div class="row mb-5">
         <div class="col-4">
             <h3>{{$mascota->nombre}}</h3>
             <img class="card-img" src="{{asset("storage")}}/{{$mascota->imagen}}" alt="Imagen de {{$mascota->nombre}}">

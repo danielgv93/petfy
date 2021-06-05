@@ -6,7 +6,7 @@
 
 @section("main")
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard") }}
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-lg-6">
             <a class="dashboard__enlace" href="{{ route("administrar-mascotas.index") }}">
                 <div class="row mt-5 mb-5 justify-content-center">

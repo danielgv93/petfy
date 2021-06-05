@@ -3857,7 +3857,7 @@ window.borrarMascota = function (mascota, form) {
       var methodForm = formulario[1].value;
       var idForm = formulario[2].value;
       jquery__WEBPACK_IMPORTED_MODULE_1___default().ajax({
-        url: window.location.origin + "/dashboard/administrar-mascotas/" + convertToSlug(mascota) + "/borrar",
+        url: window.location.origin + "/dashboard/administrar-mascotas/" + mascota + "/borrar",
         data: {
           _token: tokenForm,
           _method: methodForm,

@@ -74,7 +74,7 @@ window.borrarMascota = function(mascota, form)
             let methodForm = formulario[1].value;
             let idForm = formulario[2].value;
             $.ajax({
-                url: window.location.origin + "/dashboard/administrar-mascotas/"+ convertToSlug(mascota) +"/borrar",
+                url: window.location.origin + "/dashboard/administrar-mascotas/"+ mascota +"/borrar",
                 data: {
                     _token: tokenForm,
                     _method: methodForm,

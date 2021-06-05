@@ -1,7 +1,7 @@
 @extends('layouts.master.master')
 
 @section('title')
-    {{$familia->name}}
+    Petfy | {{$familia->name}}
 @endsection
 
 @section("main")

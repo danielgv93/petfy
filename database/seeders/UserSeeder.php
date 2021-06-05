@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         $usuario->user_role_id = 2;
         $usuario->slug = $slug;
         $usuario->email = "danielgarciavarela93@gmail.com";
+        $usuario->ciudad = "Torrelavega";
         $usuario->direccion = "Calle Campoo, 6";
         $usuario->nif = "72152050S";
         $usuario->sobre_mi = "Enamorado de los gatos y los perros. Tengo una perrita que se llama Nami y busco a alguien
@@ -39,6 +40,7 @@ class UserSeeder extends Seeder
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->direccion = $faker->streetAddress;
+        $usuario->ciudad = $faker->city;
         $usuario->nif = $faker->dni;
         $usuario->sobre_mi = "Me gustan los gatos y tengo ya dos, un siames y un persa. Me gustaría encontrar un bebe gatito
             para que se una a la familia.";
@@ -54,6 +56,7 @@ class UserSeeder extends Seeder
         $usuario->slug = $slug;
         $usuario->email = "$slug@gmail.com";
         $usuario->direccion = $faker->streetAddress;
+        $usuario->ciudad = $faker->city;
         $usuario->nif = $faker->dni;
         $usuario->sobre_mi = "Soy un activista animal y busco un animal, me da igual el que sea, para cuidarlo y darle
             acogida.";

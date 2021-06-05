@@ -30,6 +30,7 @@
                 {{ $slot }}
             </main>
         </div>
+        @include("layouts.partials.footer")
     </div>
         @stack('modals')
 

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{url("/assets/css/master.css?v=").time()}}">
 </head>
 <body>
-<div id="page-container" class="pt-3 pt-md-0">
+<div id="page-container" class="pt-3 pt-md-0" {{--{!! in_array( \Illuminate\Support\Facades\Route::currentRouteName(), ["mascotas.create", "administrar-mascotas.edit"]) ? 'style="min-height: 115vh"' : '' !!}--}}>
     @include('layouts.partials.navbar')
     <div class="container">
         @yield('main')

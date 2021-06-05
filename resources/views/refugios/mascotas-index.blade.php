@@ -8,7 +8,7 @@
     {{ \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::render("dashboard.administrar-mascotas") }}
     <h1>Estas son tus mascotas</h1>
 
-    <div class="row justify-content-center">
+    <div class="row mb-5 justify-content-center">
         {{$mascotas->links("view.name")}}
         @foreach($mascotas as $mascota)
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
@@ -39,7 +39,7 @@
                                     @csrf
                                     @method("delete")
                                     <input type="hidden" value="{{ $mascota->id }}">
-                                    <input type="button" onclick="borrarMascota('{{ $mascota->nombre }}', '{{ $mascota->id }}')" class="btn btn-petfy" value="Borrar">
+                                    <input type="button" onclick="borrarMascota('{{ $mascota->slug }}', '{{ $mascota->id }}')" class="btn btn-petfy" value="Borrar">
                                 </form>
                             </div>
                         </div>

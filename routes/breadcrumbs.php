@@ -60,6 +60,11 @@ Breadcrumbs::for('dashboard.administrar-mascotas', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Administar Mascotas', route('administrar-mascotas.index'));
 });
+// Home > Dashboard > Administrar Mascotas > Editar [Mascota]
+Breadcrumbs::for('dashboard.administrar-mascotas.edit', function ($trail, Mascota $mascota) {
+    $trail->parent('dashboard.administrar-mascotas');
+    $trail->push("Editar $mascota->nombre", route('administrar-mascotas.edit', compact("mascota")));
+});
 
 // Home > Dashboard > Añadir nueva mascota
 Breadcrumbs::for('dashboard.crear-mascota', function ($trail) {
@@ -82,11 +87,11 @@ Breadcrumbs::for('dashboard.historial-adopcion', function ($trail) {
 // Home > Dashboard > Ver Peticiones > [Familia]
 Breadcrumbs::for('familia.peticiones', function ($trail, User $familia) {
     $trail->parent('dashboard.peticiones-adopcion');
-    $trail->push($familia->name, route('familia-peticion.show', compact("familia")));
+    $trail->push("$familia->name", route('familia-peticion.show', compact("familia")));
 });
 
 // Home > Dashboard > Historial adopciones > [Familia]
 Breadcrumbs::for('familia.historial', function ($trail, User $familia) {
     $trail->parent('dashboard.historial-adopcion');
-    $trail->push($familia->name, route('familia-historial.show', compact("familia")));
+    $trail->push("$familia->name", route('familia-historial.show', compact("familia")));
 });

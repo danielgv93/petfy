@@ -29,7 +29,7 @@
 
 
 
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-md-3">
             @include("layouts.partials.filtro")
         </div>

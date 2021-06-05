@@ -6,6 +6,7 @@ use App\Models\Especie;
 use App\Models\Mascota;
 use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -77,9 +78,16 @@ class MascotasController extends Controller
      */
     public function store(Request $request)
     {
+        $nMascotasIguales = count(Mascota::query()->where("slug", Str::slug($request->nombre))->get());
+        $contador = 1;
+
         $mascota = new Mascota();
         $mascota->nombre = $request->nombre;
-        $mascota->slug = Str::slug($request->nombre);
+        while ($nMascotasIguales > 0) {
+            $nMascotasIguales = count(Mascota::query()->where("slug", Str::slug($request->nombre).($contador + 1))->get());
+            $contador++;
+            if ($nMascotasIguales == 0) $mascota->slug = Str::slug($request->nombre).$contador;
+        }
         $mascota->especie_id = $request->especie;
         $mascota->fechaNacimiento = $request->fechaNacimiento;
         $mascota->sexo = $request->sexo;
@@ -162,7 +170,7 @@ class MascotasController extends Controller
      * El usuario genera una solicitud de adopción sobre la mascota pasada por parámetro y se guarda en la tabla "adopciones".
      * Si el usuario ya ha enviado una solicitud, se le informa pero no se guarda nada en BD.
      * @param Request $request Recoge el input id de mascota
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function solicitarAdopcion(Request $request)
     {
@@ -182,13 +190,13 @@ class MascotasController extends Controller
      * Elimina una mascota de la base de datos
      *
      * @param Mascota $mascota Mascota que se quiere eliminar
-     * @return RedirectResponse
+     * @return JsonResponse
      * @throws Exception
      */
     public function destroy(Mascota $mascota)
     {
         $mascota->delete();
-        return redirect()->route("administrar-mascotas.index");
+        return response()->json(["respuesta" => "Borrado OK"]);
     }
 
 

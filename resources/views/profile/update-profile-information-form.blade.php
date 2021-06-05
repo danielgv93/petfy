@@ -89,6 +89,15 @@
             <x-jet-input-error for="ciudad" class="mt-2"/>
         </div>
 
+        <!-- Sobre mi -->
+        @if (auth()->user()->rol->id == 2)
+            <div class="col-span-6 sm:col-span-4">
+                <x-jet-label for="sobre_mi" value="{{ __('Descripción sobre mi') }}"/>
+                <textarea class="form-control" name="sobre_mi" id="sobre_mi" rows="3" wire:model.defer="state.sobre_mi"></textarea>
+                <x-jet-input-error for="sobre_mi" class="mt-2"/>
+            </div>
+        @endif
+
         @if (auth()->user()->rol->id == 1)
         <!-- Geolocalizacion -->
             <div class="col-span-6 sm:col-span-4">
