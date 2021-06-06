@@ -51,6 +51,12 @@ class MascotasController extends Controller
         return view("mascotas.index", compact("mascotas", "especie"));
     }
 
+    /**
+     * Se recoge el parametro y se busca en la tabla Animales y retorna los nombres cuyo nombre
+     * coincida parcialmente con dicho parametro.
+     * @param Request $request Recoge los inputs del formulario
+     * @return JsonResponse
+     */
     public function busqueda(Request $request)
     {
         $busqueda = "%". $request->busqueda. "%";
@@ -146,7 +152,6 @@ class MascotasController extends Controller
     public function update(Request $request, Mascota $mascota)
     {
         $mascota->nombre = $request->nombre;
-        $mascota->slug = Str::slug($request->nombre);
         $mascota->fechaNacimiento = $request->fechaNacimiento;
         $mascota->sexo = $request->sexo;
         $mascota->tamano = $request->tamano === "" ? null : $request->tamano;
