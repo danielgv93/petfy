@@ -19,6 +19,8 @@
     color: var(--secundario);
 }
 
+/* Homepage */
+
 .welcome__texto p {
     font-size: 20px;
     font-weight: 600;
@@ -49,6 +51,12 @@ a, a:hover{
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+/* Registro */
+.pass_caracteres {
+    font-size: 12px;
+    color: var(--primario);
 }
 
 /* Botones */
@@ -189,14 +197,6 @@ a:hover h1 {
     text-decoration: none;
 }
 
-.centrar {
-    flex-grow: 1;
-}
-
-.btn-dark {
-    background-color: #1f2937;
-    border: 1px solid #dee2e6;
-}
 
 /***************************/
 /* Copiar al portapapeles */

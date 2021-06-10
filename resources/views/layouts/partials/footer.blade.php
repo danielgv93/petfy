@@ -16,14 +16,12 @@
                         }
                     }
                     @endphp</p>
-                <p><a href="mailto:petfy.es@gmail.com">petfy.es@gmail.com</a></p>
-
             </div>
             <div class="col-3">
-                <h6>Enlaces</h6>
+                <h6>Contáctanos</h6>
                 <ul class="list-unstyled">
-                    <li><a href="{{ route("about-us") }}">Sobre Nosotros</a></li>
-                    <li><a href="{{ route("mascotas") }}">Mascotas</a></li>
+                    <li><a href="mailto:petfy.es@gmail.com">petfy.es@gmail.com</a></li>
+                    <li>656 258 366</li>
                 </ul>
             </div>
             <div class="col-3">

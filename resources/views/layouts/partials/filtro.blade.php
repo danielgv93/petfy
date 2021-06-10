@@ -52,7 +52,7 @@
             <div class="col">
                 <h3>Raza</h3>
                 <label for="raza" class="form-check">
-                    <select name="raza" id="raza">
+                    <select class="form-control" name="raza" id="raza">
                         <option value="">-</option>
                         @foreach(\App\Models\Mascota::getRazas() as $raza)
                             @if($raza)

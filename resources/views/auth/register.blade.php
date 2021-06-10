@@ -22,7 +22,7 @@
             </div>
             <div class="mt-2">
                 <x-jet-label for="user_role_id" value="{{ __('Tipo de usuario') }}" />
-                <select name="user_role_id" id="user_role_id">
+                <select class="form-control" name="user_role_id" id="user_role_id">
                     @foreach(\App\Models\UserRol::query()->orderBy("id", "desc")->get() as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->role_name }}</option>
                     @endforeach
@@ -40,7 +40,7 @@
             </div>
 
             <div class="mt-2">
-                <x-jet-label for="password" value="{{ __('Contraseña') }}" />
+                <label class="block font-medium text-sm text-gray-700" for="password">Contraseña. <span class="pass_caracteres">Mínimo 8 caracteres</span></label>
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
